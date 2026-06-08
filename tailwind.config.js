@@ -10,6 +10,14 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+  			brand: {
+  				rust: 'hsl(var(--brand-rust))',
+  				forest: 'hsl(var(--brand-forest))',
+  				sunflower: 'hsl(var(--brand-sunflower))',
+  				cream: 'hsl(var(--brand-cream))',
+  				coffee: 'hsl(var(--brand-coffee))',
+  				sage: 'hsl(var(--brand-sage))'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -65,6 +73,7 @@ module.exports = {
   			heading: ['var(--font-heading)'],
   			body: ['var(--font-body)'],
   			display: ['var(--font-display)'],
+  			script: ['var(--font-script)'],
   			mono: ['var(--font-mono)']
   		},
   		keyframes: {

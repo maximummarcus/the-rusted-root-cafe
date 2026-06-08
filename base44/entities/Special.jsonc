@@ -1,0 +1,51 @@
+{
+  "name": "Special",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Name of the special"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the special"
+    },
+    "price": {
+      "type": "string",
+      "description": "Price as text, e.g. '$6.50'"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "food",
+        "drink"
+      ],
+      "default": "food",
+      "description": "Whether this is a food or drink special"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Image URL for the special"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the special is currently active/shown"
+    },
+    "month_label": {
+      "type": "string",
+      "description": "Label for the month/season, e.g. 'June Specials'"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
