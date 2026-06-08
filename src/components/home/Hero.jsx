@@ -46,7 +46,7 @@ export default function Hero() {
               ? 'font-heading font-semibold uppercase tracking-wide'
               : 'font-script'
           }`}
-          style={{ fontSize: 'clamp(2.25rem, 9vw, 5rem)', lineHeight: 1.05 }}
+          style={{ fontSize: 'clamp(1.85rem, 9vw, 5rem)', lineHeight: 1.05 }}
         >
           {BRAND.slogan}
         </motion.h1>

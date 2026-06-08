@@ -26,21 +26,33 @@ export default function About() {
           </div>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              The Rusted Root café is a little corner of Windsor, Virginia where good
-              coffee, from-scratch food, and a room full of greenery come together.
+              At The Rusted Root Cafe, we believe great food has a way of bringing people
+              together.
             </p>
             <p>
-              We&apos;re a café and scratch bakery <em>and</em> a houseplant &amp; home-decor
-              shop — because we believe the best places are the ones where you can linger.
-              Order a panini, browse the plants, catch up with a friend, and take a little
-              something green home with you.
+              What started as a dream to create a welcoming gathering place has grown into a
+              café where friends meet over coffee, families share meals, and neighbors become
+              familiar faces. From our homemade pastries and fresh-brewed coffee to our hearty
+              breakfast and lunch specials, everything we serve is made with care and a passion
+              for quality.
             </p>
             <p>
-              Everything we make starts from scratch — bagels, chicken salad, cinnamon
-              rolls, croissants and more. Come hungry, stay a while, and become a regular.
+              More than just a café, The Rusted Root Cafe is a place to &quot;Gather, Grow, and
+              Get Rooted!&quot; We strive to create an atmosphere that feels like home, where
+              everyone is greeted with a smile and every visit leaves you feeling a little
+              brighter than when you arrived.
+            </p>
+            <p>
+              Whether you&apos;re stopping by for your morning coffee, grabbing lunch with
+              coworkers, or treating yourself to one of our fresh-baked desserts, we&apos;re
+              grateful to be part of your day.
+            </p>
+            <p>
+              Thank you for supporting local, sharing in our journey, and becoming part of The
+              Rusted Root family. We can&apos;t wait to serve you.
             </p>
             <p className={isModern ? 'text-primary font-semibold text-xl' : 'font-script text-3xl text-primary'}>
-              {BRAND.slogan}
+              {BRAND.slogan} 🌿☕️🤎
             </p>
           </div>
         </div>
