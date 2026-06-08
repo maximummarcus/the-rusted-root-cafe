@@ -12,7 +12,6 @@ export default function Header() {
         <div className="flex items-center justify-between gap-3 py-3">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            {/* PLACEHOLDER IMAGE: replace with real logo */}
             <img
               src={LOGO_URL}
               alt="The Rusted Root café logo"

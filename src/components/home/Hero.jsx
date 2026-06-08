@@ -29,7 +29,6 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className={`bg-brand-cream p-4 md:p-6 shadow-2xl ${isModern ? 'rounded-md' : 'rounded-[2rem]'}`}
         >
-          {/* PLACEHOLDER IMAGE: replace with real logo */}
           <img
             src={LOGO_URL}
             alt="The Rusted Root café logo"

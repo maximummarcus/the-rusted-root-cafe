@@ -23,8 +23,8 @@ export const BRAND = {
 // Owner: paste your Clover Online Ordering URL here.
 export const CLOVER_ORDER_URL = '';
 
-// Logo placeholder — owner will swap with real logo file.
-export const LOGO_URL = 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/c4103ed5b_generated_e6f85744.png';
+// The Rusted Root café logo.
+export const LOGO_URL = '/logo.jpeg';
 
 export const HOURS = [
   { day: 'Monday', time: '8:00am – 4:00pm' },
