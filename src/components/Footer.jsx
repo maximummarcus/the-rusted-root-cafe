@@ -10,7 +10,6 @@ export default function Footer() {
         {/* Brand */}
         <div className="space-y-4">
           <div className="inline-block bg-white rounded-2xl p-2">
-            {/* PLACEHOLDER IMAGE: replace with real logo */}
             <img src={LOGO_URL} alt="The Rusted Root café logo" className="w-24 h-auto rounded-full" />
           </div>
           <p className="font-script text-2xl text-brand-sunflower">{BRAND.slogan}</p>
