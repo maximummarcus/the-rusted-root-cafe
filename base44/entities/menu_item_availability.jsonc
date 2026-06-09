@@ -1,0 +1,26 @@
+{
+  "name": "menu_item_availability",
+  "type": "object",
+  "properties": {
+    "menu_item_id": {
+      "type": "string",
+      "description": "Stable key for the menu item. We use the item's display name (names are unique across the cafeData menu) so it maps cleanly to both the Menu listing and the Most Ordered strip."
+    },
+    "available": {
+      "type": "boolean",
+      "default": true,
+      "description": "True = AVAILABLE, false = SOLD OUT. Customer menu reads this to render the SOLD OUT badge."
+    }
+  },
+  "required": [
+    "menu_item_id"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

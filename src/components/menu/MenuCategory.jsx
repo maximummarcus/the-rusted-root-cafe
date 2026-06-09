@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '@/components/menu/MenuItem';
 
-export default function MenuCategory({ category }) {
+export default function MenuCategory({ category, isSoldOut = () => false }) {
   const hasItems = category.items && category.items.length > 0;
 
   return (
@@ -11,7 +11,7 @@ export default function MenuCategory({ category }) {
       {hasItems ? (
         <div className="grid gap-3 md:grid-cols-2">
           {category.items.map((item) => (
-            <MenuItem key={item.name} item={item} />
+            <MenuItem key={item.name} item={item} soldOut={isSoldOut(item.name)} />
           ))}
         </div>
       ) : null}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import { useTheme } from '@/lib/ThemeContext';
 
-export default function MenuItem({ item }) {
+export default function MenuItem({ item, soldOut = false }) {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
 
@@ -11,12 +11,12 @@ export default function MenuItem({ item }) {
     <div
       className={`flex items-center gap-4 p-3 ${
         isModern ? 'bg-card border border-border rounded-md shadow-sm' : ''
-      }`}
+      } ${soldOut ? 'opacity-70' : ''}`}
     >
       {item.img && (
-        <div className={`w-16 h-16 shrink-0 overflow-hidden ${isModern ? 'rounded-md' : 'rounded-2xl'}`}>
+        <div className={`relative w-16 h-16 shrink-0 overflow-hidden ${isModern ? 'rounded-md' : 'rounded-2xl'}`}>
           {/* PLACEHOLDER IMAGE: replace with real photo */}
-          <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+          <img src={item.img} alt={item.name} className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`} />
         </div>
       )}
       <div className="flex-1 min-w-0">
@@ -26,19 +26,35 @@ export default function MenuItem({ item }) {
           <span className="font-semibold text-primary whitespace-nowrap">{item.price}</span>
         </div>
         {item.desc && <p className="text-sm text-muted-foreground mt-0.5">{item.desc}</p>}
-        {item.popular && (
-          <span className="inline-block mt-1 text-[11px] font-semibold uppercase tracking-wide text-brand-coffee bg-brand-sunflower/30 px-2 py-0.5 rounded-full">
-            Popular
-          </span>
-        )}
+        <div className="flex items-center gap-2 mt-1">
+          {soldOut && (
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-wide text-white bg-red-600 px-2 py-0.5 rounded-full">
+              Sold Out
+            </span>
+          )}
+          {item.popular && !soldOut && (
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-wide text-brand-coffee bg-brand-sunflower/30 px-2 py-0.5 rounded-full">
+              Popular
+            </span>
+          )}
+        </div>
       </div>
-      <Link
-        to="/order"
-        aria-label={`Add ${item.name} via online ordering`}
-        className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
-      >
-        <Plus className="w-5 h-5" />
-      </Link>
+      {soldOut ? (
+        <span
+          aria-label={`${item.name} is sold out`}
+          className="shrink-0 inline-flex items-center justify-center px-3 h-11 rounded-full bg-muted text-muted-foreground text-xs font-semibold uppercase cursor-not-allowed"
+        >
+          Sold Out
+        </span>
+      ) : (
+        <Link
+          to="/order"
+          aria-label={`Add ${item.name} via online ordering`}
+          className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
+        >
+          <Plus className="w-5 h-5" />
+        </Link>
+      )}
     </div>
   );
 }
