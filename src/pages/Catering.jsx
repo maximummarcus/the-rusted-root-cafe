@@ -71,17 +71,15 @@ export default function Catering() {
         description="Catering from The Rusted Root Cafe in Windsor, VA. Scratch-made trays, chicken salad, pastries and more for your gathering. Call or email to inquire."
       />
 
-      {/* Photo-forward hero — full-bleeds under the transparent fixed header (same
-          treatment as Home). Mobile gets a taller aspect so the heading sits well
-          clear of the floating header chrome. */}
-      <section className="relative overflow-hidden">
-        <div className="aspect-[3/4] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden">
-          <img
-            src={IMG.catering}
-            alt="A platter of fresh-baked croissant sandwiches catered by The Rusted Root café"
-            className="w-full h-full object-cover object-center"
-          />
-        </div>
+      {/* Photo-forward hero — fills the viewport and full-bleeds under the transparent
+          fixed header (same treatment as Home). min-h-[100lvh] matches the home hero so
+          it's never shorter than the screen (URL-bar-hidden viewport); a touch taller is fine. */}
+      <section className="relative overflow-hidden min-h-[100lvh]">
+        <img
+          src={IMG.catering}
+          alt="A platter of fresh-baked croissant sandwiches catered by The Rusted Root café"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
         {/* Top-down dim keeps the white nav labels readable while the header is transparent. */}
         <div
           aria-hidden="true"
