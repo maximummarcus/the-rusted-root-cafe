@@ -8,7 +8,7 @@
 // at /admin/<ADMIN_TOKEN>. Treat this slug like a second password — only the owner gets
 // the full link. (The password itself lives in Base44 → Secrets as RRC_ADMIN_PASSWORD and
 // is checked server-side; it is never in this file or any client JS.)
-export const ADMIN_TOKEN = 'rr-7q9x2k4m8p';
+export const ADMIN_TOKEN = 'rr-d1835176486c7d959270a5628a5e756f';
 
 // Full admin path, e.g. "/admin/rr-7q9x2k4m8p".
 export const ADMIN_PATH = `/admin/${ADMIN_TOKEN}`;
