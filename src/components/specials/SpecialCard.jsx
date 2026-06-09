@@ -1,18 +1,12 @@
 import React from 'react';
-import { useTheme } from '@/lib/ThemeContext';
 import { Coffee, UtensilsCrossed } from 'lucide-react';
 
 export default function SpecialCard({ special }) {
-  const { theme } = useTheme();
-  const isModern = theme === 'modern';
   const Icon = special.type === 'drink' ? Coffee : UtensilsCrossed;
 
   return (
-    <div
-      className={`bg-card overflow-hidden shadow-md border-2 border-brand-sunflower ${
-        isModern ? 'rounded-md' : 'rounded-3xl hd-tilt'
-      }`}
-    >
+    // rounded-lg + hd-tilt both resolve per theme via tokens/CSS (tilt flattens in Modern).
+    <div className="bg-card overflow-hidden shadow-md border-2 border-brand-sunflower rounded-lg hd-tilt">
       <div className="aspect-[4/3] overflow-hidden bg-secondary">
         {special.image_url ? (
           /* PLACEHOLDER IMAGE: replace with real photo */

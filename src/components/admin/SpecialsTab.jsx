@@ -285,8 +285,8 @@ export default function SpecialsTab() {
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 <Switch checked={!!s.active} onCheckedChange={() => handleToggle(s)} aria-label="Toggle active" />
-                <Button size="icon" variant="ghost" onClick={() => handleEdit(s)} aria-label="Edit"><Pencil className="w-4 h-4" /></Button>
-                <Button size="icon" variant="ghost" onClick={() => handleDelete(s)} aria-label="Delete"><Trash2 className="w-4 h-4 text-destructive" /></Button>
+                <Button size="icon" variant="ghost" className="h-11 w-11" onClick={() => handleEdit(s)} aria-label="Edit"><Pencil className="w-4 h-4" /></Button>
+                <Button size="icon" variant="ghost" className="h-11 w-11" onClick={() => handleDelete(s)} aria-label="Delete"><Trash2 className="w-4 h-4 text-destructive" /></Button>
               </div>
             </div>
           ))}

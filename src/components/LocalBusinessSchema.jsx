@@ -7,7 +7,8 @@ export default function LocalBusinessSchema() {
       '@context': 'https://schema.org',
       '@type': 'CafeOrCoffeeShop',
       name: 'The Rusted Root Cafe',
-      image: BRAND.LOGO_URL,
+      // Schema images must be absolute URLs; LOGO_URL is a root-relative path.
+      image: new URL(LOGO_URL, location.origin).href,
       telephone: BRAND.phone,
       email: BRAND.email,
       address: {

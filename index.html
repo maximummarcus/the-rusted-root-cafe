@@ -2,10 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Apply the saved theme before any CSS so a "modern" visitor never sees a
+      // flash of the default hand-drawn theme on load (ThemeContext keeps it in sync).
+      try {
+        if (localStorage.getItem('rrc-theme') === 'modern') {
+          document.documentElement.setAttribute('data-theme', 'modern');
+        }
+      } catch (e) {
+        /* storage blocked (private mode) — default theme is fine */
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>The Rusted Root Cafe | Windsor, VA</title>
+    <meta
+      name="description"
+      content="Homey small-town café, scratch bakery & houseplant shop in Windsor, VA. Gather. Grow. Get Rooted!"
+    />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
-    <title>Base44 APP</title>
+    <meta name="theme-color" content="#FBF8F1" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Rusted Root Cafe" />
+    <meta property="og:title" content="The Rusted Root Cafe | Windsor, VA" />
+    <meta
+      property="og:description"
+      content="Homey small-town café, scratch bakery & houseplant shop in Windsor, VA. Gather. Grow. Get Rooted!"
+    />
+    <meta property="og:image" content="/wordmark-og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Rusted Root Cafe | Windsor, VA" />
+    <meta
+      name="twitter:description"
+      content="Homey small-town café, scratch bakery & houseplant shop in Windsor, VA. Gather. Grow. Get Rooted!"
+    />
+    <meta name="twitter:image" content="/wordmark-og.png" />
   </head>
   <body>
     <div id="root"></div>

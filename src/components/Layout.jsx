@@ -15,13 +15,16 @@ export default function Layout() {
   const isHeroFullBleed = HERO_FULL_BLEED_ROUTES.has(location.pathname);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background paper-texture">
+    // Mobile call-bar clearance lives on the page wrapper (below the footer), not on
+    // <main>, so the footer © line also clears the fixed bar; includes the iOS
+    // home-indicator inset, matching the bar's own safe-area padding.
+    <div
+      className={`min-h-screen flex flex-col bg-background paper-texture ${
+        isOrder ? '' : 'pb-[calc(64px+env(safe-area-inset-bottom))] md:pb-0'
+      }`}
+    >
       <Header />
-      <main
-        className={`flex-1 ${isOrder ? '' : 'pb-[64px] md:pb-0'} ${
-          isHeroFullBleed ? '' : 'pt-[var(--header-h)]'
-        }`}
-      >
+      <main className={`flex-1 ${isHeroFullBleed ? '' : 'pt-[var(--header-h)]'}`}>
         <Outlet />
       </main>
       <Footer />

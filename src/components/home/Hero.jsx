@@ -22,15 +22,20 @@ export default function Hero() {
         {/* Mobile single photo lives here. Owner: swap IMG.bakery → IMG.plants to flip. */}
         <img
           src={IMG.bakery}
-          alt="The Rusted Root café counter with the storefront sign and fresh flowers"
+          alt="The Rusted Root Cafe counter with the storefront sign and fresh flowers"
           className="w-full h-full object-cover object-center"
         />
-        {/* Desktop-only right half of the split. */}
-        <img
-          src={IMG.plants}
-          alt="Houseplants and home decor display inside the café"
-          className="hidden md:block w-full h-full object-cover object-center"
-        />
+        {/* Desktop-only right half of the split. The <picture> media query keeps
+            mobile from downloading it: below md the source doesn't match and the
+            fallback src is an inline 1x1 transparent gif (no network request). */}
+        <picture className="hidden md:block w-full h-full">
+          <source media="(min-width: 768px)" srcSet={IMG.plants} />
+          <img
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            alt="Houseplants and home decor display inside the café"
+            className="w-full h-full object-cover object-center"
+          />
+        </picture>
       </div>
       <div className="absolute inset-0 bg-brand-forest/55" />
 
@@ -45,11 +50,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className={`bg-brand-cream p-3 md:p-5 shadow-2xl ${isModern ? 'rounded-md' : 'rounded-[2rem]'}`}
+          className="bg-brand-cream p-3 md:p-5 shadow-2xl rounded-lg"
         >
           <img
             src={LOGO_URL}
-            alt="The Rusted Root café logo"
+            alt="The Rusted Root Cafe logo"
             className="h-auto rounded-full mx-auto block"
             style={{ width: 'clamp(96px, 18vw, 160px)' }}
           />

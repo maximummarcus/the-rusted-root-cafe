@@ -1,5 +1,5 @@
 {
-  "name": "untitled",
+  "name": "The Rusted Root Cafe",
   "site": {
     "installCommand": "npm install",
     "buildCommand": "npm run build",

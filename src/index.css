@@ -76,6 +76,8 @@
     --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
     --font-body: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
     --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    /* Modern has no script accents — font-script spots fall back to the heading font. */
+    --font-script: 'Poppins', ui-sans-serif, system-ui, sans-serif;
   }
 }
 
@@ -92,9 +94,12 @@
     @apply bg-background text-foreground font-body;
   }
 
-  /* Smooth theme transitions */
-  body,
-  body * {
+  /* Smooth theme transitions — gated behind .theme-transitioning, which the
+     theme toggle adds to <html> for ~300ms around a flip. An always-on rule
+     would also animate the very first paint, i.e. a visible morph from the
+     wrong theme on every hard reload. */
+  .theme-transitioning body,
+  .theme-transitioning body * {
     transition: background-color 250ms ease, border-color 250ms ease,
       color 250ms ease, fill 250ms ease, box-shadow 250ms ease;
   }

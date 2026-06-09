@@ -1,14 +1,10 @@
 import React from 'react';
 import { BRAND, HOURS } from '@/lib/cafeData';
 import { MapPin, Phone, Clock } from 'lucide-react';
-import { useTheme } from '@/lib/ThemeContext';
 
 export default function HoursLocationCard() {
-  const { theme } = useTheme();
-  const isModern = theme === 'modern';
-
   return (
-    <div className={`grid gap-6 md:grid-cols-2 bg-card shadow-lg overflow-hidden ${isModern ? 'rounded-md' : 'rounded-[2rem]'}`}>
+    <div className="grid gap-6 md:grid-cols-2 bg-card shadow-lg overflow-hidden rounded-lg">
       <div className="p-7">
         <h3 className="font-heading text-2xl text-foreground flex items-center gap-2 mb-4">
           <Clock className="w-5 h-5 text-primary" /> Hours

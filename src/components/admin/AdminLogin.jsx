@@ -5,8 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Lock, Loader2 } from 'lucide-react';
 
-// Unauthenticated visitors see ONLY this prompt. The dashboard subtree is not mounted
-// until the password is verified server-side, so no admin controls exist in the DOM.
+// Unauthenticated visitors see ONLY this prompt. There is no server check on this
+// plan: the password is hashed in the browser and compared to the stored SHA-256
+// hash, and a localStorage flag keeps the session (see src/lib/adminConfig.js for
+// the full security note + launch TODO). The dashboard subtree is not mounted
+// until that check passes, so no admin controls exist in the DOM before login.
 export default function AdminLogin({ onSuccess }) {
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -25,7 +28,7 @@ export default function AdminLogin({ onSuccess }) {
         setError(result?.error || 'Incorrect password.');
       }
     } catch {
-      setError('Could not reach the server. Please try again.');
+      setError('Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }

@@ -77,7 +77,7 @@ export default function Catering() {
       <section className="relative overflow-hidden min-h-[100lvh]">
         <img
           src={IMG.catering}
-          alt="A platter of fresh-baked croissant sandwiches catered by The Rusted Root café"
+          alt="A platter of fresh-baked croissant sandwiches catered by The Rusted Root Cafe"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         {/* Top-down dim keeps the white nav labels readable while the header is transparent. */}
@@ -110,7 +110,7 @@ export default function Catering() {
           {gallery.map((g, index) => (
             <figure
               key={g.src}
-              className={`group bg-card overflow-hidden shadow-md ${isModern ? 'rounded-md' : 'rounded-2xl'} ${
+              className={`group bg-card overflow-hidden shadow-md rounded-lg ${
                 hasLoneTrailingTile && index === gallery.length - 1 ? 'md:col-start-2' : ''
               }`}
             >
@@ -133,7 +133,7 @@ export default function Catering() {
       <div className="max-w-3xl mx-auto px-6 pb-14 text-center">
         <ul className="grid sm:grid-cols-2 gap-3 text-left">
           {offerings.map((o) => (
-            <li key={o} className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-3">
+            <li key={o} className="flex items-center gap-3 bg-card border border-border rounded-lg px-4 py-3">
               <Check className="w-5 h-5 text-primary shrink-0" />
               <span className="text-foreground">{o}</span>
             </li>

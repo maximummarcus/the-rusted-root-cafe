@@ -20,8 +20,8 @@ export default function About() {
         </div>
 
         <div className={`grid md:grid-cols-2 gap-8 items-center`}>
-          <div className={`overflow-hidden shadow-lg ${isModern ? 'rounded-md' : 'rounded-[2rem] hd-tilt'}`}>
-            <img src={IMG.storefront} alt="The Rusted Root café storefront with its green awning in Windsor, VA" loading="lazy" className="w-full h-full object-cover" />
+          <div className="overflow-hidden shadow-lg rounded-lg hd-tilt">
+            <img src={IMG.storefront} alt="The Rusted Root Cafe storefront with its green awning in Windsor, VA" loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
@@ -56,7 +56,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mt-14 text-center bg-brand-sage/25 rounded-[2rem] py-10 px-6">
+        <div className="mt-14 text-center bg-brand-sage/25 rounded-lg py-10 px-6">
           <p className="font-script text-3xl md:text-4xl text-primary">{BRAND.tagline}</p>
           <p className="mt-3 text-muted-foreground">
             That&apos;s the heart of {BRAND.name}, and the whole reason we opened our doors.

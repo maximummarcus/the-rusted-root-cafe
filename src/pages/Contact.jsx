@@ -5,11 +5,8 @@ import SectionHeading from '@/components/SectionHeading';
 import HoursLocationCard from '@/components/HoursLocationCard';
 import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import { Phone, Mail, Instagram, Facebook, MapPin } from 'lucide-react';
-import { useTheme } from '@/lib/ThemeContext';
 
 export default function Contact() {
-  const { theme } = useTheme();
-  const isModern = theme === 'modern';
   const mapsQuery = encodeURIComponent(BRAND.address);
 
   return (
@@ -25,11 +22,11 @@ export default function Contact() {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3 mb-8">
-          <a href={`tel:${BRAND.phoneRaw}`} className="flex flex-col items-center gap-2 bg-card border border-border rounded-2xl p-5 min-h-[44px] hover:shadow-md transition">
+          <a href={`tel:${BRAND.phoneRaw}`} className="flex flex-col items-center gap-2 bg-card border border-border rounded-lg p-5 min-h-[44px] hover:shadow-md transition">
             <Phone className="w-6 h-6 text-primary" />
             <span className="font-semibold text-foreground">{BRAND.phone}</span>
           </a>
-          <a href={`mailto:${BRAND.email}`} className="flex flex-col items-center gap-2 bg-card border border-border rounded-2xl p-5 min-h-[44px] hover:shadow-md transition">
+          <a href={`mailto:${BRAND.email}`} className="flex flex-col items-center gap-2 bg-card border border-border rounded-lg p-5 min-h-[44px] hover:shadow-md transition">
             <Mail className="w-6 h-6 text-primary" />
             <span className="font-semibold text-foreground text-sm break-all text-center">{BRAND.email}</span>
           </a>
@@ -37,7 +34,7 @@ export default function Contact() {
             href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 bg-card border border-border rounded-2xl p-5 min-h-[44px] hover:shadow-md transition"
+            className="flex flex-col items-center gap-2 bg-card border border-border rounded-lg p-5 min-h-[44px] hover:shadow-md transition"
           >
             <MapPin className="w-6 h-6 text-primary" />
             <span className="font-semibold text-foreground text-sm text-center">{BRAND.addressShort}</span>
@@ -47,9 +44,9 @@ export default function Contact() {
         <HoursLocationCard />
 
         {/* Map */}
-        <div className={`mt-8 overflow-hidden shadow-lg ${isModern ? 'rounded-md' : 'rounded-[2rem]'}`}>
+        <div className="mt-8 overflow-hidden shadow-lg rounded-lg">
           <iframe
-            title="Map to The Rusted Root café"
+            title="Map to The Rusted Root Cafe"
             width="100%"
             height="380"
             style={{ border: 0 }}
@@ -60,7 +57,7 @@ export default function Contact() {
         </div>
 
         {/* Social */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 min-h-[48px] px-5 rounded-full bg-brand-forest text-brand-cream font-semibold">
             <Instagram className="w-5 h-5" /> {BRAND.instagramHandle}
           </a>
