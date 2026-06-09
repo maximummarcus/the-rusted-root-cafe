@@ -14,6 +14,44 @@ const offerings = [
   'Drink & limeade service',
 ];
 
+const gallery = [
+  {
+    src: '/images/catering-baked-ziti-tray.jpg',
+    alt: 'Catering tray of scratch-made baked ziti',
+    caption: 'Hot entrée trays',
+  },
+  {
+    src: '/images/catering-boxed-lunch.jpg',
+    alt: 'Individual boxed lunch with a wrap, side and dessert',
+    caption: 'Boxed lunches',
+  },
+  {
+    src: '/images/catering-wings-tray.jpg',
+    alt: 'Catering tray of saucy party wings',
+    caption: 'Party wings',
+  },
+  {
+    src: '/images/catering-dessert-cups.jpg',
+    alt: 'Platter of banana pudding dessert cups',
+    caption: 'Dessert cups',
+  },
+  {
+    src: '/images/catering-jalapeno-biscuits.jpg',
+    alt: 'Tray of scratch-made jalapeño cheddar biscuits',
+    caption: 'Scratch biscuits',
+  },
+  {
+    src: '/images/catering-cheese-bites.jpg',
+    alt: 'Tray of golden, savory cheese bites',
+    caption: 'Cheesy bites',
+  },
+  {
+    src: '/images/catering-mac-and-cheese.jpg',
+    alt: 'Pan of creamy baked mac and cheese',
+    caption: 'Mac & cheese',
+  },
+];
+
 export default function Catering() {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
@@ -24,11 +62,16 @@ export default function Catering() {
         title="Catering — The Rusted Root Cafe, Windsor VA"
         description="Catering from The Rusted Root Cafe in Windsor, VA. Scratch-made trays, chicken salad, pastries and more for your gathering. Call or email to inquire."
       />
+
       <section className="relative overflow-hidden">
         <div className="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
-          <img src={IMG.catering} alt="A Rusted Root catering buffet spread with trays of food and pastries" className="w-full h-full object-cover" />
+          <img
+            src={IMG.catering}
+            alt="A platter of fresh-baked croissant sandwiches catered by The Rusted Root café"
+            className="w-full h-full object-cover object-center"
+          />
         </div>
-        <div className="absolute inset-0 bg-brand-forest/50 flex items-center justify-center text-center px-6">
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/80 via-brand-forest/30 to-transparent flex items-end justify-center text-center px-6 pb-8 md:pb-14">
           <div>
             <p className={isModern ? 'text-sm uppercase tracking-[0.2em] text-brand-sunflower font-semibold' : 'font-script text-3xl text-brand-sunflower'}>
               The Root Way
@@ -38,15 +81,40 @@ export default function Catering() {
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-6 py-14 text-center">
+      <div className="max-w-3xl mx-auto px-6 pt-14 text-center">
         <SectionHeading title="Let us feed your gathering" center />
         <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
           From morning meetings to family celebrations, we&apos;ll bring the from-scratch
           goodness to you. Tell us the date, the headcount, and what you&apos;re dreaming
           of — we&apos;ll take care of the rest.
         </p>
+      </div>
 
-        <ul className="mt-8 grid sm:grid-cols-2 gap-3 text-left">
+      <section aria-label="Recent catering spreads" className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
+          {gallery.map((g) => (
+            <figure
+              key={g.src}
+              className={`group bg-card overflow-hidden shadow-md ${isModern ? 'rounded-md' : 'rounded-2xl'}`}
+            >
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={g.src}
+                  alt={g.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <figcaption className="px-3 py-2 md:py-3 text-center font-heading text-sm md:text-base text-foreground">
+                {g.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <div className="max-w-3xl mx-auto px-6 pb-14 text-center">
+        <ul className="grid sm:grid-cols-2 gap-3 text-left">
           {offerings.map((o) => (
             <li key={o} className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-3">
               <Check className="w-5 h-5 text-primary shrink-0" />

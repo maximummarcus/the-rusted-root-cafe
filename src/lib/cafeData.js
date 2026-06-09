@@ -46,7 +46,7 @@ export const IMG = {
   cinnamonRollsTray: '/images/cinnamon-rolls-iced-tray.jpg',
   diningArea: '/images/dining-area-plants.jpg',
   storefront: '/images/storefront-front.jpg',
-  catering: '/images/buffet-setup.jpg',
+  catering: '/images/catering-hero-platter.jpg',
   frenchHen: '/images/caprese-panini.jpg',
   avocadoToast: null,
   chickenSaladPlate: '/images/chicken-salad-bagel.jpg',
