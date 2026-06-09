@@ -43,8 +43,8 @@ export default function Menu() {
         </p>
       </div>
 
-      {/* Sticky category tabs */}
-      <div className="sticky top-[112px] md:top-[120px] z-30 bg-background/95 backdrop-blur-md border-y border-border">
+      {/* Sticky category tabs — pinned just under the fixed header. */}
+      <div className="sticky top-[var(--header-h)] z-30 bg-background/95 backdrop-blur-md border-y border-border">
         <div className="max-w-5xl mx-auto px-3">
           <div className="flex gap-2 overflow-x-auto no-scrollbar py-2">
             {tabs.map((t) => (

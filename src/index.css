@@ -6,6 +6,9 @@
 
 @layer base {
   :root {
+    /* Fixed-header clearance. Header.jsx updates this to the rendered height. */
+    --header-h: 120px;
+
     /* ===== BRAND PALETTE (shared by both themes) ===== */
     --brand-rust: 12 56% 45%;        /* #B14A33 */
     --brand-forest: 142 33% 18%;     /* #1F3D2C */

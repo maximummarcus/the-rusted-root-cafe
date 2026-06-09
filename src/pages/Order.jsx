@@ -17,8 +17,8 @@ export default function Order() {
         description="Order pickup online from The Rusted Root Cafe in Windsor, VA. Scratch-made café & bakery favorites, ready when you are."
       />
 
-      {/* Native wrapper bar */}
-      <div className="sticky top-[112px] md:top-[120px] z-30 bg-brand-forest text-brand-cream">
+      {/* Native wrapper bar — pinned just under the fixed header. */}
+      <div className="sticky top-[var(--header-h)] z-40 bg-brand-forest text-brand-cream">
         <div className="max-w-[120rem] mx-auto px-4 py-2 flex items-center justify-between gap-3">
           <Link to="/menu" className="inline-flex items-center gap-1.5 text-sm font-semibold min-h-[44px]">
             <ArrowLeft className="w-4 h-4" /> Back to Menu
@@ -39,7 +39,7 @@ export default function Order() {
             src={CLOVER_ORDER_URL}
             onError={() => setFrameFailed(true)}
             className="w-full border-0"
-            style={{ height: 'calc(100vh - 170px)' }}
+            style={{ height: 'calc(100vh - var(--header-h) - 60px)' }}
           />
         </div>
       ) : (

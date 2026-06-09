@@ -6,22 +6,41 @@ import { useTheme } from '@/lib/ThemeContext';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ShoppingBag, BookOpen } from 'lucide-react';
 
+// Mobile shows only ONE full-bleed photo (the squished side-by-side split
+// looks bad on phones). Owner: to flip which photo shows on mobile, swap
+// IMG.bakery for IMG.plants on the line marked below. Desktop keeps the split.
+
 export default function Hero() {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Split background */}
-      <div className="absolute inset-0 grid grid-cols-2">
-        {/* PLACEHOLDER IMAGE: replace with real photo */}
-        <img src={IMG.bakery} alt="The Rusted Root café scratch bakery counter" className="w-full h-full object-cover" />
-        {/* PLACEHOLDER IMAGE: replace with real photo */}
-        <img src={IMG.plants} alt="Houseplants and home decor corner at the café" className="w-full h-full object-cover" />
+    <section className="relative overflow-hidden min-h-[100lvh] flex flex-col">
+      {/* Background photos */}
+      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
+        {/* Mobile single photo lives here. Owner: swap IMG.bakery → IMG.plants to flip. */}
+        <img
+          src={IMG.bakery}
+          alt="The Rusted Root café scratch bakery counter"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Desktop-only right half of the split. */}
+        <img
+          src={IMG.plants}
+          alt="Houseplants and home decor corner at the café"
+          className="hidden md:block w-full h-full object-cover object-center"
+        />
       </div>
       <div className="absolute inset-0 bg-brand-forest/55" />
 
-      <div className="relative max-w-[120rem] mx-auto px-4 py-16 md:py-28 flex flex-col items-center text-center">
+      {/* Content — centered vertically inside the visible area below the fixed header. */}
+      <div
+        className="relative flex-1 flex flex-col items-center justify-center text-center px-4 max-w-[120rem] mx-auto w-full"
+        style={{
+          paddingTop: 'calc(var(--header-h, 120px) + 1rem)',
+          paddingBottom: '2rem',
+        }}
+      >
         {/* Center logo card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
