@@ -2,18 +2,32 @@
 // SECRET ADMIN — configuration
 // ============================================================
 //
-// Layered lock: an obscure URL token + a server-checked password.
+// Layered lock: an obscure URL token + a password checked in the browser.
 //
-// TODO Marcus: change ADMIN_TOKEN to your own random slug before launch. The admin lives
-// at /admin/<ADMIN_TOKEN>. Treat this slug like a second password — only the owner gets
-// the full link. (The password itself lives in Base44 → Secrets as RRC_ADMIN_PASSWORD and
-// is checked server-side; it is never in this file or any client JS.)
-export const ADMIN_TOKEN = 'rr-7q9x2k4m8p';
+// NOTE ON SECURITY MODE: This app's Base44 plan does not deploy backend functions,
+// so the password can't be checked server-side. Instead it's checked client-side
+// against the SHA-256 hash below, and the Special / menu_item_availability entities
+// have public write rules so the dashboard can save without a logged-in account.
+// This is a deliberately lightweight gate ("keep casual visitors out") for a
+// low-stakes work-in-progress site — it is NOT strong security: someone technical
+// could bypass the gate or write via the API. Revisit if the site handles anything
+// sensitive (a Builder-tier plan would let us move the check back server-side).
+//
+// TODO Marcus: change ADMIN_TOKEN to your own random slug before launch. The admin
+// lives at /admin/<ADMIN_TOKEN>. Treat the slug like a second password.
+export const ADMIN_TOKEN = 'rr-d1835176486c7d959270a5628a5e756f';
 
-// Full admin path, e.g. "/admin/rr-7q9x2k4m8p".
+// Full admin path, e.g. "/admin/rr-...".
 export const ADMIN_PATH = `/admin/${ADMIN_TOKEN}`;
 
-// TODO Marcus: paste the owner's Clover dashboard link here. Online orders are managed in
-// Clover (not this site), so the Orders tab just deep-links here. Leave blank to show the
-// "add your Clover dashboard link" setup note instead of the button.
+// SHA-256 hash of the admin password. The plaintext is never stored here.
+// Initial password: "RustedRootCafe2026!" — change it after first login.
+// To change: tell Claude the new password and it'll regenerate this hash, or run
+//   printf '%s' 'YOUR NEW PASSWORD' | openssl dgst -sha256
+// and paste the hex value below.
+export const ADMIN_PASSWORD_SHA256 = '84b96b6566c5ad133b009ca82c8036f85cb63c0ded0f959fd2d286c3e626d7d6';
+
+// TODO Marcus: paste the owner's Clover dashboard link here. Online orders are managed
+// in Clover (not this site), so the Orders tab just deep-links here. Leave blank to show
+// the "add your Clover dashboard link" setup note instead of the button.
 export const CLOVER_DASHBOARD_URL = '';

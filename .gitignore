@@ -29,3 +29,7 @@ dist-ssr
 
 .env
 .vite
+
+# Source archives for site photos — extracted into public/images/ instead.
+rusted-root-site-photos/
+rusted-root-catering-photos/

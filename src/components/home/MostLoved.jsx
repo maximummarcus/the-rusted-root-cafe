@@ -22,12 +22,23 @@ export default function MostLoved() {
               }`}
             >
               <div className="aspect-square overflow-hidden">
-                {/* PLACEHOLDER IMAGE: replace with real photo */}
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                {item.img ? (
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-secondary/40 border-2 border-dashed border-border flex flex-col items-center justify-center p-4 text-center gap-1.5">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      Image coming soon
+                    </span>
+                    <span className={`leading-tight text-primary ${isModern ? 'font-heading font-semibold text-base' : 'font-script text-xl'}`}>
+                      {item.name}
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="p-4 text-center">
                 <h3 className="font-heading text-lg text-foreground">{item.name}</h3>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { MENU, MOST_LOVED } from '@/lib/cafeData';
+import { MENU, MOST_LOVED, IMG } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
 import SectionHeading from '@/components/SectionHeading';
 import MenuCategory from '@/components/menu/MenuCategory';
@@ -72,7 +72,19 @@ export default function Menu() {
         </section>
 
         {MENU.map((c) => (
-          <MenuCategory key={c.key} category={c} isSoldOut={isSoldOut} />
+          <React.Fragment key={c.key}>
+            <MenuCategory category={c} isSoldOut={isSoldOut} />
+            {c.key === 'limeade' && (
+              <div className="pb-6 -mt-3 flex justify-center">
+                <img
+                  src={IMG.lemonadeMenu}
+                  alt="Homemade Lemonade flavor menu — strawberry, peach, blackberry, lavender and more"
+                  loading="lazy"
+                  className="block w-full max-w-[220px] h-auto object-contain rounded-lg shadow-sm"
+                />
+              </div>
+            )}
+          </React.Fragment>
         ))}
 
         {/* Specials pulled from entity */}
