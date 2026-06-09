@@ -39,7 +39,7 @@ export default function Header() {
   }, [isHome]);
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50">
       {/* Scroll-aware background: transparent at top, fades to cream + blur + border as you scroll. */}
       <div
         aria-hidden="true"
