@@ -14,9 +14,9 @@ export const BRAND = {
   address: '11409 Windsor Blvd, Unit C, Windsor, VA 23487',
   addressShort: '11409 Windsor Blvd, Unit C',
   cityState: 'Windsor, VA 23487',
-  instagram: 'https://instagram.com/the_rustedrootcafe',
+  instagram: 'https://www.instagram.com/the_rustedrootcafe/',
   instagramHandle: '@the_rustedrootcafe',
-  facebook: 'https://facebook.com/',
+  facebook: 'https://www.facebook.com/p/The-Rusted-Root-100093432030913/',
   geo: { lat: 36.8068, lng: -76.7441 },
 };
 
