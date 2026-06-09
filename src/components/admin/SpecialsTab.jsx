@@ -8,10 +8,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, Plus, Trash2, Pencil, X } from 'lucide-react';
+import { Loader2, Plus, Trash2, Pencil, X, ImagePlus } from 'lucide-react';
 import { toast } from 'sonner';
 
 const EMPTY = { title: '', description: '', price: '', type: 'food', image_url: '', active: true, sort_order: 0, month_label: '' };
+
+// Accept common web image types only; cap uploads so a giant phone photo can't hang the form.
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // ~10MB
 
 const sortSpecials = (list) =>
   [...list].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0) || (a.title || '').localeCompare(b.title || ''));
@@ -22,6 +25,8 @@ export default function SpecialsTab() {
   const [form, setForm] = useState(EMPTY);
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const loadSpecials = () =>
@@ -37,6 +42,39 @@ export default function SpecialsTab() {
   const resetForm = () => {
     setForm(EMPTY);
     setEditingId(null);
+    setUploadError(null);
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // let the same file be re-picked later (e.g. after Remove)
+    if (!file) return;
+    setUploadError(null);
+
+    if (file.type && !file.type.startsWith('image/')) {
+      setUploadError('Please choose an image file (JPG, PNG, etc.).');
+      return;
+    }
+    if (file.size > MAX_IMAGE_BYTES) {
+      setUploadError('That image is too large — please keep it under 10MB.');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm((f) => ({ ...f, image_url: file_url }));
+      toast.success('Image uploaded');
+    } catch {
+      setUploadError('Upload failed — please try again.');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setForm((f) => ({ ...f, image_url: '' }));
+    setUploadError(null);
   };
 
   const handleSubmit = async (e) => {
@@ -183,18 +221,36 @@ export default function SpecialsTab() {
           <Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="A cozy seasonal favorite..." />
         </div>
         <div className="space-y-1.5">
-          <Label>Image URL <span className="text-muted-foreground font-normal">(optional — a placeholder is fine)</span></Label>
-          <div className="flex items-center gap-3">
-            <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://…" />
-            {form.image_url && <img src={form.image_url} alt="preview" className="w-12 h-12 rounded-xl object-cover shrink-0" />}
-          </div>
+          <Label>Image <span className="text-muted-foreground font-normal">(optional — a placeholder is fine)</span></Label>
+          {form.image_url ? (
+            <div className="flex items-center gap-3">
+              <img src={form.image_url} alt="Special preview" className="w-16 h-16 rounded-xl object-cover shrink-0 border border-border" />
+              <div className="flex items-center gap-2">
+                <label className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-secondary text-secondary-foreground cursor-pointer text-sm font-semibold hover:opacity-90 transition">
+                  {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
+                  {uploading ? 'Uploading…' : 'Replace'}
+                  <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploading} />
+                </label>
+                <Button type="button" variant="ghost" size="sm" onClick={handleRemoveImage} disabled={uploading} className="gap-1 text-muted-foreground">
+                  <Trash2 className="w-4 h-4" /> Remove
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <label className="flex items-center justify-center gap-2 px-4 py-6 rounded-xl border border-dashed border-border bg-secondary/40 text-secondary-foreground cursor-pointer text-sm font-semibold hover:bg-secondary transition">
+              {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
+              {uploading ? 'Uploading…' : 'Upload image'}
+              <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploading} />
+            </label>
+          )}
+          {uploadError && <p className="text-xs text-destructive">{uploadError}</p>}
         </div>
         <div className="flex items-center gap-3">
           <Switch checked={form.active} onCheckedChange={(v) => setForm({ ...form, active: v })} />
           <Label>Active (shown on the site)</Label>
         </div>
         <div className="pt-1">
-          <Button type="submit" disabled={saving} className="gap-2 min-h-[48px] w-full sm:w-auto">
+          <Button type="submit" disabled={saving || uploading} className="gap-2 min-h-[48px] w-full sm:w-auto">
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
             {editingId ? 'Update Special' : 'Add Special'}
           </Button>
