@@ -47,10 +47,6 @@
   ],
   "rls": {
     "read": {},
-    "write": {
-      "user_condition": {
-        "role": "admin"
-      }
-    }
+    "write": {}
   }
 }
