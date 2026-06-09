@@ -22,10 +22,10 @@ export default function MostLoved() {
               }`}
             >
               <div className="aspect-square overflow-hidden">
-                {/* PLACEHOLDER IMAGE: replace with real photo */}
                 <img
                   src={item.img}
                   alt={item.name}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>

@@ -36,24 +36,27 @@ export const HOURS = [
   { day: 'Sunday', time: 'Closed' },
 ];
 
-// PLACEHOLDER IMAGES — owner will replace with real photos.
+// IMAGES — real owner photos live at /images/. Slots without a matching real
+// photo still point at the original AI-generated placeholder (WIP, will be
+// replaced as real photos arrive).
 export const IMG = {
-  hero: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/0f3635004_generated_1cca7114.png',
-  bakery: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/9291911fe_generated_6ace2e11.png',
-  plants: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/dc5e3e5ab_generated_c55c41fe.png',
-  storefront: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/1ece937a5_generated_a3174eba.png',
-  catering: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/4ed7e87f0_generated_f25ca0d0.png',
-  frenchHen: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/9a150250d_generated_f6ac6fb8.png',
-  avocadoToast: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/ab9c04998_generated_d17e1755.png',
-  chickenSaladPlate: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/22bb4a809_generated_4b4ec53d.png',
-  cranberrySalad: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/f1c0583c9_generated_c2337e98.png',
-  turkeyBaconRanch: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/7ed05ee47_generated_4aef1743.png',
-  chickenBaconPanini: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/1f33610bf_generated_a9d93307.png',
-  bagels: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/e3b3e756b_generated_7e8fa615.png',
-  cinnamonRoll: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/217a06dcf_generated_4f33ac10.png',
-  almondCroissant: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/275a4d8a6_generated_5ab3be36.png',
-  specialtyDrink: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/68b85ab84_generated_398239da.png',
-  limeade: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/4154b76ee_generated_c45279e3.png',
+  hero: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/0f3635004_generated_1cca7114.png', // unused
+  bakery: '/images/counter-and-sign.jpg',
+  plants: '/images/plant-decor-display.jpg',
+  storefront: '/images/storefront-front.jpg',
+  catering: '/images/buffet-setup.jpg',
+  frenchHen: '/images/caprese-panini.jpg',
+  avocadoToast: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/ab9c04998_generated_d17e1755.png', // WIP placeholder
+  chickenSaladPlate: '/images/chicken-salad-bagel.jpg',
+  cranberrySalad: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/f1c0583c9_generated_c2337e98.png', // WIP placeholder
+  turkeyBaconRanch: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/7ed05ee47_generated_4aef1743.png', // WIP placeholder
+  chickenBaconPanini: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/1f33610bf_generated_a9d93307.png', // WIP placeholder
+  bagels: '/images/scratch-bagels-tray.jpg',
+  cinnamonRoll: '/images/cinnamon-roll-single.jpg',
+  almondCroissant: '/images/croissants-tray.jpg',
+  specialtyDrink: '/images/specialty-drink.jpg',
+  limeade: 'https://media.base44.com/images/public/6a2713e14b51b44712b64612/4154b76ee_generated_c45279e3.png', // WIP placeholder
+  lemonadeMenu: '/images/lemonade-menu.png',
 };
 
 // MENU — confirmed categories in order. Items with confirmed prices are verbatim.

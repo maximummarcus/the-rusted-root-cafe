@@ -15,8 +15,7 @@ export default function MenuItem({ item, soldOut = false }) {
     >
       {item.img && (
         <div className={`relative w-16 h-16 shrink-0 overflow-hidden ${isModern ? 'rounded-md' : 'rounded-2xl'}`}>
-          {/* PLACEHOLDER IMAGE: replace with real photo */}
-          <img src={item.img} alt={item.name} className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`} />
+          <img src={item.img} alt={item.name} loading="lazy" className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`} />
         </div>
       )}
       <div className="flex-1 min-w-0">
