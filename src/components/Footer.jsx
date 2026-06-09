@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BRAND, LOGO_URL, HOURS, NAV_LINKS } from '@/lib/cafeData';
+import { BRAND, LOGO_URL, WORDMARK_URL, HOURS, NAV_LINKS } from '@/lib/cafeData';
 import { MapPin, Phone, Mail, Instagram, Facebook, Clock } from 'lucide-react';
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="inline-block bg-white rounded-2xl p-2">
             <img src={LOGO_URL} alt="The Rusted Root café logo" className="w-24 h-auto rounded-full" />
           </div>
-          <p className="font-script text-2xl text-brand-sunflower">{BRAND.slogan}</p>
+          <img src={WORDMARK_URL} alt="The Rusted Root Cafe" className="w-48 max-w-full h-auto" />
           <p className="text-sm text-brand-cream/70">{BRAND.tagline}</p>
         </div>
 

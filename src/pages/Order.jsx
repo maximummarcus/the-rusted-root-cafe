@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BRAND, MENU } from '@/lib/cafeData';
+import { BRAND, MENU, CLOVER_ORDER_URL, DOORDASH_ORDER_URL } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
 import { Phone, ArrowLeft, ShoppingBag } from 'lucide-react';
 
-// ===== Ordering provider links =====
-// The owner links out to her ordering providers (no inline embed).
-const CLOVER_ORDER_URL = "#";   // TODO Marcus: paste her Clover Online Ordering link
-const DOORDASH_ORDER_URL = "#"; // TODO Marcus: paste the DoorDash ordering link
+// Ordering provider links live in src/lib/cafeData.js (single source of truth).
+// While a link is blank the button below renders disabled ("coming soon");
+// pasting the real URL there makes it go live automatically.
+const isLiveUrl = (url) => Boolean(url) && url !== '#';
 
 export default function Order() {
   return (
@@ -48,14 +48,23 @@ export default function Order() {
         <div className="mt-10 mx-auto max-w-md flex flex-col gap-6">
           {/* Primary — order direct via Clover */}
           <div>
-            <a
-              href={CLOVER_ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-brand-forest text-brand-cream text-lg font-bold shadow-lg hover:opacity-90 transition"
-            >
-              <ShoppingBag className="w-5 h-5" /> Order for Pickup
-            </a>
+            {isLiveUrl(CLOVER_ORDER_URL) ? (
+              <a
+                href={CLOVER_ORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-brand-forest text-brand-cream text-lg font-bold shadow-lg hover:opacity-90 transition"
+              >
+                <ShoppingBag className="w-5 h-5" /> Order for Pickup
+              </a>
+            ) : (
+              <div
+                aria-disabled="true"
+                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-muted text-muted-foreground text-lg font-bold cursor-not-allowed select-none"
+              >
+                <ShoppingBag className="w-5 h-5" /> Online ordering coming soon
+              </div>
+            )}
             <p className="mt-2 text-center text-sm text-muted-foreground">
               Order direct from The Rusted Root.
             </p>
@@ -63,24 +72,28 @@ export default function Order() {
 
           {/* Secondary — DoorDash (red accent, text-only, no trademarked logo) */}
           <div>
-            <a
-              href={DOORDASH_ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ backgroundColor: '#FF3008' }}
-              className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full text-white text-lg font-bold shadow-lg hover:opacity-90 transition"
-            >
-              Order on DoorDash
-            </a>
+            {isLiveUrl(DOORDASH_ORDER_URL) ? (
+              <a
+                href={DOORDASH_ORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ backgroundColor: '#FF3008' }}
+                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full text-white text-lg font-bold shadow-lg hover:opacity-90 transition"
+              >
+                Order on DoorDash
+              </a>
+            ) : (
+              <div
+                aria-disabled="true"
+                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-muted text-muted-foreground text-lg font-bold cursor-not-allowed select-none"
+              >
+                Online ordering coming soon
+              </div>
+            )}
             <p className="mt-2 text-center text-sm text-muted-foreground">
               Pickup or delivery via DoorDash.
             </p>
           </div>
-
-          {/* PLACEHOLDER: remove once order links are live */}
-          <p className="text-center text-xs text-muted-foreground italic">
-            Online ordering links coming soon.
-          </p>
 
           {/* Call fallback */}
           <a

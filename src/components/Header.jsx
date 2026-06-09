@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { NAV_LINKS, LOGO_URL, BRAND } from '@/lib/cafeData';
+import { NAV_LINKS, WORDMARK_URL, BRAND } from '@/lib/cafeData';
 import ThemeToggle from '@/components/ThemeToggle';
 
 // Once the background is at least this opaque, dark text reads — flip nav labels back to normal.
@@ -82,16 +82,22 @@ export default function Header() {
       />
       <div className="relative max-w-[120rem] mx-auto px-4 md:px-8">
         <div className="flex items-center gap-2 md:gap-3 py-2">
-          {/* Inline logo — matches the nav button height so the bar reads as one row. */}
+          {/* Brand wordmark — sized to the existing bar height (44px touch target kept
+              on the link). Cream mark + dark outline reads on both themes; a subtle
+              drop-shadow is added only over the transparent-on-hero state, where the
+              photo behind can run light. */}
           <Link
             to="/"
             aria-label={`${BRAND.name}, Home`}
-            className="shrink-0 inline-flex items-center justify-center min-h-[44px] min-w-[44px]"
+            className="shrink-0 inline-flex items-center justify-center min-h-[44px]"
           >
             <img
-              src={LOGO_URL}
-              alt="The Rusted Root café logo"
-              className="w-11 h-11 md:w-12 md:h-12 rounded-full object-cover"
+              src={WORDMARK_URL}
+              alt="The Rusted Root Cafe"
+              className="h-6 md:h-10 w-auto"
+              style={{
+                filter: isLight ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none',
+              }}
             />
           </Link>
 
@@ -127,8 +133,13 @@ export default function Header() {
             </ul>
           </nav>
 
-          {/* Theme toggle — always reachable. */}
-          <div className="shrink-0">
+          {/* Theme toggle — always reachable. Icon-only below md: the full-label pill
+              (~186px) plus a legible wordmark physically can't fit a 375px bar, so the
+              compact variant keeps the wordmark and nav tabs usable on phones. */}
+          <div className="shrink-0 md:hidden">
+            <ThemeToggle compact />
+          </div>
+          <div className="shrink-0 hidden md:block">
             <ThemeToggle />
           </div>
         </div>

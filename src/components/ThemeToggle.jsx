@@ -21,7 +21,9 @@ export default function ThemeToggle({ compact = false }) {
         }}
       />
       <span
-        className={`relative z-10 flex items-center justify-center gap-1.5 w-[88px] py-1.5 rounded-full text-xs font-semibold transition-colors ${
+        className={`relative z-10 flex items-center justify-center gap-1.5 ${
+          compact ? 'w-9' : 'w-[88px]'
+        } py-1.5 rounded-full text-xs font-semibold transition-colors ${
           !isModern ? 'text-primary-foreground' : 'text-muted-foreground'
         }`}
       >
@@ -29,7 +31,9 @@ export default function ThemeToggle({ compact = false }) {
         {!compact && 'Hand-Drawn'}
       </span>
       <span
-        className={`relative z-10 flex items-center justify-center gap-1.5 w-[88px] py-1.5 rounded-full text-xs font-semibold transition-colors ${
+        className={`relative z-10 flex items-center justify-center gap-1.5 ${
+          compact ? 'w-9' : 'w-[88px]'
+        } py-1.5 rounded-full text-xs font-semibold transition-colors ${
           isModern ? 'text-primary-foreground' : 'text-muted-foreground'
         }`}
       >

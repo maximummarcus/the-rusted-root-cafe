@@ -9,6 +9,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import { ThemeProvider } from '@/lib/ThemeContext';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Layout from '@/components/Layout';
+import ScrollToTop from '@/components/ScrollToTop';
 // Add page imports here
 import Home from '@/pages/Home';
 import Menu from '@/pages/Menu';
@@ -47,7 +48,9 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
-      {/* Secret admin (obscure URL token + server-checked password; self-contained, no site chrome) */}
+      {/* Secret admin — obscure URL slug + client-side password gate with a
+          localStorage session (no backend functions on this plan; see
+          src/lib/adminConfig.js). Self-contained, no site chrome. */}
       <Route path={ADMIN_PATH} element={<AdminDashboard />} />
 
       {/* Auth pages */}
@@ -85,6 +88,7 @@ function App() {
       <ThemeProvider>
         <QueryClientProvider client={queryClientInstance}>
           <Router>
+            <ScrollToTop />
             <AuthenticatedApp />
           </Router>
           <Toaster />

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 
 const ThemeContext = createContext(null);
 
@@ -20,8 +20,20 @@ export function ThemeProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  const toggleTheme = () =>
+  // The global 250ms theme transition (index.css) only applies while
+  // .theme-transitioning is on <html>, so the morph animates on an actual
+  // toggle but never on initial load.
+  const transitionTimer = useRef(null);
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    root.classList.add('theme-transitioning');
+    if (transitionTimer.current) window.clearTimeout(transitionTimer.current);
+    transitionTimer.current = window.setTimeout(() => {
+      root.classList.remove('theme-transitioning');
+      transitionTimer.current = null;
+    }, 300);
     setTheme((t) => (t === 'modern' ? 'handdrawn' : 'modern'));
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>

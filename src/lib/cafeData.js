@@ -20,11 +20,19 @@ export const BRAND = {
   geo: { lat: 36.8068, lng: -76.7441 },
 };
 
-// Owner: paste your Clover Online Ordering URL here.
-export const CLOVER_ORDER_URL = '';
+// ===== ONLINE ORDERING LINKS — single source of truth =====
+// Owner/Marcus: paste the live links between the quotes. While a link is empty
+// the matching button on the Order page renders a disabled "Online ordering
+// coming soon" state; pasting a real URL makes that button go live automatically.
+export const CLOVER_ORDER_URL = '';   // <-- paste the Clover Online Ordering URL here
+export const DOORDASH_ORDER_URL = ''; // <-- paste the DoorDash store URL here
 
-// The Rusted Root café logo.
+// The Rusted Root café logo (round sunflower badge).
 export const LOGO_URL = '/logo.jpeg';
+
+// Brand wordmark — cream retro serif on a transparent background. Used as the
+// brand mark in the header and footer; works on both light and dark surfaces.
+export const WORDMARK_URL = '/wordmark.png';
 
 export const HOURS = [
   { day: 'Monday', time: '8:00am – 4:00pm' },
