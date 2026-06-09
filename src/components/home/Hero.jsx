@@ -14,10 +14,8 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       {/* Split background */}
       <div className="absolute inset-0 grid grid-cols-2">
-        {/* PLACEHOLDER IMAGE: replace with real photo */}
-        <img src={IMG.bakery} alt="The Rusted Root café scratch bakery counter" className="w-full h-full object-cover" />
-        {/* PLACEHOLDER IMAGE: replace with real photo */}
-        <img src={IMG.plants} alt="Houseplants and home decor corner at the café" className="w-full h-full object-cover" />
+        <img src={IMG.bakery} alt="The Rusted Root café counter with the storefront sign and fresh flowers" className="w-full h-full object-cover" />
+        <img src={IMG.plants} alt="Houseplants and home decor display inside the café" className="w-full h-full object-cover" />
       </div>
       <div className="absolute inset-0 bg-brand-forest/55" />
 

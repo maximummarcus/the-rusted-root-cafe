@@ -8,14 +8,14 @@ const cards = [
     icon: Coffee,
     title: 'Café & Bakery',
     img: IMG.bakery,
-    alt: 'Scratch bakery pastry case',
+    alt: 'The café counter with the Rusted Root sign and fresh flowers',
     body: 'Scratch-made bagels, paninis, salads, homemade chicken salad, cinnamon rolls, almond croissants — fresh every day.',
   },
   {
     icon: Leaf,
     title: 'Plants & Home Decor',
     img: IMG.plants,
-    alt: 'Houseplants and home decor shelves',
+    alt: 'Houseplants and home decor display inside the café',
     body: 'Browse leafy houseplants and cozy home goods while you sip. Take a little something green home with you.',
   },
 ];
@@ -33,8 +33,7 @@ export default function DualIdentity() {
             className={`relative overflow-hidden shadow-lg ${isModern ? 'rounded-md' : 'rounded-[2rem]'}`}
           >
             <div className="aspect-[4/3] overflow-hidden">
-              {/* PLACEHOLDER IMAGE: replace with real photo */}
-              <img src={c.img} alt={c.alt} className="w-full h-full object-cover" />
+              <img src={c.img} alt={c.alt} loading="lazy" className="w-full h-full object-cover" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/90 via-brand-forest/30 to-transparent" />
             <div className="absolute bottom-0 p-6 text-brand-cream">

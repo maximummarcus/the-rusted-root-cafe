@@ -26,8 +26,7 @@ export default function Catering() {
       />
       <section className="relative overflow-hidden">
         <div className="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
-          {/* PLACEHOLDER IMAGE: replace with real photo */}
-          <img src={IMG.catering} alt="A catering spread of sandwiches, pastries and baked goods" className="w-full h-full object-cover" />
+          <img src={IMG.catering} alt="A Rusted Root catering buffet spread with trays of food and pastries" className="w-full h-full object-cover" />
         </div>
         <div className="absolute inset-0 bg-brand-forest/50 flex items-center justify-center text-center px-6">
           <div>

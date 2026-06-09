@@ -21,8 +21,7 @@ export default function About() {
 
         <div className={`grid md:grid-cols-2 gap-8 items-center`}>
           <div className={`overflow-hidden shadow-lg ${isModern ? 'rounded-md' : 'rounded-[2rem] hd-tilt'}`}>
-            {/* PLACEHOLDER IMAGE: replace with real photo */}
-            <img src={IMG.storefront} alt="The welcoming storefront of The Rusted Root café" className="w-full h-full object-cover" />
+            <img src={IMG.storefront} alt="The Rusted Root café storefront with its green awning in Windsor, VA" loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
