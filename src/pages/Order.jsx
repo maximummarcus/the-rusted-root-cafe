@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { CLOVER_ORDER_URL, BRAND, MENU } from '@/lib/cafeData';
+import { BRAND, MENU } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
-import { Phone, ArrowLeft, ExternalLink, ShoppingBag } from 'lucide-react';
+import { Phone, ArrowLeft, ShoppingBag } from 'lucide-react';
+
+// ===== Ordering provider links =====
+// The owner links out to her ordering providers (no inline embed).
+const CLOVER_ORDER_URL = "#";   // TODO Marcus: paste her Clover Online Ordering link
+const DOORDASH_ORDER_URL = "#"; // TODO Marcus: paste the DoorDash ordering link
 
 export default function Order() {
-  const [frameFailed, setFrameFailed] = useState(false);
-  const hasUrl = Boolean(CLOVER_ORDER_URL);
-
-  const showFallback = !hasUrl || frameFailed;
-
   return (
     <>
       <Seo
@@ -32,83 +32,85 @@ export default function Order() {
         </div>
       </div>
 
-      {!showFallback ? (
-        <div className="w-full bg-background">
-          <iframe
-            title="Online Ordering Portal"
-            src={CLOVER_ORDER_URL}
-            onError={() => setFrameFailed(true)}
-            className="w-full border-0"
-            style={{ height: 'calc(100vh - 170px)' }}
-          />
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <div className="text-center">
+          <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-primary">
+            <ShoppingBag className="w-4 h-4" /> Order Online
+          </span>
+          <h1 className="font-heading text-4xl md:text-5xl text-foreground mt-3">Ready when you are</h1>
+          <p className="mt-4 text-muted-foreground">
+            Choose how you&apos;d like to order — pick up direct from the café or get it
+            through DoorDash.
+          </p>
         </div>
-      ) : (
-        <OrderFallback />
-      )}
-    </>
-  );
-}
 
-function OrderFallback() {
-  return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
-      <div className="text-center">
-        <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-primary">
-          <ShoppingBag className="w-4 h-4" /> Order for Pickup
-        </span>
-        <h1 className="font-heading text-4xl md:text-5xl text-foreground mt-3">Ready when you are</h1>
-        <p className="mt-4 text-muted-foreground">
-          Online ordering is powered by Clover. The quickest way to order right now is to
-          give us a ring — we&apos;ll have it fresh and waiting.
-        </p>
-
-        <a
-          href={`tel:${BRAND.phoneRaw}`}
-          className="mt-8 inline-flex items-center justify-center gap-3 min-h-[64px] w-full sm:w-auto px-10 rounded-full bg-primary text-primary-foreground text-xl font-bold shadow-lg hover:opacity-90 transition"
-        >
-          <Phone className="w-6 h-6" /> Tap to Call · {BRAND.phone}
-        </a>
-
-        {CLOVER_ORDER_URL && (
-          <div className="mt-4">
+        {/* Order-link buttons — stack full-width on mobile */}
+        <div className="mt-10 mx-auto max-w-md flex flex-col gap-6">
+          {/* Primary — order direct via Clover */}
+          <div>
             <a
               href={CLOVER_ORDER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary font-semibold underline-offset-4 hover:underline"
+              className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-brand-forest text-brand-cream text-lg font-bold shadow-lg hover:opacity-90 transition"
             >
-              Open online ordering <ExternalLink className="w-4 h-4" />
+              <ShoppingBag className="w-5 h-5" /> Order for Pickup
             </a>
+            <p className="mt-2 text-center text-sm text-muted-foreground">
+              Order direct from The Rusted Root.
+            </p>
           </div>
-        )}
-      </div>
 
-      {/* Quick menu glance */}
-      <div className="mt-12">
-        <h2 className="font-heading text-2xl text-foreground mb-4 text-center">Popular picks</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {MENU.flatMap((c) => c.items)
-            .filter((i) => i.popular)
-            .map((item) => (
-              <div key={item.name} className="flex items-center justify-between bg-card border border-border rounded-2xl px-4 py-3">
-                <span className="font-heading text-lg text-foreground">{item.name}</span>
-                <span className="text-primary font-semibold">{item.price}</span>
-              </div>
-            ))}
+          {/* Secondary — DoorDash (red accent, text-only, no trademarked logo) */}
+          <div>
+            <a
+              href={DOORDASH_ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ backgroundColor: '#FF3008' }}
+              className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full text-white text-lg font-bold shadow-lg hover:opacity-90 transition"
+            >
+              Order on DoorDash
+            </a>
+            <p className="mt-2 text-center text-sm text-muted-foreground">
+              Pickup or delivery via DoorDash.
+            </p>
+          </div>
+
+          {/* PLACEHOLDER: remove once order links are live */}
+          <p className="text-center text-xs text-muted-foreground italic">
+            Online ordering links coming soon.
+          </p>
+
+          {/* Call fallback */}
+          <a
+            href={`tel:${BRAND.phoneRaw}`}
+            className="inline-flex items-center justify-center gap-2 text-primary font-semibold underline-offset-4 hover:underline min-h-[44px]"
+          >
+            <Phone className="w-4 h-4" /> Or call us to order: {BRAND.phone}
+          </a>
         </div>
-        <p className="text-center mt-6">
-          <Link to="/menu" className="text-primary font-semibold underline-offset-4 hover:underline">
-            See the full menu →
-          </Link>
-        </p>
-      </div>
 
-      {/* Config note for owner */}
-      {!CLOVER_ORDER_URL && (
-        <p className="mt-10 text-xs text-center text-muted-foreground italic">
-          Setup note: add your Clover Online Ordering link to enable inline ordering.
-        </p>
-      )}
-    </div>
+        {/* Quick menu glance */}
+        <div className="mt-12">
+          <h2 className="font-heading text-2xl text-foreground mb-4 text-center">Popular picks</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {MENU.flatMap((c) => c.items)
+              .filter((i) => i.popular)
+              .map((item) => (
+                <div key={item.name} className="flex items-center justify-between bg-card border border-border rounded-2xl px-4 py-3">
+                  <span className="font-heading text-lg text-foreground">{item.name}</span>
+                  <span className="text-primary font-semibold">{item.price}</span>
+                </div>
+              ))}
+          </div>
+          <p className="text-center mt-6">
+            <Link to="/menu" className="text-primary font-semibold underline-offset-4 hover:underline">
+              See the full menu →
+            </Link>
+          </p>
+        </div>
+      </div>
+    </>
   );
 }
