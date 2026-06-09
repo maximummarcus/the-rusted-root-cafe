@@ -6,24 +6,28 @@ import ThemeToggle from '@/components/ThemeToggle';
 // Once the background is at least this opaque, dark text reads — flip nav labels back to normal.
 const LIGHT_THRESHOLD = 0.6;
 
+// Routes whose first section is a full-bleed photo hero. The header overlays them
+// transparently and fades to opaque on scroll; on every other route it starts opaque.
+const HERO_OVERLAY_ROUTES = new Set(['/', '/catering']);
+
 export default function Header() {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHeroOverlay = HERO_OVERLAY_ROUTES.has(location.pathname);
   const headerRef = useRef(null);
   const [bgOpacity, setBgOpacity] = useState(0);
 
   // White labels are only needed where the transparent bar overlays a dark image — the
-  // home hero. On every other route the transparent state sits over a light page bg,
-  // so dark text reads fine and we leave the labels alone.
-  const isLight = isHome && bgOpacity < LIGHT_THRESHOLD;
+  // home and catering heroes. On every other route the transparent state sits over a
+  // light page bg, so dark text reads fine and we leave the labels alone.
+  const isLight = isHeroOverlay && bgOpacity < LIGHT_THRESHOLD;
 
   useEffect(() => {
     let ticking = false;
 
     const update = () => {
-      // On Home, fade in across roughly one viewport (the hero height).
+      // On hero-overlay routes, fade in across roughly one viewport (the hero height).
       // On other pages, fade in over ~140px so the bar fills in quickly.
-      const threshold = isHome
+      const threshold = isHeroOverlay
         ? Math.max(window.innerHeight * 0.9, 320)
         : 140;
       const next = Math.min(Math.max(window.scrollY / threshold, 0), 1);
@@ -45,7 +49,7 @@ export default function Header() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [isHome]);
+  }, [isHeroOverlay]);
 
   // Expose the rendered header height as --header-h so page wrappers and sticky bars
   // (Layout main, Menu tabs, Order back-bar) can clear / pin against it without magic numbers.
