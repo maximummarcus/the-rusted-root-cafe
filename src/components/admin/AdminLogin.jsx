@@ -38,7 +38,7 @@ export default function AdminLogin({ onSuccess }) {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary mb-4">
             <Lock className="w-6 h-6 text-foreground" />
           </div>
-          <h1 className="font-heading text-2xl text-foreground">The Rusted Root — Admin</h1>
+          <h1 className="font-heading text-2xl text-foreground">The Rusted Root: Admin</h1>
           <p className="mt-1 text-sm text-muted-foreground">Enter the admin password to continue.</p>
         </div>
         <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4">

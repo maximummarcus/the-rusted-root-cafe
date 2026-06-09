@@ -106,7 +106,7 @@ export default function OutOfStockTab() {
                     </button>
                   </div>
                   <p className="mt-1 text-[11px] text-muted-foreground">
-                    {updated ? `Last updated: ${timeAgo(updated)}` : 'Last updated: —'}
+                    {updated ? `Last updated: ${timeAgo(updated)}` : 'Last updated: never'}
                   </p>
                 </div>
               );

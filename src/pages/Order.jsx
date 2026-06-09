@@ -13,7 +13,7 @@ export default function Order() {
   return (
     <>
       <Seo
-        title="Order Online — The Rusted Root Cafe, Windsor VA"
+        title="Order Online: The Rusted Root Cafe, Windsor VA"
         description="Order pickup online from The Rusted Root Cafe in Windsor, VA. Scratch-made café & bakery favorites, ready when you are."
       />
 
@@ -39,7 +39,7 @@ export default function Order() {
           </span>
           <h1 className="font-heading text-4xl md:text-5xl text-foreground mt-3">Ready when you are</h1>
           <p className="mt-4 text-muted-foreground">
-            Choose how you&apos;d like to order — pick up direct from the café or get it
+            Choose how you&apos;d like to order: pick up direct from the café or get it
             through DoorDash.
           </p>
         </div>

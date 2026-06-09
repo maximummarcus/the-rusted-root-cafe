@@ -56,7 +56,7 @@ export default function SpecialsTab() {
       return;
     }
     if (file.size > MAX_IMAGE_BYTES) {
-      setUploadError('That image is too large — please keep it under 10MB.');
+      setUploadError('That image is too large. Please keep it under 10MB.');
       return;
     }
 
@@ -66,7 +66,7 @@ export default function SpecialsTab() {
       setForm((f) => ({ ...f, image_url: file_url }));
       toast.success('Image uploaded');
     } catch {
-      setUploadError('Upload failed — please try again.');
+      setUploadError('Upload failed. Please try again.');
     } finally {
       setUploading(false);
     }
@@ -221,7 +221,7 @@ export default function SpecialsTab() {
           <Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="A cozy seasonal favorite..." />
         </div>
         <div className="space-y-1.5">
-          <Label>Image <span className="text-muted-foreground font-normal">(optional — a placeholder is fine)</span></Label>
+          <Label>Image <span className="text-muted-foreground font-normal">(optional, a placeholder is fine)</span></Label>
           {form.image_url ? (
             <div className="flex items-center gap-3">
               <img src={form.image_url} alt="Special preview" className="w-16 h-16 rounded-xl object-cover shrink-0 border border-border" />
@@ -263,7 +263,7 @@ export default function SpecialsTab() {
           <Loader2 className="w-6 h-6 animate-spin text-primary" />
         </div>
       ) : specials.length === 0 ? (
-        <p className="text-muted-foreground text-center py-8">No specials yet — add your first above.</p>
+        <p className="text-muted-foreground text-center py-8">No specials yet. Add your first above.</p>
       ) : (
         <div className="space-y-3">
           {specials.map((s) => (

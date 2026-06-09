@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   };
 
   // Never index the admin, regardless of auth state.
-  const seo = <Seo title="Admin — The Rusted Root Cafe" description="" noindex />;
+  const seo = <Seo title="Admin: The Rusted Root Cafe" description="" noindex />;
 
   if (authed === null) {
     return (
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
         {/* Header */}
         <header className="sticky top-0 z-30 bg-brand-forest text-brand-cream">
           <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-            <h1 className="font-heading text-base sm:text-xl tracking-wide truncate">THE RUSTED ROOT — ADMIN</h1>
+            <h1 className="font-heading text-base sm:text-xl tracking-wide truncate">THE RUSTED ROOT: ADMIN</h1>
             <Button
               onClick={handleLogout}
               variant="secondary"

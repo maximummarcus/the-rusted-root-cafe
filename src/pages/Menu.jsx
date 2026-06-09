@@ -33,7 +33,7 @@ export default function Menu() {
   return (
     <>
       <Seo
-        title="Menu — The Rusted Root Cafe, Windsor VA"
+        title="Menu: The Rusted Root Cafe, Windsor VA"
         description="Browse the menu at The Rusted Root Cafe in Windsor, VA: breakfast, paninis, sandwiches, wraps, salads, scratch-made pastries, specialty drinks, limeade and more."
       />
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-6 text-center">
@@ -78,7 +78,7 @@ export default function Menu() {
               <div className="pb-6 -mt-3 flex justify-center">
                 <img
                   src={IMG.lemonadeMenu}
-                  alt="Homemade Lemonade flavor menu — strawberry, peach, blackberry, lavender and more"
+                  alt="Homemade Lemonade flavor menu: strawberry, peach, blackberry, lavender and more"
                   loading="lazy"
                   className="block w-full max-w-[220px] h-auto object-contain rounded-lg shadow-sm"
                 />

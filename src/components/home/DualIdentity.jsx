@@ -9,7 +9,7 @@ const cards = [
     title: 'Café & Bakery',
     img: IMG.cinnamonRollsTray,
     alt: 'Tray of freshly iced scratch-made cinnamon rolls',
-    body: 'Scratch-made bagels, paninis, salads, homemade chicken salad, cinnamon rolls, almond croissants — fresh every day.',
+    body: 'Scratch-made bagels, paninis, salads, homemade chicken salad, cinnamon rolls, almond croissants. Fresh every day.',
   },
   {
     icon: Leaf,
