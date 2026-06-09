@@ -10,7 +10,8 @@ export default function Specials() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.Special.filter({ active: true }, '-created_date')
+    // Only active specials, ordered by the admin's manual sort_order (ascending).
+    base44.entities.Special.filter({ active: true }, 'sort_order')
       .then(setSpecials)
       .catch(() => setSpecials([]))
       .finally(() => setLoading(false));

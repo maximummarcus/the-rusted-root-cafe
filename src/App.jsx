@@ -18,6 +18,8 @@ import Specials from '@/pages/Specials';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import AdminSpecials from '@/pages/AdminSpecials';
+import AdminDashboard from '@/pages/AdminDashboard';
+import { ADMIN_PATH } from '@/lib/adminConfig';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import ForgotPassword from '@/pages/ForgotPassword';
@@ -45,6 +47,9 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
+      {/* Secret admin (obscure URL token + server-checked password; self-contained, no site chrome) */}
+      <Route path={ADMIN_PATH} element={<AdminDashboard />} />
+
       {/* Auth pages */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

@@ -6,12 +6,14 @@ import SectionHeading from '@/components/SectionHeading';
 import MenuCategory from '@/components/menu/MenuCategory';
 import MenuItem from '@/components/menu/MenuItem';
 import SpecialCard from '@/components/specials/SpecialCard';
+import { useAvailability } from '@/hooks/useAvailability';
 
 export default function Menu() {
   const [specials, setSpecials] = useState([]);
+  const { isSoldOut } = useAvailability();
 
   useEffect(() => {
-    base44.entities.Special.filter({ active: true }, '-created_date')
+    base44.entities.Special.filter({ active: true }, 'sort_order')
       .then(setSpecials)
       .catch(() => setSpecials([]));
   }, []);
@@ -64,13 +66,13 @@ export default function Menu() {
           <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-5">Most Ordered</h2>
           <div className="grid gap-3 md:grid-cols-2">
             {MOST_LOVED.map((item) => (
-              <MenuItem key={item.name} item={{ ...item, popular: true }} />
+              <MenuItem key={item.name} item={{ ...item, popular: true }} soldOut={isSoldOut(item.name)} />
             ))}
           </div>
         </section>
 
         {MENU.map((c) => (
-          <MenuCategory key={c.key} category={c} />
+          <MenuCategory key={c.key} category={c} isSoldOut={isSoldOut} />
         ))}
 
         {/* Specials pulled from entity */}
