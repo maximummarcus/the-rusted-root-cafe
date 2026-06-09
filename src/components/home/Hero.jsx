@@ -6,6 +6,10 @@ import { useTheme } from '@/lib/ThemeContext';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ShoppingBag, BookOpen } from 'lucide-react';
 
+// Mobile shows only ONE full-bleed photo (the squished side-by-side split
+// looks bad on phones). Owner: to flip which photo shows on mobile, swap
+// IMG.bakery for IMG.plants on the line marked below. Desktop keeps the split.
+
 export default function Hero() {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
@@ -13,16 +17,29 @@ export default function Hero() {
   return (
     // Section fills the viewport edge-to-edge, never shorter than the URL-bar-hidden viewport.
     <section className="relative overflow-hidden min-h-[100lvh]">
-      {/* Split background */}
-      <div className="absolute inset-0 grid grid-cols-2">
-        <img src={IMG.bakery} alt="The Rusted Root café counter with the storefront sign and fresh flowers" className="w-full h-full object-cover" />
-        <img src={IMG.plants} alt="Houseplants and home decor display inside the café" className="w-full h-full object-cover" />
+      {/* Background photos: single image on mobile, side-by-side split on md+. */}
+      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
+        {/* Mobile single photo lives here. Owner: swap IMG.bakery → IMG.plants to flip. */}
+        <img
+          src={IMG.bakery}
+          alt="The Rusted Root café counter with the storefront sign and fresh flowers"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Desktop-only right half of the split. */}
+        <img
+          src={IMG.plants}
+          alt="Houseplants and home decor display inside the café"
+          className="hidden md:block w-full h-full object-cover object-center"
+        />
       </div>
       <div className="absolute inset-0 bg-brand-forest/55" />
 
       {/* Content is centered in the URL-bar-VISIBLE viewport (svh) so everything */}
       {/* fits on first paint, while the section itself extends to lvh below. */}
-      <div className="relative min-h-[100svh] max-w-[120rem] mx-auto w-full px-4 pt-[88px] pb-10 flex flex-col items-center justify-center text-center">
+      <div
+        className="relative min-h-[100svh] max-w-[120rem] mx-auto w-full px-4 pb-10 flex flex-col items-center justify-center text-center"
+        style={{ paddingTop: 'calc(var(--header-h, 64px) + 1.25rem)' }}
+      >
         {/* Center logo card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

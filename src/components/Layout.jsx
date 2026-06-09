@@ -7,16 +7,16 @@ import StickyCallBar from '@/components/StickyCallBar';
 export default function Layout() {
   const location = useLocation();
   const isOrder = location.pathname === '/order';
+  // Header is fixed/overlay. Home full-bleeds behind it (Hero owns its own top
+  // spacing); every other route needs explicit clearance equal to header height.
   const isHome = location.pathname === '/';
 
   return (
     <div className="min-h-screen flex flex-col bg-background paper-texture">
       <Header />
-      {/* Header is fixed/overlay; non-home pages need top clearance equal to header height. */}
-      {/* Home is handled inside the Hero (it intentionally full-bleeds behind the header). */}
       <main
         className={`flex-1 ${isOrder ? '' : 'pb-[64px] md:pb-0'} ${
-          isHome ? '' : 'pt-[64px]'
+          isHome ? '' : 'pt-[var(--header-h)]'
         }`}
       >
         <Outlet />
