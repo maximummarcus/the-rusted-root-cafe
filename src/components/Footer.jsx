@@ -64,10 +64,10 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-4 pt-1">
-              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-brand-sunflower transition-colors">
+              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" aria-label="The Rusted Root Cafe on Instagram" className="inline-flex items-center justify-center p-3 -m-3 hover:text-brand-sunflower transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href={BRAND.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-brand-sunflower transition-colors">
+              <a href={BRAND.facebook} target="_blank" rel="noopener noreferrer" aria-label="The Rusted Root Cafe on Facebook" className="inline-flex items-center justify-center p-3 -m-3 hover:text-brand-sunflower transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
             </li>
