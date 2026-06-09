@@ -75,12 +75,12 @@ export default function Menu() {
           <React.Fragment key={c.key}>
             <MenuCategory category={c} isSoldOut={isSoldOut} />
             {c.key === 'limeade' && (
-              <div className="pb-8 -mt-2 flex justify-center">
+              <div className="pb-6 -mt-3 flex justify-center">
                 <img
                   src={IMG.lemonadeMenu}
                   alt="Homemade Lemonade flavor menu — strawberry, peach, blackberry, lavender and more"
                   loading="lazy"
-                  className="block w-full max-w-md h-auto object-contain rounded-2xl shadow-md bg-card"
+                  className="block w-full max-w-[220px] h-auto object-contain rounded-lg shadow-sm"
                 />
               </div>
             )}

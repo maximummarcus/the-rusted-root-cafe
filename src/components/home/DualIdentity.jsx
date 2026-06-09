@@ -7,15 +7,15 @@ const cards = [
   {
     icon: Coffee,
     title: 'Café & Bakery',
-    img: IMG.bakery,
-    alt: 'The café counter with the Rusted Root sign and fresh flowers',
+    img: IMG.cinnamonRollsTray,
+    alt: 'Tray of freshly iced scratch-made cinnamon rolls',
     body: 'Scratch-made bagels, paninis, salads, homemade chicken salad, cinnamon rolls, almond croissants — fresh every day.',
   },
   {
     icon: Leaf,
     title: 'Plants & Home Decor',
-    img: IMG.plants,
-    alt: 'Houseplants and home decor display inside the café',
+    img: IMG.diningArea,
+    alt: 'Dining area with houseplants and decor for sale at The Rusted Root café',
     body: 'Browse leafy houseplants and cozy home goods while you sip. Take a little something green home with you.',
   },
 ];
