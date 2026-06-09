@@ -56,6 +56,14 @@ export default function Catering() {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
 
+  // On desktop the gallery is a 3-column grid. When the photo count leaves a
+  // single tile alone in the final row, center that orphan in the middle column
+  // so it reads as intentional. Count-agnostic: derived from grid math, so it
+  // keeps working if photos are added/removed. Only the lone-orphan case is
+  // affected — full rows and the 2-up mobile layout are left untouched.
+  const desktopColumns = 3;
+  const hasLoneTrailingTile = gallery.length % desktopColumns === 1;
+
   return (
     <>
       <Seo
@@ -92,10 +100,12 @@ export default function Catering() {
 
       <section aria-label="Recent catering spreads" className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
-          {gallery.map((g) => (
+          {gallery.map((g, index) => (
             <figure
               key={g.src}
-              className={`group bg-card overflow-hidden shadow-md ${isModern ? 'rounded-md' : 'rounded-2xl'}`}
+              className={`group bg-card overflow-hidden shadow-md ${isModern ? 'rounded-md' : 'rounded-2xl'} ${
+                hasLoneTrailingTile && index === gallery.length - 1 ? 'md:col-start-2' : ''
+              }`}
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
