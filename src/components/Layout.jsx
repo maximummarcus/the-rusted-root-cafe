@@ -4,19 +4,22 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyCallBar from '@/components/StickyCallBar';
 
+// Routes whose first section is a full-bleed photo hero — they own their own top
+// spacing and the header overlays them transparently. Every other route gets
+// explicit header-height clearance below.
+const HERO_FULL_BLEED_ROUTES = new Set(['/', '/catering']);
+
 export default function Layout() {
   const location = useLocation();
   const isOrder = location.pathname === '/order';
-  // Header is fixed/overlay. Home full-bleeds behind it (Hero owns its own top
-  // spacing); every other route needs explicit clearance equal to header height.
-  const isHome = location.pathname === '/';
+  const isHeroFullBleed = HERO_FULL_BLEED_ROUTES.has(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col bg-background paper-texture">
       <Header />
       <main
         className={`flex-1 ${isOrder ? '' : 'pb-[64px] md:pb-0'} ${
-          isHome ? '' : 'pt-[var(--header-h)]'
+          isHeroFullBleed ? '' : 'pt-[var(--header-h)]'
         }`}
       >
         <Outlet />

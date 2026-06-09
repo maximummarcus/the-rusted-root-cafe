@@ -63,14 +63,23 @@ export default function Catering() {
         description="Catering from The Rusted Root Cafe in Windsor, VA. Scratch-made trays, chicken salad, pastries and more for your gathering. Call or email to inquire."
       />
 
+      {/* Photo-forward hero — full-bleeds under the transparent fixed header (same
+          treatment as Home). Mobile gets a taller aspect so the heading sits well
+          clear of the floating header chrome. */}
       <section className="relative overflow-hidden">
-        <div className="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+        <div className="aspect-[3/4] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden">
           <img
             src={IMG.catering}
             alt="A platter of fresh-baked croissant sandwiches catered by The Rusted Root café"
             className="w-full h-full object-cover object-center"
           />
         </div>
+        {/* Top-down dim keeps the white nav labels readable while the header is transparent. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[var(--header-h)] bg-gradient-to-b from-black/35 to-transparent pointer-events-none"
+        />
+        {/* Existing bottom-up forest wash carries the eyebrow + heading. */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/80 via-brand-forest/30 to-transparent flex items-end justify-center text-center px-6 pb-8 md:pb-14">
           <div>
             <p className={isModern ? 'text-sm uppercase tracking-[0.2em] text-brand-sunflower font-semibold' : 'font-script text-3xl text-brand-sunflower'}>
