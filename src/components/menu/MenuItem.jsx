@@ -13,9 +13,17 @@ export default function MenuItem({ item, soldOut = false }) {
         isModern ? 'bg-card border border-border rounded-md shadow-sm' : ''
       } ${soldOut ? 'opacity-70' : ''}`}
     >
-      {item.img && (
+      {'img' in item && (
         <div className={`relative w-16 h-16 shrink-0 overflow-hidden ${isModern ? 'rounded-md' : 'rounded-2xl'}`}>
-          <img src={item.img} alt={item.name} loading="lazy" className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`} />
+          {item.img ? (
+            <img src={item.img} alt={item.name} loading="lazy" className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`} />
+          ) : (
+            <div className="w-full h-full bg-secondary/40 border border-dashed border-border flex items-center justify-center p-1 text-center">
+              <span className="text-[8px] font-semibold uppercase tracking-tight text-muted-foreground leading-[1.15]">
+                Image<br />coming<br />soon
+              </span>
+            </div>
+          )}
         </div>
       )}
       <div className="flex-1 min-w-0">
