@@ -51,7 +51,7 @@ export default function Menu() {
               <button
                 key={t.key}
                 onClick={() => scrollTo(t.key)}
-                className="shrink-0 min-h-[40px] px-4 rounded-full text-sm font-semibold whitespace-nowrap bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="shrink-0 min-h-[44px] px-4 rounded-full text-sm font-semibold whitespace-nowrap bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 {t.name}
               </button>

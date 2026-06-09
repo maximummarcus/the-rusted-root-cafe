@@ -9,7 +9,10 @@ export default function StickyCallBar() {
   if (location.pathname === '/order') return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+    <div
+      className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t border-border bg-background/95 backdrop-blur-md"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
       <div className="flex items-stretch gap-2 p-2">
         <a
           href={`tel:${BRAND.phoneRaw}`}

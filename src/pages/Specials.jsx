@@ -36,7 +36,7 @@ export default function Specials() {
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : specials.length === 0 ? (
-          <p className="text-center text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-xl px-6 py-10 max-w-lg mx-auto">
+          <p className="text-center text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-lg px-6 py-10 max-w-lg mx-auto">
             Check back for this month&apos;s specials. We change them up often!
           </p>
         ) : (

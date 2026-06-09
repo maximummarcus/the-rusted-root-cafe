@@ -65,7 +65,7 @@ export default function AdminDashboard() {
               onClick={handleLogout}
               variant="secondary"
               size="sm"
-              className="gap-1.5 shrink-0 min-h-[40px]"
+              className="gap-1.5 shrink-0 min-h-[44px]"
             >
               <LogOut className="w-4 h-4" /> Logout
             </Button>
@@ -75,9 +75,9 @@ export default function AdminDashboard() {
         <main className="max-w-3xl mx-auto px-4 py-6">
           <Tabs defaultValue="specials">
             <TabsList className="w-full h-auto grid grid-cols-3 gap-1">
-              <TabsTrigger value="specials" className="py-2">Specials</TabsTrigger>
-              <TabsTrigger value="stock" className="py-2">Out of Stock</TabsTrigger>
-              <TabsTrigger value="orders" className="py-2">Orders</TabsTrigger>
+              <TabsTrigger value="specials" className="py-2 min-h-[44px]">Specials</TabsTrigger>
+              <TabsTrigger value="stock" className="py-2 min-h-[44px]">Out of Stock</TabsTrigger>
+              <TabsTrigger value="orders" className="py-2 min-h-[44px]">Orders</TabsTrigger>
             </TabsList>
 
             <TabsContent value="specials" className="mt-6">

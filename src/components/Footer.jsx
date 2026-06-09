@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="space-y-4">
           <div className="inline-block bg-white rounded-2xl p-2">
-            <img src={LOGO_URL} alt="The Rusted Root café logo" className="w-24 h-auto rounded-full" />
+            <img src={LOGO_URL} alt="The Rusted Root Cafe logo" className="w-24 h-auto rounded-full" />
           </div>
           <img src={WORDMARK_URL} alt="The Rusted Root Cafe" className="w-48 max-w-full h-auto" />
           <p className="text-sm text-brand-cream/70">{BRAND.tagline}</p>

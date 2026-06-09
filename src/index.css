@@ -76,6 +76,8 @@
     --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
     --font-body: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
     --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    /* Modern has no script accents — font-script spots fall back to the heading font. */
+    --font-script: 'Poppins', ui-sans-serif, system-ui, sans-serif;
   }
 }
 

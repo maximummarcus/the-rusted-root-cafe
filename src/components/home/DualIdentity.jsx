@@ -1,7 +1,6 @@
 import React from 'react';
 import { IMG } from '@/lib/cafeData';
 import { Coffee, Leaf } from 'lucide-react';
-import { useTheme } from '@/lib/ThemeContext';
 
 const cards = [
   {
@@ -15,22 +14,19 @@ const cards = [
     icon: Leaf,
     title: 'Plants & Home Decor',
     img: IMG.diningArea,
-    alt: 'Dining area with houseplants and decor for sale at The Rusted Root café',
+    alt: 'Dining area with houseplants and decor for sale at The Rusted Root Cafe',
     body: 'Browse leafy houseplants and cozy home goods while you sip. Take a little something green home with you.',
   },
 ];
 
 export default function DualIdentity() {
-  const { theme } = useTheme();
-  const isModern = theme === 'modern';
-
   return (
     <section className="max-w-[120rem] mx-auto px-6 py-14 md:py-20">
       <div className="grid gap-6 md:grid-cols-2">
         {cards.map((c) => (
           <div
             key={c.title}
-            className={`relative overflow-hidden shadow-lg ${isModern ? 'rounded-md' : 'rounded-[2rem]'}`}
+            className="relative overflow-hidden shadow-lg rounded-lg"
           >
             <div className="aspect-[4/3] overflow-hidden">
               <img src={c.img} alt={c.alt} loading="lazy" className="w-full h-full object-cover" />

@@ -111,7 +111,7 @@ export default function Order() {
             {MENU.flatMap((c) => c.items)
               .filter((i) => i.popular)
               .map((item) => (
-                <div key={item.name} className="flex items-center justify-between bg-card border border-border rounded-2xl px-4 py-3">
+                <div key={item.name} className="flex items-center justify-between bg-card border border-border rounded-lg px-4 py-3">
                   <span className="font-heading text-lg text-foreground">{item.name}</span>
                   <span className="text-primary font-semibold">{item.price}</span>
                 </div>
