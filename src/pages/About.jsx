@@ -11,7 +11,7 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About — The Rusted Root Cafe, Windsor VA"
+        title="About: The Rusted Root Cafe, Windsor VA"
         description="The Rusted Root Cafe is a Windsor, VA local spot combining a from-scratch café & bakery with a houseplant & home-decor shop. Gather. Grow. Get Rooted!"
       />
       <div className="max-w-5xl mx-auto px-6 py-12">
@@ -59,7 +59,7 @@ export default function About() {
         <div className="mt-14 text-center bg-brand-sage/25 rounded-[2rem] py-10 px-6">
           <p className="font-script text-3xl md:text-4xl text-primary">{BRAND.tagline}</p>
           <p className="mt-3 text-muted-foreground">
-            That&apos;s the heart of {BRAND.name} — and the whole reason we opened our doors.
+            That&apos;s the heart of {BRAND.name}, and the whole reason we opened our doors.
           </p>
         </div>
       </div>

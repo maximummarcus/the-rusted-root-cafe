@@ -70,7 +70,7 @@ export const MENU = [
     items: [
       { name: 'Avocado Toast', price: '$8.99', img: IMG.avocadoToast, popular: false, desc: 'Scratch sourdough, smashed avocado.' },
     ],
-    note: 'More breakfast items coming — add from Clover.',
+    note: 'More breakfast items coming. Add from Clover.',
   },
   {
     key: 'paninis',
@@ -84,10 +84,10 @@ export const MENU = [
     key: 'sandwiches',
     name: 'Sandwiches',
     items: [
-      { name: 'BLT', price: '—', popular: false },
-      { name: 'Homemade Chicken Salad', price: '—', img: IMG.chickenSaladPlate, popular: false },
+      { name: 'BLT', price: '-', popular: false },
+      { name: 'Homemade Chicken Salad', price: '-', img: IMG.chickenSaladPlate, popular: false },
     ],
-    note: 'Full sandwich list coming — add from Clover.',
+    note: 'Full sandwich list coming. Add from Clover.',
   },
   {
     key: 'wraps',
@@ -95,7 +95,7 @@ export const MENU = [
     items: [
       { name: 'Turkey Bacon Ranch', price: '$10.99', img: IMG.turkeyBaconRanch, popular: true },
     ],
-    note: 'More wraps coming — add from Clover.',
+    note: 'More wraps coming. Add from Clover.',
   },
   {
     key: 'salads',
@@ -109,54 +109,54 @@ export const MENU = [
     key: 'sprouts',
     name: 'Sprouts Menu',
     items: [],
-    note: 'Sprouts (kids) menu coming — add from Clover.',
+    note: 'Sprouts (kids) menu coming. Add from Clover.',
   },
   {
     key: 'sides',
     name: 'Sides',
     items: [],
-    note: 'Sides coming — add from Clover.',
+    note: 'Sides coming. Add from Clover.',
   },
   {
     key: 'specialty-drinks',
     name: 'Specialty Drinks',
     items: [
-      { name: 'Seasonal Specialty Latte', price: '—', img: IMG.specialtyDrink, popular: false },
+      { name: 'Seasonal Specialty Latte', price: '-', img: IMG.specialtyDrink, popular: false },
     ],
-    note: 'Full specialty drink list coming — add from Clover.',
+    note: 'Full specialty drink list coming. Add from Clover.',
   },
   {
     key: 'drinks',
     name: 'Drinks',
     items: [],
-    note: 'Drinks coming — add from Clover.',
+    note: 'Drinks coming. Add from Clover.',
   },
   {
     key: 'limeade',
     name: 'Limeade',
     items: [
-      { name: 'House Limeade', price: '—', img: IMG.limeade, popular: false },
+      { name: 'House Limeade', price: '-', img: IMG.limeade, popular: false },
     ],
-    note: 'Limeade flavors coming — add from Clover.',
+    note: 'Limeade flavors coming. Add from Clover.',
   },
   {
     key: 'pastries',
     name: 'Pastries & Desserts',
     items: [
-      { name: 'Cinnamon Rolls', price: '—', img: IMG.cinnamonRoll, popular: false },
-      { name: 'Almond Croissants', price: '—', img: IMG.almondCroissant, popular: false },
-      { name: 'Scratch-Made Bagels', price: '—', img: IMG.bagels, popular: false },
+      { name: 'Cinnamon Rolls', price: '-', img: IMG.cinnamonRoll, popular: false },
+      { name: 'Almond Croissants', price: '-', img: IMG.almondCroissant, popular: false },
+      { name: 'Scratch-Made Bagels', price: '-', img: IMG.bagels, popular: false },
     ],
-    note: 'Assorted from-scratch baked goods — add more from Clover.',
+    note: 'Assorted from-scratch baked goods: add more from Clover.',
   },
   {
     key: 'grab-n-go',
     name: 'Grab N Go',
     items: [
-      { name: 'House BBQ Sauce', price: '—', popular: false },
-      { name: 'Apple Butter', price: '—', popular: false },
+      { name: 'House BBQ Sauce', price: '-', popular: false },
+      { name: 'Apple Butter', price: '-', popular: false },
     ],
-    note: 'Retail grab-n-go items — add more from Clover.',
+    note: 'Retail grab-n-go items: add more from Clover.',
   },
 ];
 

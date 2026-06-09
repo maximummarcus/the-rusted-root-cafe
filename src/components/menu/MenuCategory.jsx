@@ -18,13 +18,13 @@ export default function MenuCategory({ category, isSoldOut = () => false }) {
 
       {category.note && (
         <p className="mt-4 text-sm italic text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-lg px-4 py-3">
-          {hasItems ? category.note : `Menu items coming — ${category.note.replace(/^.*coming — /, '')}`}
+          {hasItems ? category.note : `Menu items coming. ${category.note.replace(/^.*coming\. /, '')}`}
         </p>
       )}
 
       {!hasItems && !category.note && (
         <p className="mt-2 text-sm italic text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-lg px-4 py-3">
-          Menu items coming — add from Clover.
+          Menu items coming. Add from Clover.
         </p>
       )}
     </section>

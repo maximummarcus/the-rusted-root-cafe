@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="The Rusted Root Cafe — Café, Scratch Bakery & Plant Shop in Windsor, VA"
-        description="The Rusted Root Cafe in Windsor, VA — a from-scratch café & bakery and houseplant & home-decor shop. Gather. Grow. Get Rooted! Order online, dine in, or grab & go."
+        title="The Rusted Root Cafe: Café, Scratch Bakery & Plant Shop in Windsor, VA"
+        description="The Rusted Root Cafe in Windsor, VA: a from-scratch café & bakery and houseplant & home-decor shop. Gather. Grow. Get Rooted! Order online, dine in, or grab & go."
       />
       <LocalBusinessSchema />
       <Hero />

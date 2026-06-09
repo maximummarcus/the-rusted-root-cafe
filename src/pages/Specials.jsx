@@ -23,7 +23,7 @@ export default function Specials() {
   return (
     <>
       <Seo
-        title="Monthly Specials — The Rusted Root Cafe, Windsor VA"
+        title="Monthly Specials: The Rusted Root Cafe, Windsor VA"
         description="See this month's food and drink specials at The Rusted Root Cafe in Windsor, VA. Limited-time, made-from-scratch favorites."
       />
       <div className="max-w-5xl mx-auto px-6 py-12 text-center">
@@ -37,7 +37,7 @@ export default function Specials() {
           </div>
         ) : specials.length === 0 ? (
           <p className="text-center text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-xl px-6 py-10 max-w-lg mx-auto">
-            Check back for this month&apos;s specials — we change them up often!
+            Check back for this month&apos;s specials. We change them up often!
           </p>
         ) : (
           <div className="space-y-12">

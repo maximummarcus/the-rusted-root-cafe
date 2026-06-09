@@ -85,7 +85,7 @@ export default function Header() {
           {/* Inline logo — matches the nav button height so the bar reads as one row. */}
           <Link
             to="/"
-            aria-label={`${BRAND.name} — Home`}
+            aria-label={`${BRAND.name}, Home`}
             className="shrink-0 inline-flex items-center justify-center min-h-[44px] min-w-[44px]"
           >
             <img

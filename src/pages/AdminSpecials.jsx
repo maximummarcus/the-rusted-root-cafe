@@ -125,7 +125,7 @@ export default function AdminSpecials() {
 
   return (
     <>
-      <Seo title="Manage Specials — The Rusted Root Cafe" description="Admin tool to manage café specials." />
+      <Seo title="Manage Specials: The Rusted Root Cafe" description="Admin tool to manage café specials." />
       <div className="max-w-4xl mx-auto px-6 py-12">
         <h1 className="font-heading text-4xl text-foreground mb-2">Manage Specials</h1>
         <p className="text-muted-foreground mb-8">Add, edit, and toggle your monthly food &amp; drink specials.</p>
@@ -190,7 +190,7 @@ export default function AdminSpecials() {
         {/* List */}
         <div className="space-y-3">
           {specials.length === 0 ? (
-            <p className="text-muted-foreground text-center py-8">No specials yet — add your first above.</p>
+            <p className="text-muted-foreground text-center py-8">No specials yet. Add your first above.</p>
           ) : (
             specials.map((s) => (
               <div key={s.id} className="flex items-center gap-4 bg-card border border-border rounded-2xl p-3">

@@ -16,7 +16,7 @@ export default function OrdersTab() {
       </div>
       <h2 className="font-heading text-2xl text-foreground">Online orders are managed in Clover</h2>
       <p className="mt-2 text-muted-foreground">
-        The café takes online orders through your Clover dashboard, not this website — so they
+        The café takes online orders through your Clover dashboard, not this website, so they
         won&apos;t appear here. Open Clover to view and manage incoming orders.
       </p>
 

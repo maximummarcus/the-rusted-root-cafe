@@ -70,7 +70,7 @@ export default function Hero() {
         </motion.h1>
 
         <p className="mt-3 text-brand-cream/90 text-base md:text-lg max-w-2xl px-4">
-          A from-scratch café &amp; bakery and a houseplant &amp; home-decor shop — all under one cozy roof in Windsor, VA.
+          A from-scratch café &amp; bakery and a houseplant &amp; home-decor shop, all under one cozy roof in Windsor, VA.
         </p>
 
         <div className="mt-5 md:mt-6 flex flex-wrap items-center justify-center gap-3 px-4">
@@ -90,7 +90,7 @@ export default function Hero() {
 
         {/* Prominent style toggle */}
         <div className="mt-5 md:mt-6 flex flex-col items-center gap-1.5">
-          <span className="text-brand-cream/80 text-sm">Play with our look —</span>
+          <span className="text-brand-cream/80 text-sm">Play with our look</span>
           <div className="rounded-full bg-brand-cream/95 p-1 shadow-lg">
             <ThemeToggle />
           </div>
