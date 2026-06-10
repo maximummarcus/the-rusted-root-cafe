@@ -22,9 +22,9 @@ export function ThemeProvider({ children }) {
 
   // The global 250ms theme transition (index.css) only applies while
   // .theme-transitioning is on <html>, so the morph animates on an actual
-  // toggle but never on initial load.
+  // toggle/select but never on initial load.
   const transitionTimer = useRef(null);
-  const toggleTheme = () => {
+  const beginMorph = () => {
     const root = document.documentElement;
     root.classList.add('theme-transitioning');
     if (transitionTimer.current) window.clearTimeout(transitionTimer.current);
@@ -32,11 +32,24 @@ export function ThemeProvider({ children }) {
       root.classList.remove('theme-transitioning');
       transitionTimer.current = null;
     }, 300);
+  };
+
+  const toggleTheme = () => {
+    beginMorph();
     setTheme((t) => (t === 'modern' ? 'handdrawn' : 'modern'));
   };
 
+  // Set a specific theme. The two-button toggle uses this so each side is an
+  // explicit target ("make it Modern"), which is reliable on touch in a way that
+  // toggle-only logic is not.
+  const selectTheme = (next) => {
+    if (next !== 'modern' && next !== 'handdrawn') return;
+    beginMorph();
+    setTheme(next);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, selectTheme }}>
       {children}
     </ThemeContext.Provider>
   );
