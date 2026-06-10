@@ -40,7 +40,7 @@ export default function Specials() {
         <SectionHeading kicker="Limited Time" title="This Month's Specials" center />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 pb-16">
+      <div className="max-w-6xl mx-auto px-6 pb-8">
         {loading ? (
           <div className="flex justify-center py-16">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
