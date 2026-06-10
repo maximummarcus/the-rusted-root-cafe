@@ -50,6 +50,16 @@ const gallery = [
     alt: 'Pan of creamy baked mac and cheese',
     caption: 'Mac & cheese',
   },
+  {
+    src: '/images/catering-drink-station-landscape.jpg',
+    alt: 'Catering drink station setup',
+    caption: 'Drink stations',
+  },
+  {
+    src: '/images/catering-bacon-mac-tray-portrait.jpg',
+    alt: 'Catering tray of bacon mac and cheese',
+    caption: 'Bacon mac & cheese',
+  },
 ];
 
 export default function Catering() {

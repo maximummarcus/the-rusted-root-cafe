@@ -57,8 +57,9 @@ export const IMG = {
   catering: '/images/catering-hero-platter.jpg',
   frenchHen: '/images/caprese-panini.jpg',
   avocadoToast: null,
+  breakfastBurrito: '/images/menu-breakfast-burrito-portrait.jpg',
   chickenSaladPlate: '/images/chicken-salad-bagel.jpg',
-  cranberrySalad: null,
+  cranberrySalad: '/images/menu-cranberry-walnut-salad-portrait.jpg',
   turkeyBaconRanch: null,
   chickenBaconPanini: null,
   bagels: '/images/scratch-bagels-tray.jpg',
@@ -77,6 +78,7 @@ export const MENU = [
     name: 'Breakfast Options',
     items: [
       { name: 'Avocado Toast', price: '$8.99', img: IMG.avocadoToast, popular: false, desc: 'Scratch sourdough, smashed avocado.' },
+      { name: 'Breakfast Burrito', price: '-', img: IMG.breakfastBurrito, imgAlt: 'Breakfast burrito with salsa and sour cream', popular: false, desc: 'Served with salsa and sour cream.' },
     ],
     note: 'More breakfast items coming. Add from Clover.',
   },
@@ -109,7 +111,7 @@ export const MENU = [
     key: 'salads',
     name: 'Salads',
     items: [
-      { name: 'Cranberry Walnut Salad', price: '$13.00', img: IMG.cranberrySalad, popular: true },
+      { name: 'Cranberry Walnut Salad', price: '$13.00', img: IMG.cranberrySalad, imgAlt: 'Cranberry walnut chicken salad', popular: true },
       { name: 'Chicken Salad Coldplate', price: '$12.25', img: IMG.chickenSaladPlate, popular: true },
     ],
   },
