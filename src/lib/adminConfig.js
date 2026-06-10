@@ -2,18 +2,19 @@
 // SECRET ADMIN — configuration
 // ============================================================
 //
-// Layered lock: an obscure URL token + a password verified SERVER-SIDE.
+// Two layers guard the admin:
+//   1. An obscure URL token (this slug) keeps the page from being discoverable.
+//   2. Base44 account auth: the dashboard only opens for a logged-in user whose
+//      role is 'admin', and every write is enforced again by the admin-only write
+//      RLS on the Special and menu_item_availability entities. See
+//      src/components/admin/AdminDashboard.jsx and src/api/adminApi.js.
 //
-// SECURITY MODE: the password is checked by the `adminLogin` backend function
-// against the RRC_ADMIN_PASSWORD secret (Base44 → Secrets) — no password or
-// password hash ships in client JS. On success the backend issues a random
-// session token stored server-side (admin_session entity, 30-day expiry); the
-// client keeps only that token, and every admin read/write goes through backend
-// functions that re-validate it before touching data with the service role.
-// See src/api/adminApi.js and base44/functions/admin*.
+// There is NO password in this app and NO backend function: Base44 backend (Deno)
+// functions need the Builder plan + a separate deploy and were never deployed here,
+// so the prior function-based login always 404'd. Native auth + RLS avoids both.
 //
-// TODO Marcus: set RRC_ADMIN_PASSWORD in Base44 → Secrets (Workspace → Settings).
-// Until it is set, admin login fails closed (nobody can log in).
+// TODO Marcus: make sure your Base44 account's User role is 'admin' (Base44 ->
+// Users). Anyone signed in without that role gets an "access denied" notice.
 //
 // The admin lives at /admin/<ADMIN_TOKEN>. Treat the slug like a second password:
 // if it ever leaks (links, screenshots, the Base44 page index), rotate it by
