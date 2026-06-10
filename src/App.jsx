@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
@@ -59,6 +59,10 @@ const AuthenticatedApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Route>
+
+      {/* /Home (any casing) is a common bookmark/typo for the root. React Router v6
+          matches case-insensitively, so this single alias catches /home, /Home, /HOME. */}
+      <Route path="/home" element={<Navigate to="/" replace />} />
 
       {/* The Base44 auth scaffold (src/pages/Login & friends, ProtectedRoute) is
           dormant and intentionally unrouted — the token dashboard above is the

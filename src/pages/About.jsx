@@ -51,7 +51,7 @@ export default function About() {
               Rusted Root Cafe family. We can&apos;t wait to serve you.
             </p>
             <p className={isModern ? 'text-primary font-semibold text-xl' : 'font-script text-3xl text-primary'}>
-              {BRAND.slogan} 🌿☕️🤎
+              {BRAND.slogan}
             </p>
           </div>
         </div>

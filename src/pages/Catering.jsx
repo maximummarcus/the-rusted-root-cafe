@@ -140,7 +140,7 @@ export default function Catering() {
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-6 pb-14 text-center">
+      <div className="max-w-3xl mx-auto px-6 pb-8 text-center">
         <ul className="grid sm:grid-cols-2 gap-3 text-left">
           {offerings.map((o) => (
             <li key={o} className="flex items-center gap-3 bg-card border border-border rounded-lg px-4 py-3">

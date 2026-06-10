@@ -28,10 +28,13 @@ export default function MenuItem({ item, soldOut = false }) {
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <div className="flex items-baseline gap-2">
-          <span className="font-heading text-lg text-foreground">{item.name}</span>
-          {hasPrice && !isModern && <span className="flex-1 dotted-leader translate-y-[-4px]" />}
-          {hasPrice && <span className="font-semibold text-primary whitespace-nowrap">{item.price}</span>}
+        {/* Below md: name (max 2 lines) stacks above the price, so a long name no longer
+            wraps to 3 squeezed lines beside the thumbnail; the dotted leader is dropped.
+            md+ keeps the single baseline row (name · leader · price) unchanged. */}
+        <div className="flex flex-col md:flex-row md:items-baseline md:gap-2">
+          <span className="font-heading text-lg text-foreground line-clamp-2 md:line-clamp-none">{item.name}</span>
+          {hasPrice && !isModern && <span className="hidden md:block flex-1 dotted-leader translate-y-[-4px]" />}
+          {hasPrice && <span className="font-semibold text-primary whitespace-nowrap mt-0.5 md:mt-0">{item.price}</span>}
         </div>
         {item.desc && <p className="text-sm text-muted-foreground mt-0.5">{item.desc}</p>}
         <div className="flex items-center gap-2 mt-1">
