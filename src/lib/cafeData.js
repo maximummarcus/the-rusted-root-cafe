@@ -25,7 +25,7 @@ export const BRAND = {
 // the matching button on the Order page renders a disabled "Online ordering
 // coming soon" state; pasting a real URL makes that button go live automatically.
 export const CLOVER_ORDER_URL = '';   // <-- paste the Clover Online Ordering URL here
-export const DOORDASH_ORDER_URL = ''; // <-- paste the DoorDash store URL here
+export const DOORDASH_ORDER_URL = 'https://www.doordash.com/store/the-rusted-root-cafe-windsor-36908799/';
 
 // The Rusted Root Cafe logo (round sunflower badge).
 export const LOGO_URL = '/logo.jpeg';

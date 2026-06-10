@@ -39,7 +39,7 @@ export default function Menu() {
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-6 text-center">
         <SectionHeading kicker="The Root Way" title="Our Menu" center />
         <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-          Made from scratch, served with a smile. Tap the&nbsp;+ to add an item through online ordering.
+          Made from scratch, served with a smile. Tap the&nbsp;+ on any item to start an order.
         </p>
       </div>
 
