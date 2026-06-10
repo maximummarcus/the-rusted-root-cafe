@@ -1,0 +1,31 @@
+{
+  "name": "admin_session",
+  "type": "object",
+  "description": "Server-side admin sessions, created/validated/deleted ONLY by the admin backend functions via the service role (which bypasses RLS). The RLS below requires an admin-role Base44 user for client access; this site has no logged-in users, so no browser client can read or write sessions.",
+  "properties": {
+    "token_hash": {
+      "type": "string",
+      "description": "SHA-256 hex of the session token. Only the hash is stored, so even read access to this entity never exposes a usable token."
+    },
+    "expires_at": {
+      "type": "string",
+      "description": "ISO timestamp. Sessions past this moment are invalid; the functions delete them when encountered."
+    }
+  },
+  "required": [
+    "token_hash",
+    "expires_at"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

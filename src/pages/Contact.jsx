@@ -13,7 +13,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact & Hours: The Rusted Root Cafe, Windsor VA"
-        description="Visit The Rusted Root Cafe at 11409 Windsor Blvd, Unit C, Windsor, VA 23487. Call (757) 241-0075. See hours, map, and social links."
+        description="Visit The Rusted Root Cafe, a café and plant shop in Windsor, VA, at 11409 Windsor Blvd, Unit C. Call (757) 241-0075 for hours, directions, and more."
       />
       <LocalBusinessSchema />
       <div className="max-w-5xl mx-auto px-6 py-12">

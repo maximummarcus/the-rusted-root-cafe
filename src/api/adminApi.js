@@ -1,73 +1,125 @@
-// Admin operations — client-side only (no backend functions on this Base44 plan).
+// Client wrapper around the secret-admin backend functions.
 //
-// Auth: the password is hashed in the browser and compared to ADMIN_PASSWORD_SHA256.
-// A flag in localStorage keeps the session active until logout (no inactivity timeout).
-// This is a lightweight gate, NOT server-side security — see src/lib/adminConfig.js.
+// Auth is server-side: `adminLogin` checks the password against the
+// RRC_ADMIN_PASSWORD secret and issues a random session token that is stored
+// server-side (admin_session entity, 30-day expiry). The client keeps only the
+// token; it gates nothing by itself — every admin read/write below sends it to a
+// backend function that re-validates it against the stored session before doing
+// anything. A forged/expired token just gets 401s from every function.
 //
-// Writes: go directly through base44.entities. The Special and menu_item_availability
-// entities use public write RLS so these succeed without a logged-in Base44 account.
+// Writes go through those functions with the service role (asServiceRole), so
+// they do not depend on open RLS on the Special / menu_item_availability entities.
 
 import { base44 } from '@/api/base44Client';
-import { ADMIN_PASSWORD_SHA256 } from '@/lib/adminConfig';
 
-const AUTH_KEY = 'rrc_admin_authed';
+const SESSION_KEY = 'rrc_admin_session';
 
-async function sha256Hex(value) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
-  return Array.from(new Uint8Array(buf))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+// The pre-2026-06 admin used a forgeable client-side flag. Clear it on load so
+// no stale state lingers; nothing reads it anymore.
+try {
+  localStorage.removeItem('rrc_admin_authed');
+} catch {
+  /* storage blocked (private mode) — nothing to clear */
+}
+
+function getToken() {
+  try {
+    return localStorage.getItem(SESSION_KEY) || '';
+  } catch {
+    return '';
+  }
+}
+
+function setToken(token) {
+  try {
+    localStorage.setItem(SESSION_KEY, token);
+  } catch {
+    /* storage blocked — the session just won't survive a reload */
+  }
+}
+
+function clearToken() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+// The SDK may resolve invoke() to the raw JSON body or to a response object
+// with the body on `.data` depending on its interception config — accept both.
+function bodyOf(res) {
+  return res && typeof res === 'object' && 'data' in res ? res.data : res;
+}
+
+function errorMessage(err, fallback) {
+  return err?.data?.error || err?.response?.data?.error || err?.message || fallback;
 }
 
 export async function adminLogin(password) {
-  const hash = await sha256Hex(password || '');
-  if (hash === ADMIN_PASSWORD_SHA256) {
-    localStorage.setItem(AUTH_KEY, '1');
+  const res = await base44.functions.invoke('adminLogin', { password });
+  const data = bodyOf(res);
+  if (data?.success && data?.token) {
+    setToken(data.token);
     return { success: true };
   }
-  return { success: false, error: 'Incorrect password' };
+  return { success: false, error: data?.error || 'Incorrect password' };
 }
 
 export async function adminVerify() {
-  return localStorage.getItem(AUTH_KEY) === '1';
+  const token = getToken();
+  if (!token) return false;
+  try {
+    const res = await base44.functions.invoke('adminVerify', { token });
+    const ok = Boolean(bodyOf(res)?.authenticated);
+    if (!ok) clearToken();
+    return ok;
+  } catch {
+    return false;
+  }
 }
 
 export async function adminLogout() {
-  localStorage.removeItem(AUTH_KEY);
+  const token = getToken();
+  clearToken();
+  if (!token) return;
+  try {
+    await base44.functions.invoke('adminLogout', { token });
+  } catch {
+    /* best-effort; the local token is already gone */
+  }
 }
 
-const SPECIAL_FIELDS = ['title', 'description', 'price', 'type', 'image_url', 'active', 'sort_order', 'month_label'];
-
 export async function adminSaveSpecial(special, id) {
-  const data = {};
-  for (const f of SPECIAL_FIELDS) {
-    if (special[f] !== undefined) data[f] = special[f];
-  }
   try {
-    return id
-      ? await base44.entities.Special.update(id, data)
-      : await base44.entities.Special.create(data);
+    const res = await base44.functions.invoke('adminSaveSpecial', {
+      token: getToken(),
+      id,
+      special,
+    });
+    return bodyOf(res)?.special;
   } catch (err) {
-    throw new Error(err?.message || 'Could not save the special.');
+    throw new Error(errorMessage(err, 'Could not save the special.'));
   }
 }
 
 export async function adminDeleteSpecial(id) {
   try {
-    await base44.entities.Special.delete(id);
+    await base44.functions.invoke('adminDeleteSpecial', { token: getToken(), id });
   } catch (err) {
-    throw new Error(err?.message || 'Could not delete the special.');
+    throw new Error(errorMessage(err, 'Could not delete the special.'));
   }
 }
 
 export async function adminSetAvailability(menuItemId, available) {
   try {
-    const existing = await base44.entities.menu_item_availability.filter({ menu_item_id: menuItemId });
-    if (existing && existing.length > 0) {
-      return await base44.entities.menu_item_availability.update(existing[0].id, { available });
-    }
-    return await base44.entities.menu_item_availability.create({ menu_item_id: menuItemId, available });
+    const res = await base44.functions.invoke('adminSetAvailability', {
+      token: getToken(),
+      menuItemId,
+      available,
+    });
+    return bodyOf(res)?.availability;
   } catch (err) {
-    throw new Error(err?.message || 'Could not update availability.');
+    throw new Error(errorMessage(err, 'Could not update availability.'));
   }
 }

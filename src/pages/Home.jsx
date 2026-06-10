@@ -20,9 +20,10 @@ export default function Home() {
       <RootWayIntro />
       <MostLoved />
       <DualIdentity />
-      {/* pb stays small here: the footer's global mt-16 supplies the rest of the
-          gap, keeping the total at the same py-16/24 rhythm as the sections above. */}
-      <section className="max-w-[120rem] mx-auto px-6 pb-0 md:pb-8">
+      {/* pb stays small here: the footer's global mt-16 (64px) supplies most of
+          the gap. pb-0/md:pb-4 brings the total to ~64px mobile / 80px desktop,
+          matching the py-14 md:py-20 rhythm of the sections above. */}
+      <section className="max-w-[120rem] mx-auto px-6 pb-0 md:pb-4">
         <SectionHeading kicker="Stop By" title="Hours & Location" center className="mb-8" />
         <HoursLocationCard showMap />
       </section>
