@@ -72,9 +72,10 @@ export const HOURS = [
   'Sunday: Closed',
 ];
 
-// IMAGES — real owner photos live at /images/. Slots without a real photo
-// yet are null, which renders an "Image coming soon" placeholder tile (see
-// MostLoved + MenuItem). All AI-generated images have been removed.
+// IMAGES — real owner photos live at /images/ (and src/assets/menu/ for the
+// DoorDash set). Slots without a real photo yet are null: MenuItem renders
+// those items as text-only cards (no placeholder tile), and the MostLoved
+// strip hides them. All AI-generated images have been removed.
 export const IMG = {
   hero: null, // unused
   bakery: '/images/counter-and-sign.jpg',
