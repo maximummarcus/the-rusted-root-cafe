@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BRAND, IMG, WORDMARK_URL } from '@/lib/cafeData';
 import { useTheme } from '@/lib/ThemeContext';
-import ThemeToggle from '@/components/ThemeToggle';
 import { ShoppingBag, BookOpen } from 'lucide-react';
 
 // Mobile shows only ONE full-bleed photo (the squished side-by-side split
@@ -90,14 +89,6 @@ export default function Hero() {
           >
             <BookOpen className="w-5 h-5" /> See the Menu
           </Link>
-        </div>
-
-        {/* Prominent style toggle */}
-        <div className="mt-5 md:mt-6 flex flex-col items-center gap-1.5">
-          <span className="text-brand-cream/80 text-sm">Play with our look</span>
-          <div className="rounded-full bg-brand-cream/95 p-1 shadow-lg">
-            <ThemeToggle />
-          </div>
         </div>
       </div>
     </section>
