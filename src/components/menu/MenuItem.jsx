@@ -57,7 +57,16 @@ export default function MenuItem({ item, soldOut = false }) {
       ) : (
         <Link
           to="/order"
-          aria-label={`Add ${item.name} via online ordering`}
+          role="button"
+          aria-label={`Order ${item.name}`}
+          onKeyDown={(e) => {
+            // role="button" implies Space activates it; anchors only do so on
+            // Enter, so bridge Space to a click without disturbing Enter/click.
+            if (e.key === ' ') {
+              e.preventDefault();
+              e.currentTarget.click();
+            }
+          }}
           className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
         >
           <Plus className="w-5 h-5" />

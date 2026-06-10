@@ -5,6 +5,16 @@ import SectionHeading from '@/components/SectionHeading';
 import SpecialCard from '@/components/specials/SpecialCard';
 import { Loader2 } from 'lucide-react';
 
+// Balance the specials grid by item count so a lone special never sits in a
+// 3-up grid with empty columns: 1 centers at a card's natural width, 2 split
+// centered, 3+ fill the standard responsive grid. Card size stays consistent
+// across counts, and the classes are theme-agnostic (SpecialCard owns theming).
+function specialsGridClass(count) {
+  if (count === 1) return 'grid grid-cols-1 max-w-sm mx-auto';
+  if (count === 2) return 'grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto';
+  return 'grid gap-5 sm:grid-cols-2 lg:grid-cols-3';
+}
+
 export default function Specials() {
   const [specials, setSpecials] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,7 +54,7 @@ export default function Specials() {
             {food.length > 0 && (
               <div>
                 <h2 className="font-heading text-2xl text-foreground mb-5">Food Specials</h2>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <div className={specialsGridClass(food.length)}>
                   {food.map((s) => (
                     <SpecialCard key={s.id} special={s} />
                   ))}
@@ -54,7 +64,7 @@ export default function Specials() {
             {drinks.length > 0 && (
               <div>
                 <h2 className="font-heading text-2xl text-foreground mb-5">Drink Specials</h2>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <div className={specialsGridClass(drinks.length)}>
                   {drinks.map((s) => (
                     <SpecialCard key={s.id} special={s} />
                   ))}

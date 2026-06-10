@@ -112,7 +112,7 @@ export default function Menu() {
                     <li key={a.name}>
                       <span className="font-semibold text-foreground">{a.name}</span>{' '}
                       <span className="text-primary font-semibold">{a.price}</span>
-                      {a.detail && <span> — {a.detail}</span>}
+                      {a.detail && <span> ({a.detail})</span>}
                     </li>
                   ))}
                 </ul>
