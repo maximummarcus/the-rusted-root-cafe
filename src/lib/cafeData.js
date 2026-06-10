@@ -3,6 +3,29 @@
 // Owner can update images, prices, hours here easily.
 // ============================================================
 
+// DoorDash menu photography (owner-approved, June 2026). Originals live in
+// raw-assets/doordash/ (gitignored, like the other photo source archives);
+// these are the optimized 800x800 WebP exports. Vite turns each import into
+// a hashed asset URL, so IMG values below stay plain strings.
+// Note: pimento-blt.webp is optimized alongside these but is NOT imported —
+// the menu has no "Pimento BLT" item; awaiting owner confirmation.
+import avocadoToastPhoto from '@/assets/menu/avocado-toast.webp';
+import plainBiscuitPhoto from '@/assets/menu/plain-biscuit.webp';
+import sausageEggCheesePhoto from '@/assets/menu/sec.webp';
+import cranberryWalnutSaladPhoto from '@/assets/menu/cranberry-walnut-salad.webp';
+import chickenSaladColdplatePhoto from '@/assets/menu/chicken-salad-coldplate.webp';
+import chickenBaconCheddarPaniniPhoto from '@/assets/menu/chicken-bacon-cheddar-panini.webp';
+import pastaSaladPhoto from '@/assets/menu/pasta-salad.webp';
+import nutellaTwistPhoto from '@/assets/menu/nutella-twist.webp';
+import cookiePhoto from '@/assets/menu/cookie.webp';
+import browniePhoto from '@/assets/menu/brownie.webp';
+import glutenFreeMuffinPhoto from '@/assets/menu/gluten-free-muffin.webp';
+import honeyWrapPhoto from '@/assets/menu/honey-wrap.webp';
+import turkeyBaconRanchPhoto from '@/assets/menu/turkey-bacon-ranch.webp';
+import firecrackerPhoto from '@/assets/menu/the-firecracker.webp';
+import frenchHenPhoto from '@/assets/menu/the-french-hen.webp';
+import skinnyDipperPhoto from '@/assets/menu/skinny-dipper.webp';
+
 export const BRAND = {
   name: 'The Rusted Root Cafe',
   slogan: 'Gather. Grow. Get Rooted!',
@@ -49,9 +72,10 @@ export const HOURS = [
   'Sunday: Closed',
 ];
 
-// IMAGES — real owner photos live at /images/. Slots without a real photo
-// yet are null, which renders an "Image coming soon" placeholder tile (see
-// MostLoved + MenuItem). All AI-generated images have been removed.
+// IMAGES — real owner photos live at /images/ (and src/assets/menu/ for the
+// DoorDash set). Slots without a real photo yet are null: MenuItem renders
+// those items as text-only cards (no placeholder tile), and the MostLoved
+// strip hides them. All AI-generated images have been removed.
 export const IMG = {
   hero: null, // unused
   bakery: '/images/counter-and-sign.jpg',
@@ -60,13 +84,13 @@ export const IMG = {
   diningArea: '/images/dining-area-plants.jpg',
   storefront: '/images/storefront-front.jpg',
   catering: '/images/catering-hero-platter.jpg',
-  frenchHen: '/images/caprese-panini.jpg',
-  avocadoToast: null,
+  frenchHen: frenchHenPhoto,
+  avocadoToast: avocadoToastPhoto,
   breakfastBurrito: '/images/menu-breakfast-burrito-portrait.jpg',
-  chickenSaladPlate: '/images/chicken-salad-bagel.jpg',
-  cranberrySalad: '/images/menu-cranberry-walnut-salad-portrait.jpg',
-  turkeyBaconRanch: null,
-  chickenBaconPanini: null,
+  chickenSaladPlate: chickenSaladColdplatePhoto,
+  cranberrySalad: cranberryWalnutSaladPhoto,
+  turkeyBaconRanch: turkeyBaconRanchPhoto,
+  chickenBaconPanini: chickenBaconCheddarPaniniPhoto,
   bagels: '/images/scratch-bagels-tray.jpg',
   cinnamonRoll: '/images/cinnamon-roll-single.jpg',
   almondCroissant: '/images/croissants-tray.jpg',
@@ -80,6 +104,17 @@ export const IMG = {
   americano: '/images/drink-americano-espresso.jpg',
   toastedAlmondMocha: '/images/drink-toasted-almond-mocha.jpg',
   mudslide: '/images/drink-mudslide.jpg',
+  // Round 3 — DoorDash menu photography (see imports above).
+  plainBiscuit: plainBiscuitPhoto,
+  sausageEggCheese: sausageEggCheesePhoto,
+  pastaSalad: pastaSaladPhoto,
+  nutellaTwist: nutellaTwistPhoto,
+  cookie: cookiePhoto,
+  brownie: browniePhoto,
+  glutenFreeMuffin: glutenFreeMuffinPhoto,
+  honeyWrap: honeyWrapPhoto,
+  firecracker: firecrackerPhoto,
+  skinnyDipper: skinnyDipperPhoto,
 };
 
 // MENU — verified full menu, synced from the Google business panel
@@ -101,7 +136,8 @@ export const MENU = [
       { name: 'Avocado Sunrise BLT', price: '$7.50' },
       { name: 'Country Ham Sunrise BLT', price: '$10.00' },
       { name: 'BEC', price: null, desc: 'Bacon, egg, shredded cheddar cheese', img: IMG.bec }, // VERIFY-WITH-OWNER
-      { name: 'SEC', price: null },
+      // Spelled out (was 'SEC') so the acronym never renders as the item name — owner request, June 2026.
+      { name: 'Sausage Egg & Cheese Biscuit', price: null, img: IMG.sausageEggCheese },
       { name: 'HEC', price: null },
       { name: 'Omelet Scramble', price: '$9.50', desc: 'Scrambled eggs, your choice of meat, cheese, tomatoes, onions, mushrooms' },
       { name: 'French Toast Platter w/ Bacon', price: '$9.00' },
@@ -110,7 +146,7 @@ export const MENU = [
       { name: 'Fried Bologna', price: '$7.00' },
       { name: 'Plain Bagel', price: '$4.00', img: IMG.bagels },
       { name: 'Bagel w/ Cream Cheese', price: '$6.75' },
-      { name: 'Plain Biscuit', price: '$2.50' },
+      { name: 'Plain Biscuit', price: '$2.50', img: IMG.plainBiscuit },
       { name: 'Toasted Croissant', price: '$3.75' },
     ],
   },
@@ -125,8 +161,8 @@ export const MENU = [
       { name: 'The French Hen', price: '$11.50', img: IMG.frenchHen, popular: true },
       { name: 'Everything Hen', price: '$11.75', img: IMG.everythingHen }, // VERIFY-WITH-OWNER
       { name: 'Wacky Chicken', price: '$11.50' },
-      { name: 'The Firecracker', price: '$10.50' },
-      { name: 'Skinny Dipper', price: '$10.25' },
+      { name: 'The Firecracker', price: '$10.50', img: IMG.firecracker },
+      { name: 'Skinny Dipper', price: '$10.25', img: IMG.skinnyDipper },
       { name: 'Italian Sub', price: '$13.50', popular: true },
     ],
   },
@@ -147,7 +183,7 @@ export const MENU = [
     key: 'wraps',
     name: 'Wraps',
     items: [
-      { name: 'Honey Wrap', price: '$8.50' },
+      { name: 'Honey Wrap', price: '$8.50', img: IMG.honeyWrap },
       { name: 'Club Wrap', price: '$9.25' },
     ],
   },
@@ -176,7 +212,7 @@ export const MENU = [
       { name: 'Chicken Salad', price: null, desc: 'Half Pint $6.00 · Pint $12.00 · Quart $24.00', img: IMG.chickenSaladPlate },
       { name: 'Pimento Cheese', price: null, desc: 'Half Pint $6.00 · Pint $9.00 · Snack Box $7.50' },
       { name: 'Broccoli Salad', price: null, desc: 'Pint $6.00 · Quart $12.00' },
-      { name: 'Pasta Salad', price: null, desc: 'Pint $6.00 · Quart $12.00' },
+      { name: 'Pasta Salad', price: null, desc: 'Pint $6.00 · Quart $12.00', img: IMG.pastaSalad },
       { name: 'Banana Pudding Pint', price: '$6.25' },
     ],
   },
@@ -185,7 +221,7 @@ export const MENU = [
     name: 'Sides',
     items: [
       { name: 'Broccoli Salad', price: '$2.75' },
-      { name: 'Pasta Salad', price: '$2.75' },
+      { name: 'Pasta Salad', price: '$2.75', img: IMG.pastaSalad },
     ],
   },
   {
@@ -195,18 +231,18 @@ export const MENU = [
       { name: 'Cinnamon Roll', price: '$5.00', img: IMG.cinnamonRoll, popular: true },
       { name: 'Almond Croissant', price: '$4.50', img: IMG.almondCroissant },
       { name: 'Chocolate Croissant', price: '$3.75' },
-      { name: 'Nutella Twist', price: '$4.00' },
+      { name: 'Nutella Twist', price: '$4.00', img: IMG.nutellaTwist },
       { name: 'Turnover', price: '$4.75' },
       { name: 'Coffee Cake', price: '$4.50' },
       { name: 'Muffin', price: '$4.50' },
-      { name: 'Gluten Free Muffin', price: '$5.50' },
+      { name: 'Gluten Free Muffin', price: '$5.50', img: IMG.glutenFreeMuffin },
       { name: 'Gluten Free Cake', price: '$5.50' },
       { name: 'Gluten Free Banana Pudding', price: '$7.25' },
-      { name: 'Cookie', price: '$2.75' },
+      { name: 'Cookie', price: '$2.75', img: IMG.cookie },
       { name: 'Banana Pudding Cookie', price: '$4.50' },
       { name: 'Strawberry Crunch Cookie', price: '$4.50' },
       { name: 'Blondie', price: '$4.00' },
-      { name: 'Brownie', price: '$4.00' },
+      { name: 'Brownie', price: '$4.00', img: IMG.brownie },
     ],
   },
   {

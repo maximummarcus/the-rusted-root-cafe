@@ -10,21 +10,26 @@ export default function MenuItem({ item, soldOut = false }) {
 
   return (
     <div
-      className={`flex items-center gap-4 p-3 ${
+      className={`flex items-center gap-4 p-3 min-h-[88px] ${
         isModern ? 'bg-card border border-border rounded-md shadow-sm' : ''
       } ${soldOut ? 'opacity-70' : ''}`}
     >
-      {'img' in item && (
+      {/* Photo thumbnail only when the item has one; items without a photo are
+          text-only — no placeholder tile. min-h-[88px] above (64px thumb + p-3)
+          keeps both variants on the same height rhythm in the grid. The fixed
+          w-16 h-16 box plus the intrinsic width/height attrs mean the image can
+          never cause layout shift while it lazy-loads. */}
+      {item.img && (
         <div className="relative w-16 h-16 shrink-0 overflow-hidden rounded-lg">
-          {item.img ? (
-            <img src={item.img} alt={item.imgAlt || item.name} loading="lazy" className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`} />
-          ) : (
-            <div className="w-full h-full bg-secondary/40 border border-dashed border-border flex items-center justify-center p-1 text-center">
-              <span className="text-[8px] font-semibold uppercase tracking-tight text-muted-foreground leading-[1.15]">
-                Image<br />coming<br />soon
-              </span>
-            </div>
-          )}
+          <img
+            src={item.img}
+            alt={item.imgAlt || item.name}
+            loading="lazy"
+            decoding="async"
+            width={800}
+            height={800}
+            className={`w-full h-full object-cover ${soldOut ? 'grayscale' : ''}`}
+          />
         </div>
       )}
       <div className="flex-1 min-w-0">
