@@ -38,8 +38,8 @@ export default function AdminDashboard() {
     };
   }, []);
 
-  // Return here after Base44's hosted login; logout returns to the public home.
-  const login = () => base44.auth.redirectToLogin(window.location.href);
+  // Logout returns to the public home. (Login is handled inline by AdminLogin via
+  // base44.auth, not redirectToLogin, which would bounce to an unrouted /login.)
   const logout = () => base44.auth.logout(`${window.location.origin}/`);
 
   // Never index the admin, and keep the tab title generic regardless of state.
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
     return (
       <>
         {seo}
-        <AdminLogin onLogin={login} />
+        <AdminLogin />
       </>
     );
   }
