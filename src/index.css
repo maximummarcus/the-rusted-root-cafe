@@ -117,6 +117,20 @@
     scrollbar-width: none;
   }
 
+  /* Edge-fade hint for the header's scrollable tab row. Header.jsx drives the
+     gradient through --tab-fade-mask from live scroll position; the media query
+     keeps it strictly mobile-only (<768px) — the desktop header is untouched. */
+  .header-tab-fade {
+    -webkit-mask-image: var(--tab-fade-mask, none);
+    mask-image: var(--tab-fade-mask, none);
+  }
+  @media (min-width: 768px) {
+    .header-tab-fade {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+
   /* Paper texture for hand-drawn theme */
   .paper-texture {
     background-image: radial-gradient(hsl(var(--brand-coffee) / 0.04) 1px, transparent 1px);
