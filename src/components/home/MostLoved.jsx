@@ -12,12 +12,12 @@ export default function MostLoved() {
     <section className="bg-brand-sage/25 py-14 md:py-20">
       <div className="max-w-[120rem] mx-auto px-6">
         <SectionHeading kicker="Most Loved" title="Neighborhood favorites" center />
-        <div className="mt-10 flex gap-5 overflow-x-auto no-scrollbar pb-2 md:grid md:grid-cols-5 md:overflow-visible">
+        <div className="mt-10 flex gap-5 overflow-x-auto no-scrollbar pb-2 md:flex-wrap md:justify-center md:overflow-visible">
           {items.map((item) => (
             <Link
               to="/menu"
               key={item.name}
-              className="group shrink-0 w-56 md:w-auto bg-card overflow-hidden shadow-md hover:shadow-xl transition rounded-lg"
+              className="group shrink-0 w-56 md:w-64 bg-card overflow-hidden shadow-md hover:shadow-xl transition rounded-lg"
             >
               <div className="aspect-square overflow-hidden">
                 <img
@@ -29,7 +29,7 @@ export default function MostLoved() {
               </div>
               <div className="p-4 text-center">
                 <h3 className="font-heading text-lg text-foreground">{item.name}</h3>
-                <p className="text-primary font-semibold mt-1">{item.price}</p>
+                {item.price && <p className="text-primary font-semibold mt-1">{item.price}</p>}
               </div>
             </Link>
           ))}

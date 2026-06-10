@@ -174,6 +174,7 @@ export const MENU = [
 export const MOST_LOVED = [
   { name: 'The French Hen', price: '$11.50', img: IMG.frenchHen },
   { name: 'Chicken Salad Coldplate', price: '$12.25', img: IMG.chickenSaladPlate },
+  { name: 'Fresh-Baked Cinnamon Rolls', price: null, img: IMG.cinnamonRoll },
   { name: 'Cranberry Walnut Salad', price: '$13.00', img: IMG.cranberrySalad },
   { name: 'Avocado Toast', price: '$8.99', img: IMG.avocadoToast },
   { name: 'Turkey Bacon Ranch', price: '$10.99', img: IMG.turkeyBaconRanch },
