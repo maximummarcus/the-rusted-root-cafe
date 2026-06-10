@@ -54,7 +54,7 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           src={WORDMARK_URL}
           alt="The Rusted Root Cafe"
-          className="block h-auto w-[85vw] max-w-[560px]"
+          className="block h-auto w-[90vw] max-w-[750px]"
           style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }}
         />
 
