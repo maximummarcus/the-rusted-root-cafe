@@ -4,9 +4,14 @@ import { MOST_LOVED } from '@/lib/cafeData';
 import SectionHeading from '@/components/SectionHeading';
 
 export default function MostLoved() {
-  // Homepage strip shows photographed items only; null-img items stay in
-  // MOST_LOVED (cafeData.js) awaiting their photo swap.
-  const items = MOST_LOVED.filter((item) => item.img);
+  // Curated home strip: photographed favorites that carry a price, capped at
+  // exactly 3 so the row stays balanced (a 4th card orphan-wrapped onto a lone
+  // second row). Requiring a price keeps the trio consistent — every card shows
+  // one — and intentionally holds back the price-less "Fresh-Baked Cinnamon
+  // Rolls" favorite *here only*: it still appears in the Menu's Most Ordered
+  // strip and as a menu item (MOST_LOVED is shared, so it is left untouched).
+  // The cap also prevents a regression if the photo-less favorites gain photos.
+  const items = MOST_LOVED.filter((item) => item.img && item.price).slice(0, 3);
 
   return (
     <section className="bg-brand-sage/25 py-14 md:py-20">
