@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { WORDMARK_URL } from '@/lib/cafeData';
+import Seo from '@/components/Seo';
 
 export default function PageNotFound() {
     const location = useLocation();
@@ -7,6 +8,9 @@ export default function PageNotFound() {
 
     return (
         <div className="min-h-screen flex items-center justify-center p-6 bg-background paper-texture">
+            {/* noindex: the SPA serves this with a 200, so the meta tag is what
+                keeps junk URLs out of search results (soft-404). */}
+            <Seo title="Page Not Found | The Rusted Root Cafe" noindex />
             <div className="max-w-md w-full text-center space-y-6">
                 <Link to="/" className="inline-block">
                     <img src={WORDMARK_URL} alt="The Rusted Root Cafe" className="w-56 max-w-full h-auto mx-auto" />

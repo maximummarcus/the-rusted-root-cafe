@@ -87,6 +87,17 @@ export default function Header() {
     };
   }, []);
 
+  // Bring the active tab fully into view on route change — otherwise landing on
+  // (or tapping) a tab past the fold leaves the active pill clipped behind the
+  // edge fade on mobile. 'nearest' makes it a no-op when the pill is already
+  // fully visible, and on desktop, where the row never overflows. Layout effect
+  // so the row is aligned before paint (no visible jump).
+  useLayoutEffect(() => {
+    tabRowRef.current
+      ?.querySelector('[aria-current="page"]')
+      ?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }, [location.pathname]);
+
   // Expose the rendered header height as --header-h so page wrappers and sticky bars
   // (Layout main, Menu tabs, Order back-bar) can clear / pin against it without magic numbers.
   useLayoutEffect(() => {
@@ -130,8 +141,10 @@ export default function Header() {
               whole unit; 44px touch target kept on the link. The label reuses the
               nav-tab type + color tokens so it restyles with the tabs in both themes;
               a subtle drop-shadow is added only over the transparent-on-hero state,
-              where the photo behind can run dark. The logo drops from 32px to 28px
-              below 360px so the tab row keeps as much room as possible. */}
+              where the photo behind can run dark. The logo fills the link's 44px
+              touch target so the small "café" lettering in the badge stays legible —
+              header height is unchanged. It drops to 36px below 360px so the tab
+              row keeps as much room as possible. */}
           <Link
             to="/"
             aria-label={`${BRAND.name}, Home`}
@@ -142,7 +155,7 @@ export default function Header() {
               alt=""
               width="169"
               height="160"
-              className="h-8 max-[359px]:h-7 md:h-10 w-auto object-contain"
+              className="h-11 max-[359px]:h-9 md:h-12 w-auto object-contain"
               style={{
                 filter: isLight ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none',
               }}
@@ -178,6 +191,7 @@ export default function Header() {
                   <li key={link.to} className="shrink-0 max-md:snap-start">
                     <Link
                       to={link.to}
+                      aria-current={active ? 'page' : undefined}
                       className={`inline-flex items-center min-h-[44px] px-2.5 md:px-4 rounded-full text-sm md:text-base font-semibold whitespace-nowrap ${
                         active
                           ? 'bg-primary text-primary-foreground'

@@ -115,6 +115,9 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    /* Momentum scrolling for the swipeable rows (header tabs, menu category
+       tabs) on older iOS Safari, which otherwise pans them without inertia. */
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Edge-fade hint for the header's scrollable tab row. Header.jsx drives the
