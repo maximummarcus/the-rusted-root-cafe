@@ -6,13 +6,31 @@ export default function ThemeToggle({ compact = false }) {
   const { theme, selectTheme } = useTheme();
   const isModern = theme === 'modern';
 
+  // Compact (mobile header): the two-segment pill costs ~96px that the tab row
+  // can't spare below md, so it collapses to ONE icon-only button that flips to
+  // the other theme — the second segment is redundant there since a single tap
+  // target reaches both states. Fixed 44x44 in BOTH themes (>=44px tap target,
+  // zero layout shift on flip); the icon shows the current theme, the label
+  // names the action.
+  if (compact) {
+    return (
+      <button
+        type="button"
+        onClick={() => selectTheme(isModern ? 'handdrawn' : 'modern')}
+        aria-label={isModern ? 'Switch to Hand-Drawn theme' : 'Switch to Modern theme'}
+        className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm transition-colors hover:text-foreground select-none"
+      >
+        {isModern ? <Square className="w-4 h-4" /> : <Feather className="w-4 h-4" />}
+      </button>
+    );
+  }
+
   // Each side is its OWN real <button> with an explicit target theme (no toggle-only or
   // hover/mousedown logic), so a tap always SETS that theme — reliable on touch, not just
-  // mouse. Tap area is >= 44px tall (min-h) and, when compact, >= 44px wide (min-w) at
-  // every width via the button's own sizing, while the bar stays the same 44px height.
+  // mouse. Tap area is >= 44px tall (min-h) via the button's own sizing, while the bar
+  // stays the same 44px height.
   const sideBase =
-    'relative z-10 inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-full text-xs font-semibold transition-colors ' +
-    (compact ? 'min-w-[44px] px-2' : 'w-[88px]');
+    'relative z-10 inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-full text-xs font-semibold transition-colors w-[88px]';
 
   return (
     <div
@@ -38,7 +56,7 @@ export default function ThemeToggle({ compact = false }) {
         className={`${sideBase} ${!isModern ? 'text-primary-foreground' : 'text-muted-foreground'}`}
       >
         <Feather className="w-3.5 h-3.5" />
-        {!compact && 'Hand-Drawn'}
+        Hand-Drawn
       </button>
       <button
         type="button"
@@ -48,7 +66,7 @@ export default function ThemeToggle({ compact = false }) {
         className={`${sideBase} ${isModern ? 'text-primary-foreground' : 'text-muted-foreground'}`}
       >
         <Square className="w-3.5 h-3.5" />
-        {!compact && 'Modern'}
+        Modern
       </button>
     </div>
   );

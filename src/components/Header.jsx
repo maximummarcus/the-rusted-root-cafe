@@ -19,7 +19,9 @@ export default function Header() {
   const location = useLocation();
   const isHeroOverlay = HERO_OVERLAY_ROUTES.has(location.pathname);
   const headerRef = useRef(null);
+  const tabRowRef = useRef(null);
   const [bgOpacity, setBgOpacity] = useState(0);
+  const [tabFade, setTabFade] = useState({ left: false, right: false });
 
   // White labels are only needed where the transparent bar overlays a dark image — the
   // home and catering heroes. On every other route the transparent state sits over a
@@ -56,6 +58,35 @@ export default function Header() {
     };
   }, [isHeroOverlay]);
 
+  // Edge-fade hint for the scrollable tab row: fade a side only while more tabs sit
+  // off-screen on that side, so cut-off routes read as "swipe for more" instead of
+  // looking truncated — and the last tab is never veiled once you reach it. Recomputed
+  // on scroll/resize/font-load. Applied as a CSS mask (.header-tab-fade, mobile-only
+  // via media query) rather than a color overlay so it works over BOTH header states:
+  // transparent-on-hero and opaque cream.
+  useEffect(() => {
+    const el = tabRowRef.current;
+    if (!el) return;
+    const update = () => {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const left = el.scrollLeft > 2;
+      const right = el.scrollLeft < maxScroll - 2;
+      setTabFade((prev) =>
+        prev.left === left && prev.right === right ? prev : { left, right }
+      );
+    };
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    // Tab label widths shift when the webfont swaps in; re-measure then.
+    document.fonts?.ready?.then(update);
+    return () => {
+      el.removeEventListener('scroll', update);
+      ro.disconnect();
+    };
+  }, []);
+
   // Expose the rendered header height as --header-h so page wrappers and sticky bars
   // (Layout main, Menu tabs, Order back-bar) can clear / pin against it without magic numbers.
   useLayoutEffect(() => {
@@ -76,6 +107,12 @@ export default function Header() {
       window.removeEventListener('resize', setVar);
     };
   }, []);
+
+  // Mask stops for the tab-row fade: solid everywhere except a 24px ramp on each
+  // side that still has overflow. "black, black" (no fade) when fully in view.
+  const tabFadeMask = `linear-gradient(to right, ${
+    tabFade.left ? 'transparent, black 24px' : 'black'
+  }, ${tabFade.right ? 'black calc(100% - 24px), transparent' : 'black'})`;
 
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50">
@@ -123,20 +160,25 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Full tab nav — every width, no hamburger. Horizontal scroll if the row
-              is tight. */}
+          {/* Full tab nav — every width, no hamburger. Below md the row scrolls
+              horizontally (snap per tab, edge fade as the "more tabs" hint) so every
+              route stays reachable with a swipe even at 360px. */}
           <nav className="relative flex-1 min-w-0">
-            <ul className="flex items-center gap-1 md:gap-2 overflow-x-auto no-scrollbar">
+            <ul
+              ref={tabRowRef}
+              className="header-tab-fade flex items-center gap-1 md:gap-2 overflow-x-auto no-scrollbar max-md:snap-x"
+              style={{ '--tab-fade-mask': tabFadeMask }}
+            >
               {TAB_LINKS.map((link) => {
                 const active = location.pathname === link.to;
                 const inactiveClasses = isLight
                   ? 'text-white hover:bg-white/15'
                   : 'text-foreground/70 hover:text-foreground hover:bg-secondary';
                 return (
-                  <li key={link.to} className="shrink-0">
+                  <li key={link.to} className="shrink-0 max-md:snap-start">
                     <Link
                       to={link.to}
-                      className={`inline-flex items-center min-h-[44px] px-3 md:px-4 rounded-full text-sm md:text-base font-semibold whitespace-nowrap ${
+                      className={`inline-flex items-center min-h-[44px] px-2.5 md:px-4 rounded-full text-sm md:text-base font-semibold whitespace-nowrap ${
                         active
                           ? 'bg-primary text-primary-foreground'
                           : inactiveClasses
