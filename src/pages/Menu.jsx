@@ -18,11 +18,15 @@ export default function Menu() {
       .catch(() => setSpecials([]));
   }, []);
 
-  // Build category list including Most Ordered (top) and Specials (bottom)
+  // Build category list. Specials sits between Sprouts (Kids) and Grab N Go
+  // on the page; insert the matching tab in the same slot so smooth-scroll
+  // matches the visible order.
   const tabs = [
     { key: 'most-ordered', name: 'Most Ordered' },
-    ...MENU.map((c) => ({ key: c.key, name: c.name })),
-    { key: 'specials', name: 'Specials' },
+    ...MENU.flatMap((c) => {
+      const tab = { key: c.key, name: c.name };
+      return c.key === 'sprouts' ? [tab, { key: 'specials', name: 'Specials' }] : [tab];
+    }),
   ];
 
   const scrollTo = (key) => {
@@ -74,34 +78,56 @@ export default function Menu() {
         {MENU.map((c) => (
           <React.Fragment key={c.key}>
             <MenuCategory category={c} isSoldOut={isSoldOut} />
-            {c.key === 'limeade' && (
-              <div className="pb-6 -mt-3 flex justify-center">
-                <img
-                  src={IMG.lemonadeMenu}
-                  alt="Homemade Lemonade flavor menu: strawberry, peach, blackberry, lavender and more"
-                  loading="lazy"
-                  className="block w-full max-w-[220px] h-auto object-contain rounded-lg shadow-sm"
-                />
+
+            {/* Specials slot — rendered between Sprouts (Kids) and Grab N Go.
+                Pulled from the Base44 Special entity so the owner can rotate
+                monthly without a code change. */}
+            {c.key === 'sprouts' && (
+              <section id="specials" className="scroll-mt-32 py-8 border-b border-border/50">
+                <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-5">Specials</h2>
+                {specials.length > 0 ? (
+                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {specials.map((s) => (
+                      <SpecialCard key={s.id} special={s} />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm italic text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-lg px-4 py-3">
+                    Check back for this month&apos;s specials.
+                  </p>
+                )}
+              </section>
+            )}
+
+            {/* Homemade Lemonade sub-section, rendered inside Specialty Drinks. */}
+            {c.key === 'specialty-drinks' && c.lemonade && (
+              <div className="-mt-4 pb-8 border-b border-border/50">
+                <h3 className="font-heading text-xl text-foreground mb-3">{c.lemonade.heading}</h3>
+                <p className="text-sm text-muted-foreground mb-3">
+                  <span className="font-semibold text-foreground">Flavors:</span>{' '}
+                  {c.lemonade.flavors.join(', ')}
+                </p>
+                <ul className="text-sm text-muted-foreground space-y-1 mb-4">
+                  {c.lemonade.addOns.map((a) => (
+                    <li key={a.name}>
+                      <span className="font-semibold text-foreground">{a.name}</span>{' '}
+                      <span className="text-primary font-semibold">{a.price}</span>
+                      {a.detail && <span> — {a.detail}</span>}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex justify-center">
+                  <img
+                    src={IMG.lemonadeMenu}
+                    alt="Homemade Lemonade flavor menu: strawberry, blackberry, lavender, watermelon and more"
+                    loading="lazy"
+                    className="block w-full max-w-[220px] h-auto object-contain rounded-lg shadow-sm"
+                  />
+                </div>
               </div>
             )}
           </React.Fragment>
         ))}
-
-        {/* Specials pulled from entity */}
-        <section id="specials" className="scroll-mt-32 py-8">
-          <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-5">Specials</h2>
-          {specials.length > 0 ? (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {specials.map((s) => (
-                <SpecialCard key={s.id} special={s} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm italic text-muted-foreground bg-secondary/60 border border-dashed border-border rounded-lg px-4 py-3">
-              Check back for this month&apos;s specials.
-            </p>
-          )}
-        </section>
       </div>
     </>
   );

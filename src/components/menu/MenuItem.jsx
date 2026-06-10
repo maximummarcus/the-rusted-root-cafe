@@ -6,6 +6,7 @@ import { useTheme } from '@/lib/ThemeContext';
 export default function MenuItem({ item, soldOut = false }) {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
+  const hasPrice = item.price != null && item.price !== '' && item.price !== '-';
 
   return (
     <div
@@ -29,8 +30,8 @@ export default function MenuItem({ item, soldOut = false }) {
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline gap-2">
           <span className="font-heading text-lg text-foreground">{item.name}</span>
-          {!isModern && <span className="flex-1 dotted-leader translate-y-[-4px]" />}
-          <span className="font-semibold text-primary whitespace-nowrap">{item.price}</span>
+          {hasPrice && !isModern && <span className="flex-1 dotted-leader translate-y-[-4px]" />}
+          {hasPrice && <span className="font-semibold text-primary whitespace-nowrap">{item.price}</span>}
         </div>
         {item.desc && <p className="text-sm text-muted-foreground mt-0.5">{item.desc}</p>}
         <div className="flex items-center gap-2 mt-1">

@@ -70,103 +70,176 @@ export const IMG = {
   lemonadeMenu: '/images/lemonade-menu.png',
 };
 
-// MENU — confirmed categories in order. Items with confirmed prices are verbatim.
-// Categories without confirmed items show an editable empty state.
+// MENU — verified full menu, synced from the Google business panel
+// ("Provided by DoorDash", pulled 2026-06-09). Categories render in the order
+// below. The Specials section (slot 7 on the page) is owner-editable through
+// the Base44 Special entity and is injected by Menu.jsx — keep it out of this
+// hardcoded array so the owner can rotate specials monthly without a code
+// change. Items with `price: null` render with no price (owner sets these in
+// Clover later). Items with a tiered `desc` string carry their pricing on
+// the description line.
 export const MENU = [
   {
     key: 'breakfast',
-    name: 'Breakfast Options',
+    name: 'Breakfast',
     items: [
-      { name: 'Avocado Toast', price: '$8.99', img: IMG.avocadoToast, popular: false, desc: 'Scratch sourdough, smashed avocado.' },
-      { name: 'Breakfast Burrito', price: '-', img: IMG.breakfastBurrito, imgAlt: 'Breakfast burrito with salsa and sour cream', popular: false, desc: 'Served with salsa and sour cream.' },
-    ],
-    note: 'More breakfast items coming. Add from Clover.',
-  },
-  {
-    key: 'paninis',
-    name: 'Paninis',
-    items: [
-      { name: 'The French Hen', price: '$11.50', img: IMG.frenchHen, popular: true },
-      { name: 'Chicken, Bacon & Cheddar Panini', price: '$11.50', img: IMG.chickenBaconPanini, popular: true },
+      { name: 'Avocado Toast', price: '$8.99', desc: 'Toasted sourdough, avocado, everything seasoning, crumbled bacon, fried egg', img: IMG.avocadoToast, popular: true },
+      { name: 'Avocado Toast with Tomatoes & Balsamic Glaze', price: '$10.00' },
+      { name: 'Sunrise BLT', price: '$7.00' },
+      { name: 'Avocado Sunrise BLT', price: '$7.50' },
+      { name: 'Country Ham Sunrise BLT', price: '$10.00' },
+      { name: 'BEC', price: null, desc: 'Bacon, egg, shredded cheddar cheese' },
+      { name: 'SEC', price: null },
+      { name: 'HEC', price: null },
+      { name: 'Omelet Scramble', price: '$9.50', desc: 'Scrambled eggs, your choice of meat, cheese, tomatoes, onions, mushrooms' },
+      { name: 'French Toast Platter w/ Bacon', price: '$9.00' },
+      { name: 'French Toast Platter w/ Sausage', price: '$9.50' },
+      { name: 'French Toast Sandwich', price: null },
+      { name: 'Fried Bologna', price: '$7.00' },
+      { name: 'Plain Bagel', price: '$4.00', img: IMG.bagels },
+      { name: 'Bagel w/ Cream Cheese', price: '$6.75' },
+      { name: 'Plain Biscuit', price: '$2.50' },
+      { name: 'Toasted Croissant', price: '$3.75' },
     ],
   },
   {
     key: 'sandwiches',
     name: 'Sandwiches',
     items: [
-      { name: 'BLT', price: '-', popular: false },
-      { name: 'Homemade Chicken Salad', price: '-', img: IMG.chickenSaladPlate, popular: false },
+      { name: 'BLT', price: '$9.25', desc: 'Bacon, lettuce, tomato, mayo on toasted sourdough' },
+      { name: 'Country Ham BLT', price: '$12.25' },
+      { name: 'Classic Club', price: '$10.25' },
+      { name: 'Turkey Bacon Ranch', price: '$10.99', img: IMG.turkeyBaconRanch, popular: true },
+      { name: 'The French Hen', price: '$11.50', img: IMG.frenchHen, popular: true },
+      { name: 'Everything Hen', price: '$11.75' },
+      { name: 'Wacky Chicken', price: '$11.50' },
+      { name: 'The Firecracker', price: '$10.50' },
+      { name: 'Skinny Dipper', price: '$10.25' },
+      { name: 'Italian Sub', price: '$13.50', popular: true },
     ],
-    note: 'Full sandwich list coming. Add from Clover.',
+  },
+  {
+    key: 'paninis',
+    name: 'Paninis',
+    items: [
+      { name: 'Cheesy Pig', price: '$10.25', desc: 'Homemade pimento cheese with bacon on sourdough panini' },
+      { name: 'Pizza Melt', price: '$12.00' },
+      { name: 'Ham & Swiss Melt', price: '$11.00' },
+      { name: 'Chicken, Bacon, Cheddar Panini', price: '$11.50', img: IMG.chickenBaconPanini },
+      { name: 'Chicken Salad Melt', price: '$12.00' },
+      { name: '3 Cheese Bacon Melt', price: '$13.00', desc: 'Cheddar, Swiss, pepper jack, bacon on sourdough' },
+      { name: 'Chicken Panini', price: '$11.50', desc: 'Sourdough, basil pesto, provolone, tomato, balsamic glaze', popular: true },
+    ],
   },
   {
     key: 'wraps',
     name: 'Wraps',
     items: [
-      { name: 'Turkey Bacon Ranch', price: '$10.99', img: IMG.turkeyBaconRanch, popular: true },
+      { name: 'Honey Wrap', price: '$8.50' },
+      { name: 'Club Wrap', price: '$9.25' },
     ],
-    note: 'More wraps coming. Add from Clover.',
   },
   {
     key: 'salads',
     name: 'Salads',
     items: [
-      { name: 'Cranberry Walnut Salad', price: '$13.00', img: IMG.cranberrySalad, imgAlt: 'Cranberry walnut chicken salad', popular: true },
       { name: 'Chicken Salad Coldplate', price: '$12.25', img: IMG.chickenSaladPlate, popular: true },
+      { name: 'Cranberry Walnut Salad', price: '$13.00', img: IMG.cranberrySalad, imgAlt: 'Cranberry walnut chicken salad', popular: true },
+      { name: 'Chef Salad', price: '$13.50' },
     ],
   },
   {
     key: 'sprouts',
-    name: 'Sprouts Menu',
-    items: [],
-    note: 'Sprouts (kids) menu coming. Add from Clover.',
+    name: 'Sprouts (Kids)',
+    items: [
+      { name: 'Kids Grilled Cheese', price: '$6.50' },
+    ],
+  },
+  // ── Slot 7: Specials (owner-editable, lives in Base44 Special entity).
+  //    Rendered by Menu.jsx between 'sprouts' and 'grab-n-go'. Not hardcoded here.
+  {
+    key: 'grab-n-go',
+    name: 'Grab N Go',
+    items: [
+      { name: 'Chicken Salad', price: null, desc: 'Half Pint $6.00 · Pint $12.00 · Quart $24.00', img: IMG.chickenSaladPlate },
+      { name: 'Pimento Cheese', price: null, desc: 'Half Pint $6.00 · Pint $9.00 · Snack Box $7.50' },
+      { name: 'Broccoli Salad', price: null, desc: 'Pint $6.00 · Quart $12.00' },
+      { name: 'Pasta Salad', price: null, desc: 'Pint $6.00 · Quart $12.00' },
+      { name: 'Banana Pudding Pint', price: '$6.25' },
+    ],
   },
   {
     key: 'sides',
     name: 'Sides',
-    items: [],
-    note: 'Sides coming. Add from Clover.',
-  },
-  {
-    key: 'specialty-drinks',
-    name: 'Specialty Drinks',
     items: [
-      { name: 'Seasonal Specialty Latte', price: '-', img: IMG.specialtyDrink, popular: false },
+      { name: 'Broccoli Salad', price: '$2.75' },
+      { name: 'Pasta Salad', price: '$2.75' },
     ],
-    note: 'Full specialty drink list coming. Add from Clover.',
-  },
-  {
-    key: 'drinks',
-    name: 'Drinks',
-    items: [],
-    note: 'Drinks coming. Add from Clover.',
-  },
-  {
-    key: 'limeade',
-    name: 'Limeade',
-    items: [
-      { name: 'House Limeade', price: '-', img: IMG.limeade, popular: false },
-    ],
-    note: 'Limeade flavors coming. Add from Clover.',
   },
   {
     key: 'pastries',
     name: 'Pastries & Desserts',
     items: [
-      { name: 'Cinnamon Rolls', price: '-', img: IMG.cinnamonRoll, popular: false },
-      { name: 'Almond Croissants', price: '-', img: IMG.almondCroissant, popular: false },
-      { name: 'Scratch-Made Bagels', price: '-', img: IMG.bagels, popular: false },
+      { name: 'Cinnamon Roll', price: '$5.00', img: IMG.cinnamonRoll, popular: true },
+      { name: 'Almond Croissant', price: '$4.50', img: IMG.almondCroissant },
+      { name: 'Chocolate Croissant', price: '$3.75' },
+      { name: 'Nutella Twist', price: '$4.00' },
+      { name: 'Turnover', price: '$4.75' },
+      { name: 'Coffee Cake', price: '$4.50' },
+      { name: 'Muffin', price: '$4.50' },
+      { name: 'Gluten Free Muffin', price: '$5.50' },
+      { name: 'Gluten Free Cake', price: '$5.50' },
+      { name: 'Gluten Free Banana Pudding', price: '$7.25' },
+      { name: 'Cookie', price: '$2.75' },
+      { name: 'Banana Pudding Cookie', price: '$4.50' },
+      { name: 'Strawberry Crunch Cookie', price: '$4.50' },
+      { name: 'Blondie', price: '$4.00' },
+      { name: 'Brownie', price: '$4.00' },
     ],
-    note: 'Assorted from-scratch baked goods: add more from Clover.',
   },
   {
-    key: 'grab-n-go',
-    name: 'Grab N Go',
+    key: 'specialty-drinks',
+    name: 'Specialty Drinks',
     items: [
-      { name: 'House BBQ Sauce', price: '-', popular: false },
-      { name: 'Apple Butter', price: '-', popular: false },
+      { name: 'Lavender Vanilla Latte', price: null, img: IMG.specialtyDrink },
+      { name: 'French Vanilla Latte', price: null },
+      { name: 'White Chocolate Raspberry Latte', price: null },
+      { name: 'Cinnamon Roll Latte', price: null },
+      { name: 'CTC Latte', price: null },
+      { name: 'Pecan Praline Latte', price: null },
+      { name: 'Toasted Almond Mocha', price: null },
+      { name: 'Caramel Macchiato', price: null },
+      { name: 'Mudslide', price: null },
+      { name: 'Matcha Latte', price: null },
+      { name: 'Americano', price: null },
+      { name: 'Limeade', price: null },
     ],
-    note: 'Retail grab-n-go items: add more from Clover.',
+    // Homemade Lemonade sub-section — rendered by Menu.jsx below this category.
+    lemonade: {
+      heading: 'Homemade Lemonade',
+      flavors: [
+        'Blackberry', 'Strawberry', 'Raspberry', 'Watermelon',
+        'Blue Raspberry', 'Pomegranate', 'Guava', 'Passion Fruit',
+        'Kiwi', 'Coconut', 'Violet', 'Lavender',
+        'Honey', 'Orange', 'Banana', 'Huckleberry',
+      ],
+      addOns: [
+        { name: 'Popping Boba Pearls', price: '$1', detail: 'Strawberry, Mango, Passion Fruit, Kiwi, Blueberry, Pomegranate' },
+        { name: 'Glitter', price: '$0.50' },
+      ],
+    },
+  },
+  {
+    key: 'drinks',
+    name: 'Drinks',
+    items: [
+      { name: 'Sweet Tea', price: '$2.99' },
+      { name: 'Orange Juice', price: '$2.00' },
+      { name: 'Apple Juice', price: '$3.50' },
+      { name: 'Soda Can', price: '$1.50' },
+      { name: 'Bottle Water', price: '$1.00' },
+      { name: 'Juice Box', price: '$1.00' },
+    ],
   },
 ];
 
