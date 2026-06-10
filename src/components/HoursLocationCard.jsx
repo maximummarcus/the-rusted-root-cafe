@@ -2,7 +2,9 @@ import React from 'react';
 import { BRAND, HOURS } from '@/lib/cafeData';
 import { MapPin, Phone, Clock } from 'lucide-react';
 
-export default function HoursLocationCard() {
+// showMap renders a mini Google Map inside the Find Us panel (Home passes it).
+// Contact keeps its own full-width map below this card, so it leaves it off.
+export default function HoursLocationCard({ showMap = false }) {
   return (
     <div className="grid gap-6 md:grid-cols-2 bg-card shadow-lg overflow-hidden rounded-lg">
       <div className="p-7">
@@ -30,6 +32,20 @@ export default function HoursLocationCard() {
         >
           <Phone className="w-4 h-4" /> {BRAND.phone}
         </a>
+        {showMap && (
+          <div className="mt-5 overflow-hidden rounded-lg shadow-md">
+            <iframe
+              title="Map to The Rusted Root Cafe"
+              width="100%"
+              height="300"
+              className="block"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(BRAND.address)}&output=embed`}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BRAND, IMG, LOGO_URL } from '@/lib/cafeData';
+import { BRAND, IMG, WORDMARK_URL } from '@/lib/cafeData';
 import { useTheme } from '@/lib/ThemeContext';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ShoppingBag, BookOpen } from 'lucide-react';
@@ -45,20 +45,19 @@ export default function Hero() {
         className="relative min-h-[100svh] max-w-[120rem] mx-auto w-full px-4 pb-10 flex flex-col items-center justify-center text-center"
         style={{ paddingTop: 'calc(var(--header-h, 64px) + 1.25rem)' }}
       >
-        {/* Center logo card */}
-        <motion.div
+        {/* Brand wordmark — flat transparent lettering, no card. The soft drop
+            shadow is load-bearing: bright patches of the photos dip to ~3:1
+            against the cream strokes even under the forest overlay (the header
+            shadows this same mark over the hero for the same reason). */}
+        <motion.img
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-brand-cream p-3 md:p-5 shadow-2xl rounded-lg"
-        >
-          <img
-            src={LOGO_URL}
-            alt="The Rusted Root Cafe logo"
-            className="h-auto rounded-full mx-auto block"
-            style={{ width: 'clamp(96px, 18vw, 160px)' }}
-          />
-        </motion.div>
+          src={WORDMARK_URL}
+          alt="The Rusted Root Cafe"
+          className="block h-auto w-[85vw] max-w-[560px]"
+          style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }}
+        />
 
         <motion.h1
           initial={{ opacity: 0, y: 16 }}

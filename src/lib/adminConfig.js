@@ -16,9 +16,10 @@
 // TODO (launch gate): server-side password verification + restricted RLS on the
 // Special / menu_item_availability entities are required before real launch.
 //
-// TODO Marcus: change ADMIN_TOKEN to your own random slug before launch. The admin
-// lives at /admin/<ADMIN_TOKEN>. Treat the slug like a second password.
-export const ADMIN_TOKEN = 'rr-d1835176486c7d959270a5628a5e756f';
+// The admin lives at /admin/<ADMIN_TOKEN>. Treat the slug like a second password:
+// if it ever leaks (links, screenshots, the Base44 page index), rotate it by
+// replacing ADMIN_TOKEN with a fresh 32-char random value.
+export const ADMIN_TOKEN = 'ee1grSVD9wDrLcqh6G6JDb3ubyvLFaF3';
 
 // Full admin path, e.g. "/admin/rr-...".
 export const ADMIN_PATH = `/admin/${ADMIN_TOKEN}`;

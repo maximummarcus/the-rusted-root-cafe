@@ -25,7 +25,7 @@ export const BRAND = {
 // the matching button on the Order page renders a disabled "Online ordering
 // coming soon" state; pasting a real URL makes that button go live automatically.
 export const CLOVER_ORDER_URL = '';   // <-- paste the Clover Online Ordering URL here
-export const DOORDASH_ORDER_URL = ''; // <-- paste the DoorDash store URL here
+export const DOORDASH_ORDER_URL = 'https://www.doordash.com/store/the-rusted-root-cafe-windsor-36908799/';
 
 // The Rusted Root Cafe logo (round sunflower badge).
 export const LOGO_URL = '/logo.jpeg';
@@ -174,6 +174,7 @@ export const MENU = [
 export const MOST_LOVED = [
   { name: 'The French Hen', price: '$11.50', img: IMG.frenchHen },
   { name: 'Chicken Salad Coldplate', price: '$12.25', img: IMG.chickenSaladPlate },
+  { name: 'Fresh-Baked Cinnamon Rolls', price: null, img: IMG.cinnamonRoll },
   { name: 'Cranberry Walnut Salad', price: '$13.00', img: IMG.cranberrySalad },
   { name: 'Avocado Toast', price: '$8.99', img: IMG.avocadoToast },
   { name: 'Turkey Bacon Ranch', price: '$10.99', img: IMG.turkeyBaconRanch },
