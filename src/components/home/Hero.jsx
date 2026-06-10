@@ -5,10 +5,6 @@ import { BRAND, IMG, WORDMARK_URL } from '@/lib/cafeData';
 import { useTheme } from '@/lib/ThemeContext';
 import { ShoppingBag, BookOpen } from 'lucide-react';
 
-// Mobile shows only ONE full-bleed photo (the squished side-by-side split
-// looks bad on phones). Owner: to flip which photo shows on mobile, swap
-// IMG.bakery for IMG.plants on the line marked below. Desktop keeps the split.
-
 export default function Hero() {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
@@ -16,25 +12,13 @@ export default function Hero() {
   return (
     // Section fills the viewport edge-to-edge, never shorter than the URL-bar-hidden viewport.
     <section className="relative overflow-hidden min-h-[100lvh]">
-      {/* Background photos: single image on mobile, side-by-side split on md+. */}
-      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
-        {/* Mobile single photo lives here. Owner: swap IMG.bakery → IMG.plants to flip. */}
+      {/* Background photo: single full-bleed image at every breakpoint. */}
+      <div className="absolute inset-0">
         <img
           src={IMG.bakery}
           alt="The Rusted Root Cafe counter with the storefront sign and fresh flowers"
           className="w-full h-full object-cover object-center"
         />
-        {/* Desktop-only right half of the split. The <picture> media query keeps
-            mobile from downloading it: below md the source doesn't match and the
-            fallback src is an inline 1x1 transparent gif (no network request). */}
-        <picture className="hidden md:block w-full h-full">
-          <source media="(min-width: 768px)" srcSet={IMG.plants} />
-          <img
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            alt="Houseplants and home decor display inside the café"
-            className="w-full h-full object-cover object-center"
-          />
-        </picture>
       </div>
       <div className="absolute inset-0 bg-brand-forest/55" />
 
@@ -73,7 +57,7 @@ export default function Hero() {
         </motion.h1>
 
         <p className="mt-3 text-brand-cream/90 text-base md:text-lg max-w-2xl px-4">
-          A from-scratch café &amp; bakery and a houseplant &amp; home-decor shop, all under one cozy roof in Windsor, VA.
+          A from-scratch café &amp; bakery with a cozy small-town welcome in Windsor, VA.
         </p>
 
         <div className="mt-5 md:mt-6 flex flex-wrap items-center justify-center gap-3 px-4">

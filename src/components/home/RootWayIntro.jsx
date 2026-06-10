@@ -8,7 +8,7 @@ export default function RootWayIntro() {
       <SectionHeading kicker="The Root Way" title="Welcome, neighbor" center />
       <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
         We&apos;re the friendly little spot where regulars are known by name. Pull up a
-        chair, order something scratch-made, browse the plants, and stay a while.
+        chair, order something scratch-made, and stay a while.
       </p>
       <p className="mt-4 font-script text-2xl md:text-3xl text-primary">
         {BRAND.tagline}

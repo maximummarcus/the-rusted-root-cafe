@@ -3,7 +3,7 @@ import Seo from '@/components/Seo';
 import Hero from '@/components/home/Hero';
 import RootWayIntro from '@/components/home/RootWayIntro';
 import MostLoved from '@/components/home/MostLoved';
-import DualIdentity from '@/components/home/DualIdentity';
+import CafeBakery from '@/components/home/CafeBakery';
 import HoursLocationCard from '@/components/HoursLocationCard';
 import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import SectionHeading from '@/components/SectionHeading';
@@ -12,14 +12,14 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="The Rusted Root Cafe: Café, Scratch Bakery & Plant Shop in Windsor, VA"
-        description="The Rusted Root Cafe in Windsor, VA: a from-scratch café & bakery and houseplant & home-decor shop. Gather. Grow. Get Rooted! Order online, dine in, or grab & go."
+        title="The Rusted Root Cafe: Café & Scratch Bakery in Windsor, VA"
+        description="The Rusted Root Cafe in Windsor, VA: a homey from-scratch café & bakery. Gather. Grow. Get Rooted! Order online, dine in, or grab & go."
       />
       <LocalBusinessSchema />
       <Hero />
       <RootWayIntro />
       <MostLoved />
-      <DualIdentity />
+      <CafeBakery />
       {/* pb stays small here: the footer's global mt-16 (64px) supplies most of
           the gap. pb-0/md:pb-4 brings the total to ~64px mobile / 80px desktop,
           matching the py-14 md:py-20 rhythm of the sections above. */}
