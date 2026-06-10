@@ -30,8 +30,9 @@ export default function AdminDashboard() {
     window.location.href = '/';
   };
 
-  // Never index the admin, regardless of auth state.
-  const seo = <Seo title="Admin: The Rusted Root Cafe" description="" noindex />;
+  // Never index the admin, regardless of auth state, and keep the tab title
+  // generic so it doesn't announce what this page is.
+  const seo = <Seo title="The Rusted Root Cafe" description="" noindex />;
 
   if (authed === null) {
     return (
