@@ -66,7 +66,7 @@ export default function Order() {
               </div>
             )}
             <p className="mt-2 text-center text-sm text-muted-foreground">
-              Order direct from The Rusted Root.
+              Order direct from The Rusted Root Cafe.
             </p>
           </div>
 

@@ -36,11 +36,8 @@ export default function Footer() {
             <Clock className="w-4 h-4" /> Hours
           </h4>
           <ul className="space-y-1 text-sm text-brand-cream/80">
-            {HOURS.map((h) => (
-              <li key={h.day} className="flex justify-between gap-3">
-                <span>{h.day}</span>
-                <span className={h.time === 'Closed' ? 'text-brand-cream/50' : ''}>{h.time}</span>
-              </li>
+            {HOURS.map((line) => (
+              <li key={line} className={line.endsWith('Closed') ? 'text-brand-cream/50' : ''}>{line}</li>
             ))}
           </ul>
         </div>

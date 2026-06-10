@@ -48,7 +48,7 @@ export default function About() {
             </p>
             <p>
               Thank you for supporting local, sharing in our journey, and becoming part of The
-              Rusted Root family. We can&apos;t wait to serve you.
+              Rusted Root Cafe family. We can&apos;t wait to serve you.
             </p>
             <p className={isModern ? 'text-primary font-semibold text-xl' : 'font-script text-3xl text-primary'}>
               {BRAND.slogan} 🌿☕️🤎

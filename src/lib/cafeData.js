@@ -32,16 +32,21 @@ export const LOGO_URL = '/logo.jpeg';
 
 // Brand wordmark — cream retro serif on a transparent background. Used as the
 // brand mark in the header and footer; works on both light and dark surfaces.
-export const WORDMARK_URL = '/wordmark.png';
+// The ?v=2 query busts browser + social caches: the art was replaced in place
+// (same filename) with the new "The Rusted Root Cafe" mark, so bump this again
+// if the file is ever re-exported.
+export const WORDMARK_URL = '/wordmark.png?v=2';
 
+// Business hours — confirmed by the owner June 2026. Open Mon to Sat 8 to 4,
+// staying open late on Wednesdays until 6 PM; closed Sunday. (The 8 to 6 hours
+// listed on social profiles are wrong — do not trust them.) These lines render
+// verbatim on the Contact page, the Home "Hours & Location" panel, and the
+// footer, so keep the copy in hyphens only (no en/em dashes). The machine-
+// readable openingHours for SEO live in LocalBusinessSchema.jsx — keep in sync.
 export const HOURS = [
-  { day: 'Monday', time: '8:00am – 4:00pm' },
-  { day: 'Tuesday', time: '8:00am – 4:00pm' },
-  { day: 'Wednesday', time: '8:00am – 6:00pm' },
-  { day: 'Thursday', time: '8:00am – 4:00pm' },
-  { day: 'Friday', time: '8:00am – 4:00pm' },
-  { day: 'Saturday', time: '8:00am – 4:00pm' },
-  { day: 'Sunday', time: 'Closed' },
+  'Mon-Sat: 8 AM - 4 PM',
+  'Open late Wednesdays until 6 PM',
+  'Sunday: Closed',
 ];
 
 // IMAGES — real owner photos live at /images/. Slots without a real photo

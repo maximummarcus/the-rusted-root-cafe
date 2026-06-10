@@ -12,10 +12,12 @@ export default function HoursLocationCard({ showMap = false }) {
           <Clock className="w-5 h-5 text-primary" /> Hours
         </h3>
         <ul className="space-y-2">
-          {HOURS.map((h) => (
-            <li key={h.day} className="flex justify-between border-b border-border/60 pb-1.5 text-foreground">
-              <span className="font-medium">{h.day}</span>
-              <span className={h.time === 'Closed' ? 'text-muted-foreground' : ''}>{h.time}</span>
+          {HOURS.map((line) => (
+            <li
+              key={line}
+              className={`border-b border-border/60 pb-1.5 ${line.endsWith('Closed') ? 'text-muted-foreground' : 'text-foreground'}`}
+            >
+              {line}
             </li>
           ))}
         </ul>
