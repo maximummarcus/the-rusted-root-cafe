@@ -44,9 +44,9 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
-      {/* Secret admin — obscure URL slug + server-side password check and
-          server-side sessions (see src/lib/adminConfig.js and
-          base44/functions/admin*). Self-contained, no site chrome. */}
+      {/* Secret admin — obscure URL slug + Base44 account auth (role: admin),
+          enforced again by admin-only entity write RLS (see src/lib/adminConfig.js
+          and src/api/adminApi.js). Self-contained, no site chrome. */}
       <Route path={ADMIN_PATH} element={<AdminDashboard />} />
 
       {/* Public site with shared layout */}
@@ -64,9 +64,9 @@ const AuthenticatedApp = () => {
           matches case-insensitively, so this single alias catches /home, /Home, /HOME. */}
       <Route path="/home" element={<Navigate to="/" replace />} />
 
-      {/* The Base44 auth scaffold (src/pages/Login & friends, ProtectedRoute) is
-          dormant and intentionally unrouted — the token dashboard above is the
-          only admin surface. */}
+      {/* The in-app Base44 auth scaffold (src/pages/Login & friends, ProtectedRoute)
+          is dormant and intentionally unrouted — the admin above uses Base44's
+          hosted login (base44.auth.redirectToLogin) and is the only admin surface. */}
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>

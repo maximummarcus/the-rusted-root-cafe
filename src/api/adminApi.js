@@ -1,125 +1,75 @@
-// Client wrapper around the secret-admin backend functions.
+// Client admin data layer.
 //
-// Auth is server-side: `adminLogin` checks the password against the
-// RRC_ADMIN_PASSWORD secret and issues a random session token that is stored
-// server-side (admin_session entity, 30-day expiry). The client keeps only the
-// token; it gates nothing by itself — every admin read/write below sends it to a
-// backend function that re-validates it against the stored session before doing
-// anything. A forged/expired token just gets 401s from every function.
+// Auth model: the admin is a logged-in Base44 user whose role is 'admin' (see
+// AdminDashboard, which gates on base44.auth.me().role). These helpers talk to
+// the entities directly; every write is authorized server-side by the entities'
+// admin-only write RLS (write: { user_condition: { role: 'admin' } }), so a
+// non-admin or anonymous caller is rejected by the platform regardless of the UI.
 //
-// Writes go through those functions with the service role (asServiceRole), so
-// they do not depend on open RLS on the Special / menu_item_availability entities.
+// No backend functions are involved: Base44 backend (Deno) functions require the
+// Builder plan and a separate deploy, and were never deployed on this app, so the
+// previous function-based login always 404'd. Native auth + RLS needs neither.
 
 import { base44 } from '@/api/base44Client';
 
-const SESSION_KEY = 'rrc_admin_session';
-
-// The pre-2026-06 admin used a forgeable client-side flag. Clear it on load so
-// no stale state lingers; nothing reads it anymore.
-try {
-  localStorage.removeItem('rrc_admin_authed');
-} catch {
-  /* storage blocked (private mode) — nothing to clear */
-}
-
-function getToken() {
+// Clear credentials left by the previous password/token-based admin so nothing stale lingers.
+for (const key of ['rrc_admin_authed', 'rrc_admin_session']) {
   try {
-    return localStorage.getItem(SESSION_KEY) || '';
+    localStorage.removeItem(key);
   } catch {
-    return '';
+    /* storage blocked (private mode) — nothing to clear */
   }
 }
 
-function setToken(token) {
-  try {
-    localStorage.setItem(SESSION_KEY, token);
-  } catch {
-    /* storage blocked — the session just won't survive a reload */
+// Only the fields the Special form owns, so a stray key never reaches the entity.
+const SPECIAL_FIELDS = ['title', 'description', 'price', 'type', 'image_url', 'active', 'sort_order', 'month_label'];
+
+function pickSpecial(special) {
+  const data = {};
+  for (const f of SPECIAL_FIELDS) {
+    if (special?.[f] !== undefined) data[f] = special[f];
   }
+  return data;
 }
 
-function clearToken() {
-  try {
-    localStorage.removeItem(SESSION_KEY);
-  } catch {
-    /* ignore */
+// A permission failure here means the user is not an admin (or their login lapsed),
+// since the entity write RLS only admits role:admin. Surface that clearly.
+function adminErrorMessage(err, fallback) {
+  const status = err?.status ?? err?.response?.status;
+  if (status === 401 || status === 403) {
+    return 'Not authorized. Please log in again with the café’s admin account.';
   }
-}
-
-// The SDK may resolve invoke() to the raw JSON body or to a response object
-// with the body on `.data` depending on its interception config — accept both.
-function bodyOf(res) {
-  return res && typeof res === 'object' && 'data' in res ? res.data : res;
-}
-
-function errorMessage(err, fallback) {
-  return err?.data?.error || err?.response?.data?.error || err?.message || fallback;
-}
-
-export async function adminLogin(password) {
-  const res = await base44.functions.invoke('adminLogin', { password });
-  const data = bodyOf(res);
-  if (data?.success && data?.token) {
-    setToken(data.token);
-    return { success: true };
-  }
-  return { success: false, error: data?.error || 'Incorrect password' };
-}
-
-export async function adminVerify() {
-  const token = getToken();
-  if (!token) return false;
-  try {
-    const res = await base44.functions.invoke('adminVerify', { token });
-    const ok = Boolean(bodyOf(res)?.authenticated);
-    if (!ok) clearToken();
-    return ok;
-  } catch {
-    return false;
-  }
-}
-
-export async function adminLogout() {
-  const token = getToken();
-  clearToken();
-  if (!token) return;
-  try {
-    await base44.functions.invoke('adminLogout', { token });
-  } catch {
-    /* best-effort; the local token is already gone */
-  }
+  return err?.message || fallback;
 }
 
 export async function adminSaveSpecial(special, id) {
+  const data = pickSpecial(special);
   try {
-    const res = await base44.functions.invoke('adminSaveSpecial', {
-      token: getToken(),
-      id,
-      special,
-    });
-    return bodyOf(res)?.special;
+    return id
+      ? await base44.entities.Special.update(id, data)
+      : await base44.entities.Special.create(data);
   } catch (err) {
-    throw new Error(errorMessage(err, 'Could not save the special.'));
+    throw new Error(adminErrorMessage(err, 'Could not save the special.'));
   }
 }
 
 export async function adminDeleteSpecial(id) {
   try {
-    await base44.functions.invoke('adminDeleteSpecial', { token: getToken(), id });
+    await base44.entities.Special.delete(id);
   } catch (err) {
-    throw new Error(errorMessage(err, 'Could not delete the special.'));
+    throw new Error(adminErrorMessage(err, 'Could not delete the special.'));
   }
 }
 
 export async function adminSetAvailability(menuItemId, available) {
   try {
-    const res = await base44.functions.invoke('adminSetAvailability', {
-      token: getToken(),
-      menuItemId,
-      available,
-    });
-    return bodyOf(res)?.availability;
+    // One row per menu item (keyed by name): update it if present, else create it.
+    const existing = await base44.entities.menu_item_availability.filter({ menu_item_id: menuItemId });
+    const row = existing?.[0];
+    return row
+      ? await base44.entities.menu_item_availability.update(row.id, { available })
+      : await base44.entities.menu_item_availability.create({ menu_item_id: menuItemId, available });
   } catch (err) {
-    throw new Error(errorMessage(err, 'Could not update availability.'));
+    throw new Error(adminErrorMessage(err, 'Could not update availability.'));
   }
 }

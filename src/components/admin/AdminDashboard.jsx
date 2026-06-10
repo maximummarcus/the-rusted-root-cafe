@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { adminVerify, adminLogout } from '@/api/adminApi';
+import { base44 } from '@/api/base44Client';
 import Seo from '@/components/Seo';
 import AdminLogin from '@/components/admin/AdminLogin';
 import SpecialsTab from '@/components/admin/SpecialsTab';
@@ -9,32 +9,43 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Loader2, LogOut } from 'lucide-react';
 
+// Auth model: the admin is a logged-in Base44 user whose role is 'admin'. The
+// dashboard subtree is only mounted for such a user; an anonymous visitor sees the
+// login prompt and a signed-in non-admin sees an access notice. Entity writes are
+// independently enforced by the admin-only write RLS, so this client gate is
+// defense-in-depth, not the only lock. No backend functions are used (this app's
+// Base44 plan does not run them).
 export default function AdminDashboard() {
-  // null = checking, false = not authed, true = authed. The dashboard subtree is only
-  // mounted when authed === true, so no admin controls exist in the DOM otherwise.
-  const [authed, setAuthed] = useState(null);
+  // 'checking' | 'anon' | 'forbidden' | 'admin'
+  const [status, setStatus] = useState('checking');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     let active = true;
-    adminVerify().then((ok) => {
-      if (active) setAuthed(ok);
-    });
+    base44.auth
+      .me()
+      .then((user) => {
+        if (!active) return;
+        setEmail(user?.email || '');
+        setStatus(user?.role === 'admin' ? 'admin' : 'forbidden');
+      })
+      .catch(() => {
+        // No valid session — treat as anonymous and show the login prompt.
+        if (active) setStatus('anon');
+      });
     return () => {
       active = false;
     };
   }, []);
 
-  const handleLogout = async () => {
-    await adminLogout();
-    setAuthed(false);
-    window.location.href = '/';
-  };
+  // Return here after Base44's hosted login; logout returns to the public home.
+  const login = () => base44.auth.redirectToLogin(window.location.href);
+  const logout = () => base44.auth.logout(`${window.location.origin}/`);
 
-  // Never index the admin, regardless of auth state, and keep the tab title
-  // generic so it doesn't announce what this page is.
+  // Never index the admin, and keep the tab title generic regardless of state.
   const seo = <Seo title="The Rusted Root Cafe" description="" noindex />;
 
-  if (authed === null) {
+  if (status === 'checking') {
     return (
       <>
         {seo}
@@ -45,15 +56,36 @@ export default function AdminDashboard() {
     );
   }
 
-  if (!authed) {
+  if (status === 'anon') {
     return (
       <>
         {seo}
-        <AdminLogin onSuccess={() => setAuthed(true)} />
+        <AdminLogin onLogin={login} />
       </>
     );
   }
 
+  if (status === 'forbidden') {
+    return (
+      <>
+        {seo}
+        <div className="min-h-screen flex items-center justify-center px-6 bg-background">
+          <div className="w-full max-w-sm text-center">
+            <h1 className="font-heading text-2xl text-foreground">Not an admin account</h1>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {email ? `${email} is signed in but does not have admin access.` : 'This account does not have admin access.'}{' '}
+              Log in with the café’s admin account to continue.
+            </p>
+            <Button onClick={logout} className="mt-6 gap-2 min-h-[48px]">
+              <LogOut className="w-4 h-4" /> Log out &amp; switch account
+            </Button>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // status === 'admin'
   return (
     <>
       {seo}
@@ -63,7 +95,7 @@ export default function AdminDashboard() {
           <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
             <h1 className="font-heading text-base sm:text-xl tracking-wide truncate">THE RUSTED ROOT: ADMIN</h1>
             <Button
-              onClick={handleLogout}
+              onClick={logout}
               variant="secondary"
               size="sm"
               className="gap-1.5 shrink-0 min-h-[44px]"
