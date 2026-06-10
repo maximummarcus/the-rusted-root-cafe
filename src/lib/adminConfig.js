@@ -18,7 +18,7 @@
 // The admin lives at /admin/<ADMIN_TOKEN>. Treat the slug like a second password:
 // if it ever leaks (links, screenshots, the Base44 page index), rotate it by
 // replacing ADMIN_TOKEN with a fresh 32-char random value.
-export const ADMIN_TOKEN = 's7nOK5G028RCzEcmGTFt9xM8issGRrE3';
+export const ADMIN_TOKEN = 'AdF8sR8jBdXQLjGs7HdGx1d8BDefPsmO';
 
 // Full admin path, e.g. "/admin/<token>".
 export const ADMIN_PATH = `/admin/${ADMIN_TOKEN}`;
