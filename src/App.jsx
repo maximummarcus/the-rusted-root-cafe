@@ -17,7 +17,9 @@ import Catering from '@/pages/Catering';
 import Specials from '@/pages/Specials';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
-import AdminDashboard from '@/pages/AdminDashboard';
+// Deliberately NOT in src/pages: Base44's prerendered page index is generated from
+// registered pages, and the admin must never appear in any public page list.
+import AdminDashboard from '@/components/admin/AdminDashboard';
 import { ADMIN_PATH } from '@/lib/adminConfig';
 
 const AuthenticatedApp = () => {
@@ -42,9 +44,9 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
-      {/* Secret admin — obscure URL slug + client-side password gate with a
-          localStorage session (no backend functions on this plan; see
-          src/lib/adminConfig.js). Self-contained, no site chrome. */}
+      {/* Secret admin — obscure URL slug + server-side password check and
+          server-side sessions (see src/lib/adminConfig.js and
+          base44/functions/admin*). Self-contained, no site chrome. */}
       <Route path={ADMIN_PATH} element={<AdminDashboard />} />
 
       {/* Public site with shared layout */}
