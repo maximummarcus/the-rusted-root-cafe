@@ -68,6 +68,13 @@ export const IMG = {
   specialtyDrink: '/images/specialty-drink.jpg',
   limeade: null,
   lemonadeMenu: '/images/lemonade-menu.png',
+  // Round 2 — owner-supplied photos. See VERIFY-WITH-OWNER notes at usage sites.
+  bec: '/images/breakfast-bec.jpg',
+  everythingHen: '/images/sandwich-everything-hen.jpg',
+  hamSwissMelt: '/images/panini-ham-swiss.jpg',
+  americano: '/images/drink-americano-espresso.jpg',
+  toastedAlmondMocha: '/images/drink-toasted-almond-mocha.jpg',
+  mudslide: '/images/drink-mudslide.jpg',
 };
 
 // MENU — verified full menu, synced from the Google business panel
@@ -88,7 +95,7 @@ export const MENU = [
       { name: 'Sunrise BLT', price: '$7.00' },
       { name: 'Avocado Sunrise BLT', price: '$7.50' },
       { name: 'Country Ham Sunrise BLT', price: '$10.00' },
-      { name: 'BEC', price: null, desc: 'Bacon, egg, shredded cheddar cheese' },
+      { name: 'BEC', price: null, desc: 'Bacon, egg, shredded cheddar cheese', img: IMG.bec }, // VERIFY-WITH-OWNER
       { name: 'SEC', price: null },
       { name: 'HEC', price: null },
       { name: 'Omelet Scramble', price: '$9.50', desc: 'Scrambled eggs, your choice of meat, cheese, tomatoes, onions, mushrooms' },
@@ -111,7 +118,7 @@ export const MENU = [
       { name: 'Classic Club', price: '$10.25' },
       { name: 'Turkey Bacon Ranch', price: '$10.99', img: IMG.turkeyBaconRanch, popular: true },
       { name: 'The French Hen', price: '$11.50', img: IMG.frenchHen, popular: true },
-      { name: 'Everything Hen', price: '$11.75' },
+      { name: 'Everything Hen', price: '$11.75', img: IMG.everythingHen }, // VERIFY-WITH-OWNER
       { name: 'Wacky Chicken', price: '$11.50' },
       { name: 'The Firecracker', price: '$10.50' },
       { name: 'Skinny Dipper', price: '$10.25' },
@@ -124,7 +131,7 @@ export const MENU = [
     items: [
       { name: 'Cheesy Pig', price: '$10.25', desc: 'Homemade pimento cheese with bacon on sourdough panini' },
       { name: 'Pizza Melt', price: '$12.00' },
-      { name: 'Ham & Swiss Melt', price: '$11.00' },
+      { name: 'Ham & Swiss Melt', price: '$11.00', img: IMG.hamSwissMelt }, // VERIFY-WITH-OWNER — pretzel bun pre-press
       { name: 'Chicken, Bacon, Cheddar Panini', price: '$11.50', img: IMG.chickenBaconPanini },
       { name: 'Chicken Salad Melt', price: '$12.00' },
       { name: '3 Cheese Bacon Melt', price: '$13.00', desc: 'Cheddar, Swiss, pepper jack, bacon on sourdough' },
@@ -207,11 +214,11 @@ export const MENU = [
       { name: 'Cinnamon Roll Latte', price: null },
       { name: 'CTC Latte', price: null },
       { name: 'Pecan Praline Latte', price: null },
-      { name: 'Toasted Almond Mocha', price: null },
+      { name: 'Toasted Almond Mocha', price: null, img: IMG.toastedAlmondMocha }, // VERIFY-WITH-OWNER — seasonal cup, owner may want a re-shoot
       { name: 'Caramel Macchiato', price: null },
-      { name: 'Mudslide', price: null },
+      { name: 'Mudslide', price: null, img: IMG.mudslide }, // VERIFY-WITH-OWNER — seasonal cup, owner may want a re-shoot
       { name: 'Matcha Latte', price: null },
-      { name: 'Americano', price: null },
+      { name: 'Americano', price: null, img: IMG.americano },
       { name: 'Limeade', price: null },
     ],
     // Homemade Lemonade sub-section — rendered by Menu.jsx below this category.
