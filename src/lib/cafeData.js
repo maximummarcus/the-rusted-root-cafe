@@ -65,7 +65,8 @@ export const WORDMARK_URL = '/wordmark.png?v=2';
 // listed on social profiles are wrong — do not trust them.) These lines render
 // verbatim on the Contact page, the Home "Hours & Location" panel, and the
 // footer, so keep the copy in hyphens only (no en/em dashes). The machine-
-// readable openingHours for SEO live in LocalBusinessSchema.jsx — keep in sync.
+// readable openingHoursSpecification for SEO lives in the static JSON-LD in
+// index.html — keep in sync.
 export const HOURS = [
   'Mon-Sat: 8 AM - 4 PM',
   'Open late Wednesdays until 6 PM',
