@@ -30,6 +30,11 @@ export default function LocalBusinessSchema() {
       ],
       sameAs: [BRAND.instagram, BRAND.facebook],
       slogan: BRAND.slogan,
+      url: 'https://rooted-cafe-co.base44.app',
+      priceRange: '$',
+      servesCuisine: ['American', 'Coffee', 'Baked Goods'],
+      hasMenu: 'https://rooted-cafe-co.base44.app/menu',
+      acceptsReservations: false,
     };
     const script = document.createElement('script');
     script.type = 'application/ld+json';

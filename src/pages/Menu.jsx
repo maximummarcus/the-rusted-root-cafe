@@ -37,11 +37,11 @@ export default function Menu() {
   return (
     <>
       <Seo
-        title="Menu: The Rusted Root Cafe, Windsor VA"
-        description="Browse the menu at The Rusted Root Cafe in Windsor, VA: breakfast, paninis, sandwiches, wraps, salads, scratch-made pastries, specialty drinks, limeade and more."
+        title="Menu | The Rusted Root Cafe - Windsor, VA"
+        description="Breakfast sandwiches, paninis, salads, scratch-baked pastries, and espresso drinks at The Rusted Root Cafe in Windsor, VA. See the full menu and prices."
       />
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-6 text-center">
-        <SectionHeading kicker="The Root Way" title="Our Menu" center />
+        <SectionHeading as="h1" kicker="The Root Way" title="Our Menu" center />
         <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
           Made from scratch, served with a smile. Tap the&nbsp;+ on any item to start an order.
         </p>

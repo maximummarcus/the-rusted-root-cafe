@@ -12,8 +12,8 @@ export default function Order() {
   return (
     <>
       <Seo
-        title="Order Online: The Rusted Root Cafe, Windsor VA"
-        description="Order pickup online from The Rusted Root Cafe in Windsor, VA. Scratch-made café & bakery favorites, ready when you are."
+        title="Order | The Rusted Root Cafe - Windsor, VA"
+        description="Order from The Rusted Root Cafe in Windsor, VA for pickup through DoorDash, or call (757) 241-0075 to place an order."
       />
 
       {/* Native wrapper bar — pinned just under the fixed header. */}

@@ -11,12 +11,12 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About: The Rusted Root Cafe, Windsor VA"
-        description="The Rusted Root Cafe is a Windsor, VA local spot serving from-scratch café & bakery favorites made with care. Gather. Grow. Get Rooted!"
+        title="About | The Rusted Root Cafe - Windsor, VA"
+        description="The story behind The Rusted Root Cafe, a homey cafe, scratch bakery, and houseplant shop in Windsor, VA. Gather. Grow. Get Rooted!"
       />
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="text-center mb-10">
-          <SectionHeading kicker="The Root Way" title="Our Story" center />
+          <SectionHeading as="h1" kicker="The Root Way" title="Our Story" center />
         </div>
 
         <div className={`grid md:grid-cols-2 gap-8 items-center`}>
