@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BRAND, IMG, WORDMARK_URL } from '@/lib/cafeData';
+import { BRAND } from '@/lib/cafeData';
 import { useTheme } from '@/lib/ThemeContext';
 import { ShoppingBag, BookOpen } from 'lucide-react';
 
@@ -11,42 +11,35 @@ export default function Hero() {
 
   return (
     // Section fills the viewport edge-to-edge, never shorter than the URL-bar-hidden viewport.
-    <section className="relative overflow-hidden min-h-[100lvh]">
-      {/* Background photo: single full-bleed image at every breakpoint. */}
-      <div className="absolute inset-0">
-        <img
-          src={IMG.bakery}
-          alt="The Rusted Root Cafe counter with the storefront sign and fresh flowers"
-          className="w-full h-full object-cover object-center"
-        />
-      </div>
-      <div className="absolute inset-0 bg-brand-forest/55" />
-
+    // Pure white in BOTH themes: the logo art sits on a #FFFFFF field, so any
+    // off-white tone would show a visible square seam around the image.
+    <section className="relative overflow-hidden min-h-[100lvh] bg-white">
       {/* Content is centered in the URL-bar-VISIBLE viewport (svh) so everything */}
       {/* fits on first paint, while the section itself extends to lvh below. */}
       <div
         className="relative min-h-[100svh] max-w-[120rem] mx-auto w-full px-4 pb-10 flex flex-col items-center justify-center text-center"
         style={{ paddingTop: 'calc(var(--header-h, 64px) + 1.25rem)' }}
       >
-        {/* Brand wordmark — flat transparent lettering, no card. The soft drop
-            shadow is load-bearing: bright patches of the photos dip to ~3:1
-            against the cream strokes even under the forest overlay (the header
-            shadows this same mark over the hero for the same reason). */}
+        {/* Owner's logo IS the hero centerpiece — a contained <img>, never a
+            background-cover layer (cover would crop the circular mark on mobile
+            portrait). object-contain + max-w/max-h keep it whole at every size;
+            the max-height shrinks before the slogan + CTAs below can overflow a
+            390px viewport. */}
         <motion.img
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          src={WORDMARK_URL}
+          src="/images/rusted-root-logo-hero.jpg"
           alt="The Rusted Root Cafe"
-          className="block h-auto w-[90vw] max-w-[750px]"
-          style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }}
+          loading="eager"
+          className="block object-contain w-auto max-w-[88vw] max-h-[min(62svh,640px)]"
         />
 
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className={`mt-5 md:mt-6 text-brand-cream max-w-full break-words px-4 ${
+          className={`mt-5 md:mt-6 text-brand-forest max-w-full break-words px-4 ${
             isModern
               ? 'font-heading font-semibold uppercase tracking-wide'
               : 'font-script'
@@ -56,7 +49,7 @@ export default function Hero() {
           {BRAND.slogan}
         </motion.h1>
 
-        <p className="mt-3 text-brand-cream/90 text-base md:text-lg max-w-2xl px-4">
+        <p className="mt-3 text-brand-forest/80 text-base md:text-lg max-w-2xl px-4">
           A from-scratch café &amp; bakery with a cozy small-town welcome in Windsor, VA.
         </p>
 

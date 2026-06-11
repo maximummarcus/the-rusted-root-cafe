@@ -22,10 +22,14 @@ export default function Header() {
   const [bgOpacity, setBgOpacity] = useState(0);
   const [tabFade, setTabFade] = useState({ left: false, right: false });
 
-  // White labels are only needed where the transparent bar overlays a dark image — the
-  // home and catering heroes. On every other route the transparent state sits over a
-  // light page bg, so dark text reads fine and we leave the labels alone.
-  const isLight = isHeroOverlay && bgOpacity < LIGHT_THRESHOLD;
+  // The transparent-bar state needs route-aware label colors. The home hero is now a
+  // pure-WHITE field (the owner logo), so white labels would vanish there — it gets
+  // Forest labels instead. The catering hero is still a dark photo, so it keeps the
+  // white labels + drop-shadow. Every other route starts opaque, so this only matters
+  // while the bar is still mostly transparent (bgOpacity below the light threshold).
+  const overHero = isHeroOverlay && bgOpacity < LIGHT_THRESHOLD;
+  const overWhiteHero = overHero && location.pathname === '/'; // Forest labels
+  const overDarkHero = overHero && location.pathname !== '/'; // white labels
 
   useEffect(() => {
     let ticking = false;
@@ -156,15 +160,19 @@ export default function Header() {
               height="160"
               className="h-11 max-[359px]:h-9 md:h-12 w-auto object-contain"
               style={{
-                filter: isLight ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none',
+                filter: overDarkHero ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none',
               }}
             />
             <span
               className={`text-sm md:text-base font-semibold whitespace-nowrap ${
-                isLight ? 'text-white' : 'text-foreground/70'
+                overDarkHero
+                  ? 'text-white'
+                  : overWhiteHero
+                    ? 'text-brand-forest'
+                    : 'text-foreground/70'
               }`}
               style={{
-                textShadow: isLight ? '0 1px 3px rgba(0,0,0,0.45)' : 'none',
+                textShadow: overDarkHero ? '0 1px 3px rgba(0,0,0,0.45)' : 'none',
                 transition: 'color 200ms ease, text-shadow 200ms ease',
               }}
             >
@@ -183,9 +191,11 @@ export default function Header() {
             >
               {TAB_LINKS.map((link) => {
                 const active = location.pathname === link.to;
-                const inactiveClasses = isLight
+                const inactiveClasses = overDarkHero
                   ? 'text-white hover:bg-white/15'
-                  : 'text-foreground/70 hover:text-foreground hover:bg-secondary';
+                  : overWhiteHero
+                    ? 'text-brand-forest hover:bg-brand-forest/10'
+                    : 'text-foreground/70 hover:text-foreground hover:bg-secondary';
                 return (
                   <li key={link.to} className="shrink-0 max-md:snap-start">
                     <Link
@@ -198,7 +208,7 @@ export default function Header() {
                       }`}
                       style={{
                         textShadow:
-                          !active && isLight ? '0 1px 3px rgba(0,0,0,0.45)' : 'none',
+                          !active && overDarkHero ? '0 1px 3px rgba(0,0,0,0.45)' : 'none',
                         transition:
                           'color 200ms ease, background-color 200ms ease, text-shadow 200ms ease',
                       }}
