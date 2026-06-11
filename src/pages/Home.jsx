@@ -4,7 +4,6 @@ import Hero from '@/components/home/Hero';
 import RootWayIntro from '@/components/home/RootWayIntro';
 import MostLoved from '@/components/home/MostLoved';
 import HoursLocationCard from '@/components/HoursLocationCard';
-import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import SectionHeading from '@/components/SectionHeading';
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
         title="The Rusted Root Cafe | Café & Scratch Bakery in Windsor, VA"
         description="The Rusted Root Cafe in Windsor, VA: a homey from-scratch café & bakery. Gather. Grow. Get Rooted! Order online, dine in, or grab & go."
       />
-      <LocalBusinessSchema />
       <Hero />
       <RootWayIntro />
       <MostLoved />

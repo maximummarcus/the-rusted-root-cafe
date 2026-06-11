@@ -3,7 +3,6 @@ import { BRAND } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
 import SectionHeading from '@/components/SectionHeading';
 import HoursLocationCard from '@/components/HoursLocationCard';
-import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import { Phone, Mail, Instagram, Facebook, MapPin } from 'lucide-react';
 
 export default function Contact() {
@@ -15,7 +14,6 @@ export default function Contact() {
         title="Contact | The Rusted Root Cafe"
         description="Visit The Rusted Root Cafe at 11409 Windsor Blvd Unit C, Windsor, VA 23487. Hours, directions, and contact info. Call (757) 241-0075."
       />
-      <LocalBusinessSchema />
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-8">
         <div className="text-center mb-10">
           <SectionHeading as="h1" kicker="Stop By" title="Visit Us" center />
