@@ -33,7 +33,7 @@ export default function Specials() {
   return (
     <>
       <Seo
-        title="Specials | The Rusted Root Cafe - Windsor, VA"
+        title="Specials | The Rusted Root Cafe"
         description="This week's specials at The Rusted Root Cafe in Windsor, VA. Seasonal drinks and scratch-baked treats, updated regularly."
       />
       <div className="max-w-5xl mx-auto px-6 py-12 text-center">
