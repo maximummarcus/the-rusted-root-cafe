@@ -3,7 +3,6 @@ import Seo from '@/components/Seo';
 import Hero from '@/components/home/Hero';
 import RootWayIntro from '@/components/home/RootWayIntro';
 import MostLoved from '@/components/home/MostLoved';
-import CafeBakery from '@/components/home/CafeBakery';
 import HoursLocationCard from '@/components/HoursLocationCard';
 import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import SectionHeading from '@/components/SectionHeading';
@@ -19,11 +18,11 @@ export default function Home() {
       <Hero />
       <RootWayIntro />
       <MostLoved />
-      <CafeBakery />
-      {/* pb stays small here: the footer's global mt-16 (64px) supplies most of
-          the gap. pb-0/md:pb-4 brings the total to ~64px mobile / 80px desktop,
-          matching the py-14 md:py-20 rhythm of the sections above. */}
-      <section className="max-w-[120rem] mx-auto px-6 pb-0 md:pb-4">
+      {/* pt carries the gap below the MostLoved band (sections above each bring
+          their own py-14 md:py-20). pb stays small: the footer's global mt-16
+          (64px) supplies most of the bottom gap; pb-0/md:pb-4 brings the total
+          to ~64px mobile / 80px desktop, matching the same rhythm. */}
+      <section className="max-w-[120rem] mx-auto px-6 pt-14 md:pt-20 pb-0 md:pb-4">
         <SectionHeading kicker="Stop By" title="Hours & Location" center className="mb-8" />
         <HoursLocationCard showMap />
       </section>
