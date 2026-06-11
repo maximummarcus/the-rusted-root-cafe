@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BRAND, MENU, CLOVER_ORDER_URL, DOORDASH_ORDER_URL } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
-import { Phone, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { Phone, ArrowLeft, ShoppingBag, Bike } from 'lucide-react';
 
 // Ordering provider links live in src/lib/cafeData.js (single source of truth).
-// While a link is blank the button below renders disabled ("coming soon");
-// pasting the real URL there makes it go live automatically.
-const isLiveUrl = (url) => Boolean(url) && url !== '#';
+// Both are hosted ordering pages that block iframe embedding (X-Frame-Options),
+// so they must always open in a new tab.
 
 export default function Order() {
   return (
@@ -39,69 +38,53 @@ export default function Order() {
           </span>
           <h1 className="font-heading text-4xl md:text-5xl text-foreground mt-3">Ready when you are</h1>
           <p className="mt-4 text-muted-foreground">
-            Choose how you&apos;d like to order: pick up direct from the café or get it
-            through DoorDash.
+            Choose how you&apos;d like to order: pickup straight from the café or
+            delivery through DoorDash.
           </p>
         </div>
 
-        {/* Order-link buttons — stack full-width on mobile */}
-        <div className="mt-10 mx-auto max-w-md flex flex-col gap-6">
-          {/* Primary — order direct via Clover */}
-          <div>
-            {isLiveUrl(CLOVER_ORDER_URL) ? (
+        {/* Order-link buttons — equal weight; side by side on desktop, stacked
+            full-width on mobile. */}
+        <div className="mt-10 mx-auto max-w-2xl">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
               <a
                 href={CLOVER_ORDER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-brand-forest text-brand-cream text-lg font-bold shadow-lg hover:opacity-90 transition"
+                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-6 rounded-full bg-brand-forest text-brand-cream text-lg font-bold shadow-lg hover:opacity-90 transition"
               >
-                <ShoppingBag className="w-5 h-5" /> Order for Pickup
+                <ShoppingBag className="w-5 h-5" /> Order Pickup
               </a>
-            ) : (
-              <div
-                aria-disabled="true"
-                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-muted text-muted-foreground text-lg font-bold cursor-not-allowed select-none"
-              >
-                <ShoppingBag className="w-5 h-5" /> Online ordering coming soon
-              </div>
-            )}
-            <p className="mt-2 text-center text-sm text-muted-foreground">
-              Order direct from The Rusted Root Cafe.
-            </p>
-          </div>
+              <p className="mt-2 text-center text-sm text-muted-foreground">
+                Direct from the café.
+              </p>
+            </div>
 
-          {/* Secondary — DoorDash (red accent, text-only, no trademarked logo) */}
-          <div>
-            {isLiveUrl(DOORDASH_ORDER_URL) ? (
+            <div>
               <a
                 href={DOORDASH_ORDER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ backgroundColor: '#FF3008' }}
-                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full text-white text-lg font-bold shadow-lg hover:opacity-90 transition"
+                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-6 rounded-full bg-brand-forest text-brand-cream text-lg font-bold shadow-lg hover:opacity-90 transition"
               >
-                Order on DoorDash
+                <Bike className="w-5 h-5" /> Order Delivery
               </a>
-            ) : (
-              <div
-                aria-disabled="true"
-                className="flex items-center justify-center gap-3 w-full min-h-[56px] px-8 rounded-full bg-muted text-muted-foreground text-lg font-bold cursor-not-allowed select-none"
-              >
-                Online ordering coming soon
-              </div>
-            )}
-            <p className="mt-2 text-center text-sm text-muted-foreground">
-              Pickup or delivery via DoorDash.
-            </p>
+              <p className="mt-2 text-center text-sm text-muted-foreground">
+                Delivered via DoorDash.
+              </p>
+            </div>
           </div>
 
           {/* Call fallback */}
-          <a
-            href={`tel:${BRAND.phoneRaw}`}
-            className="inline-flex items-center justify-center gap-2 text-primary font-semibold underline-offset-4 hover:underline min-h-[44px]"
-          >
-            <Phone className="w-4 h-4" /> Or call us to order: {BRAND.phone}
-          </a>
+          <p className="mt-6 text-center">
+            <a
+              href={`tel:${BRAND.phoneRaw}`}
+              className="inline-flex items-center justify-center gap-2 text-primary font-semibold underline-offset-4 hover:underline min-h-[44px]"
+            >
+              <Phone className="w-4 h-4" /> Or call us to order: {BRAND.phone}
+            </a>
+          </p>
         </div>
 
         {/* Quick menu glance */}

@@ -44,10 +44,10 @@ export const BRAND = {
 };
 
 // ===== ONLINE ORDERING LINKS — single source of truth =====
-// Owner/Marcus: paste the live links between the quotes. While a link is empty
-// the matching button on the Order page renders a disabled "Online ordering
-// coming soon" state; pasting a real URL makes that button go live automatically.
-export const CLOVER_ORDER_URL = '';   // <-- paste the Clover Online Ordering URL here
+// Hosted ordering pages (Clover pickup + DoorDash delivery). Always open these
+// in a new tab — never embed them in an iframe; both hosts block framing via
+// X-Frame-Options.
+export const CLOVER_ORDER_URL = 'https://the-rusted-root-cafe-llc-windsor.cloveronline.com/menu/all';
 export const DOORDASH_ORDER_URL = 'https://www.doordash.com/store/the-rusted-root-cafe-windsor-36908799/';
 
 // The Rusted Root Cafe logo (round sunflower badge).
