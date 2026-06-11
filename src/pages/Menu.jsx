@@ -37,7 +37,7 @@ export default function Menu() {
   return (
     <>
       <Seo
-        title="Menu | The Rusted Root Cafe - Windsor, VA"
+        title="Menu | The Rusted Root Cafe"
         description="Breakfast sandwiches, paninis, salads, scratch-baked pastries, and espresso drinks at The Rusted Root Cafe in Windsor, VA. See the full menu and prices."
       />
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-6 text-center">
