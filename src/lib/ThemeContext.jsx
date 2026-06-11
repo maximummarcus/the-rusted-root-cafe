@@ -1,55 +1,39 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext(null);
 
+// Theme is LOCKED to Hand-Drawn (owner decision, June 2026). The toggle UI is
+// gone, but the theme plumbing below stays so the Modern token overrides in
+// index.css and the per-component `theme` checks remain dormant rather than
+// broken — re-enabling later is a change to this file only.
+const THEME = 'handdrawn';
 const STORAGE_KEY = 'rrc-theme';
 
+const noop = () => {};
+// Stable value object: the provider wraps the whole app, so a fresh object per
+// render would re-render every theme consumer for nothing.
+const LOCKED_VALUE = {
+  theme: THEME,
+  setTheme: noop,
+  toggleTheme: noop,
+  selectTheme: noop,
+};
+
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === 'undefined') return 'handdrawn';
-    return localStorage.getItem(STORAGE_KEY) || 'handdrawn';
-  });
-
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'modern') {
-      root.setAttribute('data-theme', 'modern');
-    } else {
-      root.removeAttribute('data-theme');
+    // Returning visitors may still carry 'modern' persisted from when the
+    // toggle existed; drop the attribute and the stored key so they land on
+    // Hand-Drawn like everyone else.
+    document.documentElement.removeAttribute('data-theme');
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* storage blocked (private mode) — attribute removal above is enough */
     }
-    localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme]);
-
-  // The global 250ms theme transition (index.css) only applies while
-  // .theme-transitioning is on <html>, so the morph animates on an actual
-  // toggle/select but never on initial load.
-  const transitionTimer = useRef(null);
-  const beginMorph = () => {
-    const root = document.documentElement;
-    root.classList.add('theme-transitioning');
-    if (transitionTimer.current) window.clearTimeout(transitionTimer.current);
-    transitionTimer.current = window.setTimeout(() => {
-      root.classList.remove('theme-transitioning');
-      transitionTimer.current = null;
-    }, 300);
-  };
-
-  const toggleTheme = () => {
-    beginMorph();
-    setTheme((t) => (t === 'modern' ? 'handdrawn' : 'modern'));
-  };
-
-  // Set a specific theme. The two-button toggle uses this so each side is an
-  // explicit target ("make it Modern"), which is reliable on touch in a way that
-  // toggle-only logic is not.
-  const selectTheme = (next) => {
-    if (next !== 'modern' && next !== 'handdrawn') return;
-    beginMorph();
-    setTheme(next);
-  };
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, selectTheme }}>
+    <ThemeContext.Provider value={LOCKED_VALUE}>
       {children}
     </ThemeContext.Provider>
   );

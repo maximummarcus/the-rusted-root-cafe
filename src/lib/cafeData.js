@@ -79,9 +79,7 @@ export const HOURS = [
 export const IMG = {
   hero: null, // unused
   bakery: '/images/counter-and-sign.jpg',
-  plants: '/images/plant-decor-display.jpg',
   cinnamonRollsTray: '/images/cinnamon-rolls-iced-tray.jpg',
-  diningArea: '/images/dining-area-plants.jpg',
   storefront: '/images/storefront-front.jpg',
   catering: '/images/catering-hero-platter.jpg',
   frenchHen: frenchHenPhoto,
