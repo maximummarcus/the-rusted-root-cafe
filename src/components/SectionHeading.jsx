@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '@/lib/ThemeContext';
 
-export default function SectionHeading({ kicker, title, center = false, className = '' }) {
+export default function SectionHeading({ kicker, title, center = false, className = '', as: Tag = 'h2' }) {
   const { theme } = useTheme();
   const isModern = theme === 'modern';
 
@@ -18,13 +18,13 @@ export default function SectionHeading({ kicker, title, center = false, classNam
           {kicker}
         </p>
       )}
-      <h2
+      <Tag
         className={`font-heading text-3xl md:text-5xl text-foreground tracking-tight ${
           isModern ? 'font-semibold uppercase tracking-wide' : 'font-light'
         }`}
       >
         {title}
-      </h2>
+      </Tag>
     </div>
   );
 }

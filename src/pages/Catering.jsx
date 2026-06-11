@@ -77,8 +77,8 @@ export default function Catering() {
   return (
     <>
       <Seo
-        title="Catering: The Rusted Root Cafe, Windsor VA"
-        description="Catering from The Rusted Root Cafe in Windsor, VA. Scratch-made trays, chicken salad, pastries and more for your gathering. Call or email to inquire."
+        title="Catering | The Rusted Root Cafe - Windsor, VA"
+        description="Catering from The Rusted Root Cafe in Windsor, VA. From-scratch pastries, sandwich platters, and coffee for gatherings of any size."
       />
 
       {/* Photo-forward hero — fills the viewport and full-bleeds under the transparent
