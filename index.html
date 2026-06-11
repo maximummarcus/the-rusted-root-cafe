@@ -2,17 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      // Apply the saved theme before any CSS so a "modern" visitor never sees a
-      // flash of the default hand-drawn theme on load (ThemeContext keeps it in sync).
-      try {
-        if (localStorage.getItem('rrc-theme') === 'modern') {
-          document.documentElement.setAttribute('data-theme', 'modern');
-        }
-      } catch (e) {
-        /* storage blocked (private mode) — default theme is fine */
-      }
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>The Rusted Root Cafe | Windsor, VA</title>
     <meta

@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAV_LINKS, BRAND } from '@/lib/cafeData';
-import ThemeToggle from '@/components/ThemeToggle';
 import logoUrl from '@/assets/rusted-root-logo.png';
 
 // Once the background is at least this opaque, dark text reads — flip nav labels back to normal.
@@ -211,16 +210,6 @@ export default function Header() {
               })}
             </ul>
           </nav>
-
-          {/* Right cluster: theme toggle (compact below md to leave the tab row room). */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <div className="md:hidden">
-              <ThemeToggle compact />
-            </div>
-            <div className="hidden md:block">
-              <ThemeToggle />
-            </div>
-          </div>
         </div>
       </div>
     </header>
