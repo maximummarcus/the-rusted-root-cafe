@@ -37,3 +37,4 @@ rusted-root-catering-photos/
 # Raw DoorDash photography (1600x1600 JPEGs + 2560x1440 banner) — optimized
 # WebP exports live in src/assets/ instead. Keep the originals out of git.
 raw-assets/
+base44/.app.jsonc
