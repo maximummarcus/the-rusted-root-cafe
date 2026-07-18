@@ -14,15 +14,15 @@
 // a thank-you instead of the ballot link. Nothing needs to be manually
 // removed when voting ends.
 //
-// TODO Marcus: HAMMY_VOTING_CLOSES is a far-out placeholder. Set the real
-// 2026 close date (YYYY-MM-DD) from the ballot or the owner, then republish.
+// Voting closes August 9, 2026 (owner-confirmed). After this date the whole
+// campaign auto-retires — see the note above.
 
 import { base44 } from '@/api/base44Client';
 
 export const HAMMY_URL = 'https://www.smithfieldtimes.com/contests/hammy-awards';
 
-// Last day voting is open (inclusive, local time). Placeholder — see TODO above.
-export const HAMMY_VOTING_CLOSES = '2026-12-31';
+// Last day voting is open (inclusive, local time).
+export const HAMMY_VOTING_CLOSES = '2026-08-09';
 
 export const hammyIsLive = () =>
   new Date() <= new Date(`${HAMMY_VOTING_CLOSES}T23:59:59`);
