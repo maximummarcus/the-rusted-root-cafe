@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { MENU, MOST_LOVED, IMG } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
@@ -11,12 +12,57 @@ import { useAvailability } from '@/hooks/useAvailability';
 export default function Menu() {
   const [specials, setSpecials] = useState([]);
   const { isSoldOut } = useAvailability();
+  const { hash } = useLocation();
+  // Set once the visitor scrolls on their own — hash corrections stop yanking
+  // the page after that. Reset per hash so a later deep link works again.
+  const userTookOverRef = useRef(false);
 
   useEffect(() => {
     base44.entities.Special.filter({ active: true }, 'sort_order')
       .then(setSpecials)
       .catch(() => setSpecials([]));
   }, []);
+
+  useEffect(() => {
+    userTookOverRef.current = false;
+  }, [hash]);
+
+  // Land hash deep-links (e.g. /menu#pastries from the Hammy "See Our Bakery"
+  // buttons) on the RIGHT section. ScrollToTop's one-shot scroll fires before
+  // the async specials fetch and lazy menu images reflow the page, so content
+  // injected ABOVE the target pushes it down and strands the viewport a
+  // section early (Grab N Go instead of Pastries & Desserts). These instant
+  // re-alignments pin the section as the layout settles — re-armed when the
+  // specials arrive (the biggest shift) — and stand down the moment the
+  // visitor scrolls on their own.
+  useEffect(() => {
+    if (!hash) return undefined;
+    let id = hash.slice(1);
+    try {
+      id = decodeURIComponent(id);
+    } catch {
+      /* malformed hash — use it raw */
+    }
+    const markUser = () => {
+      userTookOverRef.current = true;
+    };
+    window.addEventListener('wheel', markUser, { passive: true });
+    window.addEventListener('touchstart', markUser, { passive: true });
+    window.addEventListener('keydown', markUser);
+
+    const align = () => {
+      if (userTookOverRef.current) return;
+      document.getElementById(id)?.scrollIntoView({ block: 'start' });
+    };
+    const timers = [0, 250, 600, 1100, 1700].map((t) => window.setTimeout(align, t));
+
+    return () => {
+      timers.forEach((t) => window.clearTimeout(t));
+      window.removeEventListener('wheel', markUser);
+      window.removeEventListener('touchstart', markUser);
+      window.removeEventListener('keydown', markUser);
+    };
+  }, [hash, specials.length]);
 
   // Build category list. Specials sits between Sprouts (Kids) and Grab N Go
   // on the page; insert the matching tab in the same slot so smooth-scroll
