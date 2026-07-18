@@ -1,0 +1,36 @@
+{
+  "name": "VoteClick",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "enum": [
+        "home_section",
+        "popup",
+        "nav_tab"
+      ],
+      "description": "Which placement the visitor clicked the Hammy Awards vote link from: the home page section, the site-wide popup, or the Vote nav tab page."
+    }
+  },
+  "required": [
+    "source"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
