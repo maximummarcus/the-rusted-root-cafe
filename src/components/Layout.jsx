@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyCallBar from '@/components/StickyCallBar';
+import VotePopup from '@/components/VotePopup';
 
 // Routes whose first section is a full-bleed photo hero — they own their own top
 // spacing and the header overlays them transparently. Every other route gets
@@ -29,6 +30,9 @@ export default function Layout() {
       </main>
       <Footer />
       <StickyCallBar />
+      {/* Hammy Awards popup — first visit, any public page (Layout wraps them
+          all; the admin route doesn't use Layout so it's excluded by design). */}
+      <VotePopup />
     </div>
   );
 }
