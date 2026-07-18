@@ -1,6 +1,7 @@
 import React from 'react';
 import Seo from '@/components/Seo';
 import Hero from '@/components/home/Hero';
+import HammyVoteSection from '@/components/home/HammyVoteSection';
 import RootWayIntro from '@/components/home/RootWayIntro';
 import MostLoved from '@/components/home/MostLoved';
 import HoursLocationCard from '@/components/HoursLocationCard';
@@ -14,6 +15,9 @@ export default function Home() {
         description="The Rusted Root Cafe in Windsor, VA: a homey from-scratch café & bakery. Gather. Grow. Get Rooted! Order online, dine in, or grab & go."
       />
       <Hero />
+      {/* Hammy Awards vote promo — first section under the hero while voting is
+          open; unmounts itself after the close date (see src/lib/hammy.js). */}
+      <HammyVoteSection />
       <RootWayIntro />
       <MostLoved />
       {/* pt carries the gap below the MostLoved band (sections above each bring
