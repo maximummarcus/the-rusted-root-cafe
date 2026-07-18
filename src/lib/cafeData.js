@@ -3,6 +3,8 @@
 // Owner can update images, prices, hours here easily.
 // ============================================================
 
+import { hammyIsLive } from '@/lib/hammy';
+
 // DoorDash menu photography (owner-approved, June 2026). Originals live in
 // raw-assets/doordash/ (gitignored, like the other photo source archives);
 // these are the optimized 800x800 WebP exports. Vite turns each import into
@@ -306,6 +308,9 @@ export const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'Menu', to: '/menu' },
   { label: 'Order', to: '/order' },
+  // Hammy Awards campaign tab — drops out of the nav automatically once
+  // voting closes (module evaluates per page load, so this stays current).
+  ...(hammyIsLive() ? [{ label: 'Vote', to: '/vote' }] : []),
   { label: 'Catering', to: '/catering' },
   { label: 'Specials', to: '/specials' },
   { label: 'About', to: '/about' },
