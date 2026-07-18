@@ -5,6 +5,7 @@ import AdminLogin from '@/components/admin/AdminLogin';
 import SpecialsTab from '@/components/admin/SpecialsTab';
 import OutOfStockTab from '@/components/admin/OutOfStockTab';
 import OrdersTab from '@/components/admin/OrdersTab';
+import HammyStatsCard from '@/components/admin/HammyStatsCard';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Loader2, LogOut } from 'lucide-react';
@@ -106,6 +107,8 @@ export default function AdminDashboard() {
         </header>
 
         <main className="max-w-3xl mx-auto px-4 py-6">
+          {/* Hammy Awards vote-click engagement — read-only campaign stats. */}
+          <HammyStatsCard />
           <Tabs defaultValue="specials">
             <TabsList className="w-full h-auto grid grid-cols-3 gap-1">
               <TabsTrigger value="specials" className="py-2 min-h-[44px]">Specials</TabsTrigger>
