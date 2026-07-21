@@ -110,7 +110,6 @@ export default function VotePopup() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   // Animate out, then unmount. markSeen() starts the 24h cooldown.
