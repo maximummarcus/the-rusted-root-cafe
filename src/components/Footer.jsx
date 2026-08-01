@@ -71,8 +71,17 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-brand-cream/15 py-4 text-center text-xs text-brand-cream/50">
-        © {new Date().getFullYear()} {BRAND.name} · {BRAND.cityState}
+      <div className="border-t border-brand-cream/15 px-6 md:px-10 py-4 text-xs text-brand-cream/50 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-center">
+        <p>© {new Date().getFullYear()} {BRAND.name} · {BRAND.cityState}</p>
+        {/* Standing Smyze growth-loop rule: every build carries this credit link. */}
+        <a
+          href="https://smyzeweb.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center hover:text-brand-sunflower transition-colors"
+        >
+          Made by SmyzeWeb.com · No upfront cost, $29/month
+        </a>
       </div>
     </footer>
   );
