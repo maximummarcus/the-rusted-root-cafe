@@ -45,9 +45,11 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
-      {/* Secret admin — obscure URL slug + Base44 account auth (role: admin),
-          enforced again by admin-only entity write RLS (see src/lib/adminConfig.js
-          and src/api/adminApi.js). Self-contained, no site chrome. */}
+      {/* Admin — fixed path (no secret slug anymore), gated by Base44 sign-in.
+          isAdminAuthorized() in src/lib/adminConfig.js currently admits any
+          signed-in account (temporary, see that file); every write is enforced
+          again by admin-only entity write RLS (see src/api/adminApi.js).
+          Self-contained, no site chrome. */}
       <Route path={ADMIN_PATH} element={<AdminDashboard />} />
 
       {/* Public site with shared layout */}
@@ -67,8 +69,10 @@ const AuthenticatedApp = () => {
       <Route path="/home" element={<Navigate to="/" replace />} />
 
       {/* The in-app Base44 auth scaffold (src/pages/Login & friends, ProtectedRoute)
-          is dormant and intentionally unrouted — the admin above uses Base44's
-          hosted login (base44.auth.redirectToLogin) and is the only admin surface. */}
+          is dormant and intentionally unrouted — the admin above signs in inline via
+          AdminLogin.jsx (base44.auth.loginWithProvider/loginViaEmailPassword), not
+          redirectToLogin, since /login isn't registered here. It's the only admin
+          surface. */}
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>
