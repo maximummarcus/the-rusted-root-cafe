@@ -6,16 +6,21 @@ import SpecialsTab from '@/components/admin/SpecialsTab';
 import OutOfStockTab from '@/components/admin/OutOfStockTab';
 import OrdersTab from '@/components/admin/OrdersTab';
 import HammyStatsCard from '@/components/admin/HammyStatsCard';
+import { isAdminAuthorized } from '@/lib/adminConfig';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Loader2, LogOut } from 'lucide-react';
 
-// Auth model: the admin is a logged-in Base44 user whose role is 'admin'. The
-// dashboard subtree is only mounted for such a user; an anonymous visitor sees the
-// login prompt and a signed-in non-admin sees an access notice. Entity writes are
-// independently enforced by the admin-only write RLS, so this client gate is
-// defense-in-depth, not the only lock. No backend functions are used (this app's
-// Base44 plan does not run them).
+// Auth model: the admin opens for any signed-in Base44 account (Google or
+// email/password — see AdminLogin.jsx) for now, per isAdminAuthorized() in
+// src/lib/adminConfig.js — that's the one place to tighten later (e.g. back
+// to role === 'admin'). An anonymous visitor sees the login prompt; a
+// signed-in but unauthorized account sees an access notice. Entity writes
+// (and some reads) are independently enforced by the admin-only RLS on the
+// underlying entities, so this client gate is defense-in-depth, not the only
+// lock — an account without the Base44 'admin' role can still fail to load
+// or save data inside the dashboard even after passing this gate. No backend
+// functions are used (this app's Base44 plan does not run them).
 export default function AdminDashboard() {
   // 'checking' | 'anon' | 'forbidden' | 'admin'
   const [status, setStatus] = useState('checking');
@@ -28,7 +33,7 @@ export default function AdminDashboard() {
       .then((user) => {
         if (!active) return;
         setEmail(user?.email || '');
-        setStatus(user?.role === 'admin' ? 'admin' : 'forbidden');
+        setStatus(isAdminAuthorized(user) ? 'admin' : 'forbidden');
       })
       .catch(() => {
         // No valid session — treat as anonymous and show the login prompt.
