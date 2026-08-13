@@ -313,12 +313,12 @@ export const MONTHLY_SPECIALS = [
   { id: 'aug-fri-lunch', type: 'food', title: 'Friday Lunch: Steakhouse Melt', description: 'Steak, caramelized onions, Swiss, mushrooms, garlic aioli', month_label: 'August Specials', sort_order: 9 },
   { id: 'aug-sat-breakfast', type: 'food', title: 'Saturday Breakfast: Loaded Double Whammy', description: 'Biscuits & gravy with maple bacon bits, served with scrambled eggs & cheese', month_label: 'August Specials', sort_order: 10 },
   { id: 'aug-sat-lunch', type: 'food', title: 'Saturday Lunch: Spicy Pig Panini', description: 'Pepper jam, pimento cheese, country ham and bacon', month_label: 'August Specials', sort_order: 11 },
-  // August Drink Menu
-  { id: 'aug-drink-chai', type: 'drink', title: 'Golden Harvest Chai', month_label: 'August Specials', sort_order: 0 },
-  { id: 'aug-drink-matcha', type: 'drink', title: 'Sweet Peach Matcha', month_label: 'August Specials', sort_order: 1 },
-  { id: 'aug-drink-sunflower', type: 'drink', title: 'Sunflower Latte', month_label: 'August Specials', sort_order: 2 },
-  { id: 'aug-drink-maple-pecan', type: 'drink', title: 'Maple Pecan Latte', month_label: 'August Specials', sort_order: 3 },
-  { id: 'aug-drink-blackberry-lavender', type: 'drink', title: 'Blackberry Lavender Latte', month_label: 'August Specials', sort_order: 4 },
+  // August Drink Menu — images cropped from the owner's own flyer artwork.
+  { id: 'aug-drink-chai', type: 'drink', title: 'Golden Harvest Chai', image_url: '/images/special-golden-harvest-chai.jpg', month_label: 'August Specials', sort_order: 0 },
+  { id: 'aug-drink-matcha', type: 'drink', title: 'Sweet Peach Matcha', image_url: '/images/special-sweet-peach-matcha.jpg', month_label: 'August Specials', sort_order: 1 },
+  { id: 'aug-drink-sunflower', type: 'drink', title: 'Sunflower Latte', image_url: '/images/special-sunflower-latte.jpg', month_label: 'August Specials', sort_order: 2 },
+  { id: 'aug-drink-maple-pecan', type: 'drink', title: 'Maple Pecan Latte', image_url: '/images/special-maple-pecan-latte.jpg', month_label: 'August Specials', sort_order: 3 },
+  { id: 'aug-drink-blackberry-lavender', type: 'drink', title: 'Blackberry Lavender Latte', image_url: '/images/special-blackberry-lavender-latte.jpg', month_label: 'August Specials', sort_order: 4 },
 ];
 
 // Most Loved strip on Home. Keep photographed items first: the homepage strip
