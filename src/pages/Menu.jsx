@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { MENU, MOST_LOVED, IMG } from '@/lib/cafeData';
+import { MENU, MOST_LOVED, IMG, MONTHLY_SPECIALS } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
 import SectionHeading from '@/components/SectionHeading';
 import MenuCategory from '@/components/menu/MenuCategory';
@@ -18,9 +18,10 @@ export default function Menu() {
   const userTookOverRef = useRef(false);
 
   useEffect(() => {
+    // Falls back to the hardcoded MONTHLY_SPECIALS when Base44 has nothing active.
     base44.entities.Special.filter({ active: true }, 'sort_order')
-      .then(setSpecials)
-      .catch(() => setSpecials([]));
+      .then((list) => setSpecials(list.length ? list : MONTHLY_SPECIALS))
+      .catch(() => setSpecials(MONTHLY_SPECIALS));
   }, []);
 
   useEffect(() => {
