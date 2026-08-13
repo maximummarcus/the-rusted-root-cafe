@@ -292,6 +292,35 @@ export const MENU = [
   },
 ];
 
+// MONTHLY SPECIALS — shown on /specials and the Menu page's Specials section.
+// Normally the owner rotates these live through the Base44 Admin Dashboard
+// (see SpecialsTab.jsx); this array is the fallback used whenever Base44 has
+// no active specials configured, which today means it's the only source in
+// practice. To change what's live, edit this list directly — shape matches
+// the Special entity (title/description/price/type/image_url/month_label/
+// sort_order), fields left out just don't render on the card.
+export const MONTHLY_SPECIALS = [
+  // August Menu — weekly breakfast & lunch rotation, Mon-Sat.
+  { id: 'aug-mon-breakfast', type: 'food', title: 'Monday Breakfast: Waffle Sandwich', description: 'Your choice of meat, egg & cheese served on waffles', month_label: 'August Specials', sort_order: 0 },
+  { id: 'aug-mon-lunch', type: 'food', title: 'Monday Lunch: Pizza Melt Panini', description: 'Pesto, marinara, pepperoni, mozzarella cheese', month_label: 'August Specials', sort_order: 1 },
+  { id: 'aug-tue-breakfast', type: 'food', title: 'Tuesday Breakfast: Country Monte Cristo', description: 'Country ham, turkey, Swiss cheese, served with raspberry jam', month_label: 'August Specials', sort_order: 2 },
+  { id: 'aug-tue-lunch', type: 'food', title: 'Tuesday Lunch: Chicken Salad Wrap', description: 'Chicken salad, lettuce, tomato, garlic aioli, banana peppers', month_label: 'August Specials', sort_order: 3 },
+  { id: 'aug-wed-breakfast', type: 'food', title: 'Wednesday Breakfast: Steak, Egg & Cheese Biscuit', month_label: 'August Specials', sort_order: 4 },
+  { id: 'aug-wed-lunch', type: 'food', title: 'Wednesday Lunch: BLT Supreme', description: 'Bacon, lettuce, tomato, avocado, pepper jack cheese, garlic aioli', month_label: 'August Specials', sort_order: 5 },
+  { id: 'aug-thu-breakfast', type: 'food', title: 'Thursday Breakfast: Maple Bacon, Egg & Cheese Pinwheels', month_label: 'August Specials', sort_order: 6 },
+  { id: 'aug-thu-lunch', type: 'food', title: 'Thursday Lunch: Buffalo Chicken Croissant', description: 'Buffalo chicken, pepper jack cheese, lettuce, tomato, onion', month_label: 'August Specials', sort_order: 7 },
+  { id: 'aug-fri-breakfast', type: 'food', title: 'Friday Breakfast: Steak, Egg & Cheese Burrito', description: 'Toasted, served with salsa & sour cream', month_label: 'August Specials', sort_order: 8 },
+  { id: 'aug-fri-lunch', type: 'food', title: 'Friday Lunch: Steakhouse Melt', description: 'Steak, caramelized onions, Swiss, mushrooms, garlic aioli', month_label: 'August Specials', sort_order: 9 },
+  { id: 'aug-sat-breakfast', type: 'food', title: 'Saturday Breakfast: Loaded Double Whammy', description: 'Biscuits & gravy with maple bacon bits, served with scrambled eggs & cheese', month_label: 'August Specials', sort_order: 10 },
+  { id: 'aug-sat-lunch', type: 'food', title: 'Saturday Lunch: Spicy Pig Panini', description: 'Pepper jam, pimento cheese, country ham and bacon', month_label: 'August Specials', sort_order: 11 },
+  // August Drink Menu
+  { id: 'aug-drink-chai', type: 'drink', title: 'Golden Harvest Chai', month_label: 'August Specials', sort_order: 0 },
+  { id: 'aug-drink-matcha', type: 'drink', title: 'Sweet Peach Matcha', month_label: 'August Specials', sort_order: 1 },
+  { id: 'aug-drink-sunflower', type: 'drink', title: 'Sunflower Latte', month_label: 'August Specials', sort_order: 2 },
+  { id: 'aug-drink-maple-pecan', type: 'drink', title: 'Maple Pecan Latte', month_label: 'August Specials', sort_order: 3 },
+  { id: 'aug-drink-blackberry-lavender', type: 'drink', title: 'Blackberry Lavender Latte', month_label: 'August Specials', sort_order: 4 },
+];
+
 // Most Loved strip on Home. Keep photographed items first: the homepage strip
 // only shows items with a real photo, so null-img items below stay hidden there
 // (but keep them listed — they reappear automatically once their photo lands).

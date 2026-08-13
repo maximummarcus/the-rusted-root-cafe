@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
+import { MONTHLY_SPECIALS } from '@/lib/cafeData';
 import Seo from '@/components/Seo';
 import SectionHeading from '@/components/SectionHeading';
 import SpecialCard from '@/components/specials/SpecialCard';
@@ -21,9 +22,10 @@ export default function Specials() {
 
   useEffect(() => {
     // Only active specials, ordered by the admin's manual sort_order (ascending).
+    // Falls back to the hardcoded MONTHLY_SPECIALS when Base44 has nothing active.
     base44.entities.Special.filter({ active: true }, 'sort_order')
-      .then(setSpecials)
-      .catch(() => setSpecials([]))
+      .then((list) => setSpecials(list.length ? list : MONTHLY_SPECIALS))
+      .catch(() => setSpecials(MONTHLY_SPECIALS))
       .finally(() => setLoading(false));
   }, []);
 
