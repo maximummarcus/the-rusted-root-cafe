@@ -17,7 +17,6 @@ import Catering from '@/pages/Catering';
 import Specials from '@/pages/Specials';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
-import Vote from '@/pages/Vote';
 // Deliberately NOT in src/pages: Base44's prerendered page index is generated from
 // registered pages, and the admin must never appear in any public page list.
 import AdminDashboard from '@/components/admin/AdminDashboard';
@@ -57,7 +56,6 @@ const AuthenticatedApp = () => {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/vote" element={<Vote />} />
         <Route path="/catering" element={<Catering />} />
         <Route path="/specials" element={<Specials />} />
         <Route path="/about" element={<About />} />
