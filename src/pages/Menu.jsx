@@ -28,8 +28,7 @@ export default function Menu() {
     userTookOverRef.current = false;
   }, [hash]);
 
-  // Land hash deep-links (e.g. /menu#pastries from the Hammy "See Our Bakery"
-  // buttons) on the RIGHT section. ScrollToTop's one-shot scroll fires before
+  // Land hash deep-links (e.g. /menu#pastries) on the RIGHT section. ScrollToTop's one-shot scroll fires before
   // the async specials fetch and lazy menu images reflow the page, so content
   // injected ABOVE the target pushes it down and strands the viewport a
   // section early (Grab N Go instead of Pastries & Desserts). These instant

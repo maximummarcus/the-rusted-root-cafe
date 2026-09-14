@@ -3,8 +3,6 @@
 // Owner can update images, prices, hours here easily.
 // ============================================================
 
-import { hammyIsLive } from '@/lib/hammy';
-
 // DoorDash menu photography (owner-approved, June 2026). Originals live in
 // raw-assets/doordash/ (gitignored, like the other photo source archives);
 // these are the optimized 800x800 WebP exports. Vite turns each import into
@@ -62,17 +60,18 @@ export const LOGO_URL = '/logo.jpeg';
 // if the file is ever re-exported.
 export const WORDMARK_URL = '/wordmark.png?v=2';
 
-// Business hours — confirmed by the owner June 2026. Open Mon to Sat 8 to 4,
-// staying open late on Wednesdays until 6 PM; closed Sunday. (The 8 to 6 hours
-// listed on social profiles are wrong — do not trust them.) These lines render
-// verbatim on the Contact page, the Home "Hours & Location" panel, and the
-// footer, so keep the copy in hyphens only (no en/em dashes). The machine-
-// readable openingHoursSpecification for SEO lives in the static JSON-LD in
-// index.html — keep in sync.
+// Business hours — owner sent the updated Google Business Profile hours on
+// Sept 14, 2026 as a trial "for the next 8 weeks" (roughly through early
+// November 2026): Tue to Sat 8 to 3 (was 8 to 4), Sunday 8 to 3, closed
+// Monday. The Wednesday late close is gone. Re-confirm with the owner when
+// the trial ends. These lines render verbatim on the Contact page, the Home
+// "Hours & Location" panel, and the footer, so keep the copy in hyphens only
+// (no en/em dashes). The machine-readable openingHoursSpecification for SEO
+// lives in the static JSON-LD in index.html — keep in sync.
 export const HOURS = [
-  'Mon-Sat: 8 AM - 4 PM',
-  'Open late Wednesdays until 6 PM',
-  'Sunday: Closed',
+  'Tue-Sat: 8 AM - 3 PM',
+  'Sunday: 8 AM - 3 PM',
+  'Monday: Closed',
 ];
 
 // IMAGES — real owner photos live at /images/ (and src/assets/menu/ for the
@@ -346,9 +345,6 @@ export const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'Menu', to: '/menu' },
   { label: 'Order', to: '/order' },
-  // Hammy Awards campaign tab — drops out of the nav automatically once
-  // voting closes (module evaluates per page load, so this stays current).
-  ...(hammyIsLive() ? [{ label: 'Vote', to: '/vote' }] : []),
   { label: 'Catering', to: '/catering' },
   { label: 'Specials', to: '/specials' },
   { label: 'About', to: '/about' },
